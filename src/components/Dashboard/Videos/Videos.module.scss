@@ -1,0 +1,33 @@
+.container {
+  position: relative;
+  margin: 2rem 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1.5rem;
+}
+
+.video {
+  position: relative;
+  overflow: hidden;
+  margin-top: 1.75rem;
+  border-radius: 0.5rem;
+}
+
+.videoCaption {
+  cursor: pointer;
+  pointer-events: all;
+  &:hover {
+    img {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.videoCaptionTitle {
+  font-weight: 600;
+  font-size: 0.9rem;
+  line-height: 1.56;
+}

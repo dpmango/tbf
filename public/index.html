@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Buzzier" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>TBF</title>
+    <script>
+      window.REACT_ENV = {
+        GATEWAY_URL: "%REACT_APP_GATEWAY_URL%",
+        API_TIMEOUT: 10000,
+        API_RETRY_DELAY: 1500,
+        GOOGLE_API: "%REACT_APP_GOOGLE_API%",
+        APP_UPDATE_INTERVAL_MINUTES: 30
+      };
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+  </body>
+</html>

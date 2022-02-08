@@ -1,0 +1,76 @@
+.input {
+  display: block;
+  &_wrapper {
+    position: relative;
+    z-index: 1;
+  }
+  &_input {
+    -webkit-appearance: none;
+  }
+
+  :global .rangeslider {
+    box-shadow: none;
+    margin: 0.5rem 0;
+    .rangeslider__fill {
+      box-shadow: none;
+      background-color: #dbd1b6;
+    }
+    .rangeslider__handle {
+      width: 24px;
+      height: 24px;
+      box-shadow: none;
+      border: 0;
+      background-color: $colorPrimary;
+      transition: box-shadow 0.25s $ease;
+      &:hover {
+        box-shadow: 0 0 0.2rem 0.2rem rgba($colorPrimary, 0.5);
+      }
+      &::after {
+        display: none;
+      }
+    }
+    .rangeslider__labels {
+      display: none;
+    }
+    .rangeslider__handle-tooltip {
+      width: auto;
+      height: auto;
+      padding: 0.4rem 0.6rem;
+      font-size: 0.8rem;
+      background-color: rgba($colorPrimary, 0.8);
+      color: white;
+      span {
+        margin-top: 0;
+      }
+      &::after {
+        border-top-color: rgba($colorPrimary, 0.8);
+      }
+    }
+  }
+
+  &._small {
+    .input_input {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+  }
+}
+
+.label {
+  display: block;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 14px;
+  margin-bottom: 16px;
+  color: $colorPrimary;
+}
+
+.error {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: 0;
+  display: inline-block;
+  font-size: 12px;
+  color: $colorRed;
+  font-weight: 500;
+}
