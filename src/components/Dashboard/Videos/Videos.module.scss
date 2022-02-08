@@ -9,16 +9,15 @@
   grid-gap: 1.5rem;
 }
 
-.video {
-  position: relative;
-  overflow: hidden;
-  margin-top: 1.75rem;
-  border-radius: 0.5rem;
-}
+// .video {
+// }
 
 .videoCaption {
   cursor: pointer;
   pointer-events: all;
+  :global .svg-icon {
+    font-size: 2.4rem;
+  }
   &:hover {
     img {
       transform: scale(1.1);
@@ -30,4 +29,44 @@
   font-weight: 600;
   font-size: 0.9rem;
   line-height: 1.56;
+}
+
+.add {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: $colorPrimary50;
+  padding-bottom: 56.25%;
+  border-radius: 0.4rem;
+  overflow: hidden;
+  cursor: pointer;
+  &:hover {
+    color: $colorPrimary;
+  }
+}
+
+.addContent {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  padding: 2rem 1rem;
+}
+
+.addIcon {
+  font-size: 2.4rem;
+  color: $colorPrimary;
+}
+
+.addTitle {
+  margin-top: 0.2rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  line-height: 1.56;
+  color: $colorPrimary;
 }

@@ -1,10 +1,30 @@
 .video {
   position: relative;
   overflow: hidden;
+  border-radius: 0.4rem;
+  &::after {
+    display: inline-block;
+    content: ' ';
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+    transition: background 0.25s $ease;
+  }
   &.play {
     .videoCaption {
       opacity: 0;
       pointer-events: none;
+    }
+    &::after {
+      background: transparent;
+    }
+    .videoControls::after {
+      opacity: 0;
     }
   }
   // &.play {
@@ -19,6 +39,7 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
+
   &[data-ar='16:9'] {
     padding-bottom: 56.25%;
   }
@@ -72,19 +93,25 @@
   }
 }
 
-.videoCaptionTitle {
-  margin-top: 1.5rem;
-  font-weight: bold;
-  font-size: 1.8rem;
-  line-height: 2.3rem;
-}
-
 .videoControls {
   position: absolute;
   z-index: 3;
   bottom: 0.5rem;
   left: 0;
   right: 0;
+  &::after {
+    display: inline-block;
+    content: ' ';
+    position: absolute;
+    z-index: 1;
+    bottom: -0.5rem;
+    top: -4rem;
+    left: 0;
+    right: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.2) 100%);
+    pointer-events: none;
+    transition: opacity 0.25s $ease;
+  }
 }
 
 .videoControlsWrapper {
@@ -94,6 +121,7 @@
   align-items: center;
   width: 100%;
   position: relative;
+  z-index: 2;
   padding: 0 0.8rem;
   color: white;
 }
@@ -141,6 +169,7 @@
 .videoProgress {
   flex: 1 1 auto;
   margin: 0 1rem;
+
   cursor: pointer;
   progress {
     display: block;
@@ -150,7 +179,11 @@
     overflow: hidden;
     border-radius: 4px;
     color: #fff;
+    background: white;
     &::-moz-progress-bar {
+      background-color: #fff;
+    }
+    &::-webkit-progress-bar {
       background-color: #fff;
     }
     &::-webkit-progress-value {

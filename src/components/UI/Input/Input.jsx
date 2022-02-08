@@ -25,6 +25,8 @@ const Input = ({
   variant,
   modifier,
   allowClear,
+  iconLeft,
+  iconRight,
   value,
   onChange,
   mask,
@@ -75,7 +77,14 @@ const Input = ({
   return (
     <div
       style={props.style}
-      className={cns(styles.input, variant && VariantClasses[variant], modifier && styles[`_${modifier}`], className)}>
+      className={cns(
+        styles.input,
+        variant && VariantClasses[variant],
+        modifier && styles[`_${modifier}`],
+        iconLeft && styles._iconedLeft,
+        iconRight && styles._iconedRight,
+        className
+      )}>
       {label && (
         <label className={styles.label} htmlFor={id}>
           {label}
@@ -83,6 +92,16 @@ const Input = ({
       )}
 
       <div className={styles.input_wrapper}>
+        {iconLeft && (
+          <span className={styles.iconLeft}>
+            <SvgIcon name={iconLeft} />
+          </span>
+        )}
+        {iconLeft && (
+          <span className={styles.iconRight}>
+            <SvgIcon name={iconRight} />
+          </span>
+        )}
         {props.type === 'textarea' ? (
           <TextareaAutosize {...inputProps} />
         ) : mask ? (
@@ -109,6 +128,8 @@ Input.propTypes = {
   type: PropTypes.string,
   inputRef: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.instanceOf(Element) })]),
   allowClear: PropTypes.bool,
+  iconLeft: PropTypes.string,
+  iconRight: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   modifier: PropTypes.string,
   variant: PropTypes.string,

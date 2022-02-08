@@ -1,8 +1,5 @@
 .input {
   display: block;
-  &._mw-160 {
-    max-width: 160px;
-  }
   &_wrapper {
     position: relative;
     z-index: 1;
@@ -19,16 +16,16 @@
     font-size: 16px;
     line-height: 16px;
     color: $fontColor;
-    border: 1px solid $borderColor;
-    border-radius: 5px;
-    padding: 10px 15px 10px;
+    border: 1px solid $colorGray200;
+    border-radius: 0.4rem;
+    padding: 0.5rem 0.8rem 0.5rem;
     backface-visibility: hidden;
     transition: border 0.25s $ease, color 0.25s $ease, background 0.25s $ease;
     &::placeholder {
-      color: $colorGray;
+      color: $colorGray200;
     }
     &:focus {
-      border-color: $colorPrimary;
+      border-color: $fontColor;
     }
     &._withClear,
     &._withIcon {
@@ -48,20 +45,13 @@
       }
     }
   }
-  &_icon,
   &_clear {
     position: absolute;
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
   }
-  &_icon {
-    opacity: 0.5;
-    &._posleft {
-      right: auto;
-      left: 15px;
-    }
-  }
+
   &_clear {
     right: 0;
     color: $colorPrimary;
@@ -81,6 +71,16 @@
       padding-bottom: 10px;
     }
   }
+  &._iconedLeft {
+    .input_input {
+      padding-left: 2rem;
+    }
+  }
+  &._iconedRight {
+    .input_input {
+      padding-right: 2rem;
+    }
+  }
 }
 
 .label {
@@ -90,6 +90,26 @@
   font-size: 0.9rem;
   line-height: 1.2rem;
   color: #d8d8da;
+}
+
+.iconLeft {
+  position: absolute;
+  left: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $colorGray200;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.iconLeft {
+  position: absolute;
+  right: 0.7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $colorGray200;
+  font-size: 1rem;
+  line-height: 1;
 }
 
 .error {

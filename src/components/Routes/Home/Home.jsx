@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { Helmet } from 'react-helmet';
 
 import { UiStoreContext } from '@store';
-import { DashboardVideos } from '@c/Dashboard';
+import { DashboardHeadVideo, DashboardVideos } from '@c/Dashboard';
 
 import { content } from './Content.js';
 
@@ -16,6 +16,7 @@ const DashboardPage = observer(() => {
         <title>TBF</title>
       </Helmet>
 
+      <DashboardHeadVideo />
       <DashboardVideos {...content.video} />
     </>
   );
