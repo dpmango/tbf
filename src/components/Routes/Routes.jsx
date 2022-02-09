@@ -1,20 +1,33 @@
 import React, { useContext } from 'react';
 import { Router, Switch, Route, Redirect } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 
 import history from '@config/history';
+import { SessionStoreContext } from '@store';
 import Layout from '@c/Layout/';
 
-import Home from './Home';
+import ProtectedRoute from './ProtectedRoute';
+import Login from './Login';
+import Dashboard from './Dashboard';
+// import NoMatch from './NoMatch';
 
-const Routes = () => {
+const Routes = observer(() => {
+  const { sessionId } = useContext(SessionStoreContext);
+
   return (
     <Layout variant="main">
       <Switch>
-        <Home />
+        <ProtectedRoute exact path="/">
+          <Dashboard />
+        </ProtectedRoute>
+
+        <Route path="/login">{sessionId ? <Redirect to="/" /> : <Login />}</Route>
+
+        {/* <Route component={NoMatch} /> */}
       </Switch>
     </Layout>
   );
-};
+});
 
 const CustomRouter = () => (
   <Router history={history}>

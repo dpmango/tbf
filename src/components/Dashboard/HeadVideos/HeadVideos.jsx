@@ -4,9 +4,9 @@ import cns from 'classnames';
 
 import { SvgIcon, Button, Input } from '@ui';
 
-import styles from './HeadVideo.module.scss';
+import styles from './HeadVideos.module.scss';
 
-const HeadVideo = ({ className }) => {
+const HeadVideos = ({ className }) => {
   const [search, setSearch] = useState('');
   return (
     <section className={cns(styles.container, className)}>
@@ -39,4 +39,4 @@ const HeadVideo = ({ className }) => {
   );
 };
 
-export default HeadVideo;
+export default HeadVideos;

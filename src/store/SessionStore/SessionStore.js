@@ -12,7 +12,7 @@ export default class SessionStore {
   constructor() {
     makeAutoObservable(this);
 
-    // this.init();
+    this.init();
   }
   // inner actions
   setSession(newSession) {
