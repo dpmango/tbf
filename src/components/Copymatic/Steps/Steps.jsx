@@ -37,12 +37,10 @@ const Steps = ({ className, steps }) => {
   );
 
   useEffect(() => {
-    if (!firstRender) {
-      const tSlug = steps.find((x) => x.id === step).slug;
+    const tSlug = steps.find((x) => x.id === step).slug;
 
-      history.push(`${baseRoute}${tSlug}`);
-    }
-  }, [step, firstRender]);
+    history.push(`${baseRoute}${tSlug}`);
+  }, [step]);
 
   return (
     <section className={cns(st.container, className)}>
