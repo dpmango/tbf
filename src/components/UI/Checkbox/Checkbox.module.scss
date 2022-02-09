@@ -14,6 +14,7 @@
     align-items: flex-start;
     z-index: 1;
     cursor: pointer;
+    transition: 0.25s $ease;
     &:hover {
       .checkbox_label {
         color: $colorPrimary;
@@ -31,22 +32,37 @@
     pointer-events: none;
   }
   &_box {
+    flex: 0 0 auto;
     position: relative;
-    width: 16px;
-    height: 16px;
+    width: 0.8rem;
+    height: 0.8rem;
     border-radius: 0;
-    font-size: 8px;
-    border: 2px solid #e3e3e3;
+    font-size: 0.8rem;
+    border: 1px solid $colorGray200;
     background: white;
     cursor: pointer;
     color: white;
     transition: background 0.25s $ease, border 0.25s $ease;
     &._isChecked {
       background: white;
-      border-color: white;
+      border-color: $colorPrimary;
       :global .svg-icon {
         opacity: 1;
       }
+    }
+    &::after {
+      display: inline-block;
+      content: ' ';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      width: 0.3rem;
+      height: 0.3rem;
+      background: $colorPrimary;
+      border-radius: 50%;
+      transition: opacity 0.25s $ease;
     }
   }
   :global .svg-icon {
@@ -58,12 +74,17 @@
     opacity: 0;
     font-size: 0.5rem;
     color: $colorPrimary;
+    transition: opacity 0.25s $ease;
   }
 
   &_label {
     font-size: inherit;
     line-height: inherit;
-    padding-left: 10px;
+    margin-left: 0.4rem;
+    font-weight: 600;
+    font-size: 0.7rem;
+    line-height: 1.43;
+    color: $colorGray900;
     margin-top: -0.1rem;
     color: inherit;
     cursor: pointer;
@@ -79,6 +100,14 @@
   &.radio {
     .checkbox_box {
       border-radius: 50%;
+      &._isChecked {
+        :global .svg-icon {
+          opacity: 0;
+        }
+        &::after {
+          opacity: 1;
+        }
+      }
     }
   }
 }

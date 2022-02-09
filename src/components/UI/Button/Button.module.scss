@@ -4,10 +4,10 @@
   align-items: center;
   font-weight: 600;
   font-family: $baseFont;
-  font-size: 0.9rem;
   line-height: 1;
-  text-transform: uppercase;
-  padding: 21px 30px 21px;
+  padding: 0.4rem 1.2rem;
+  font-size: 0.8rem;
+  min-height: 2.2rem;
   border-radius: 0.4rem;
   transition: background 0.25s $ease, color 0.25s $ease;
   &._primary {

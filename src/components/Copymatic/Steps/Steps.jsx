@@ -6,6 +6,7 @@ import cns from 'classnames';
 import { SvgIcon, Button, Input } from '@ui';
 
 import st from './Steps.module.scss';
+import { CopymaticTopic } from '@c/Copymatic';
 
 const Steps = ({ className, steps }) => {
   const [step, activateStep] = useState(1);
@@ -14,7 +15,9 @@ const Steps = ({ className, steps }) => {
 
   const handleStepClick = useCallback(
     (id) => {
-      activateStep(id);
+      if (id < 6 && id > 0) {
+        activateStep(id);
+      }
     },
     [activateStep]
   );
@@ -37,6 +40,21 @@ const Steps = ({ className, steps }) => {
               </li>
             ))}
         </ul>
+        <div className={st.stepContent}>{step === 1 && <CopymaticTopic />}</div>
+
+        <div className={st.nav}>
+          <Button theme="gray" iconLeft="arrow-left" variant="small" outline onClick={() => handleStepClick(step - 1)}>
+            Prev
+          </Button>
+          <Button
+            theme="gray"
+            iconRight="arrow-right"
+            variant="small"
+            outline
+            onClick={() => handleStepClick(step + 1)}>
+            Next
+          </Button>
+        </div>
       </div>
     </section>
   );

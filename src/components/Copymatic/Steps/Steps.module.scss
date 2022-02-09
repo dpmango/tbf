@@ -43,6 +43,8 @@
       color: $colorGray900;
     }
     .stepDescr {
+      display: block;
+      display: -webkit-box;
       width: 100%;
       height: 100%;
       max-width: 270px;
@@ -88,6 +90,7 @@
 }
 
 .stepDescr {
+  display: none;
   font-size: 0.6rem;
   line-height: 1.5;
   color: $colorGray600;
@@ -98,8 +101,18 @@
   opacity: 0;
   pointer-events: none;
   text-overflow: ellipsis;
-  display: -webkit-box;
   -webkit-line-clamp: 1;
   line-clamp: 1;
   -webkit-box-orient: vertical;
+}
+
+.stepContent {
+  padding-bottom: 3rem;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid $borderColor;
+  padding: 1rem 0;
 }
