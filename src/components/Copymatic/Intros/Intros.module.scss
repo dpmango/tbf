@@ -1,0 +1,14 @@
+.container {
+  position: relative;
+  margin-top: 2.2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 3rem;
+}
+
+.cta {
+  margin-top: 12rem;
+}

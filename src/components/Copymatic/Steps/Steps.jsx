@@ -1,15 +1,29 @@
 import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Switch, Route, Link, useHistory, useLocation } from 'react-router-dom';
 import cns from 'classnames';
 
 import { SvgIcon, Button, Input } from '@ui';
+import { useFirstRender } from '@hooks';
+import { CopymaticIdeas, CopymaticIntros, CopymaticOutline } from '@c/Copymatic';
 
 import st from './Steps.module.scss';
-import { CopymaticTopic } from '@c/Copymatic';
+
+const baseRoute = '/copymatic/';
 
 const Steps = ({ className, steps }) => {
-  const [step, activateStep] = useState(1);
+  let history = useHistory();
+  const location = useLocation();
+  const firstRender = useFirstRender();
+
+  const getLocationHash = useCallback(() => {
+    const loc = location.pathname.split('/');
+    const tStep = steps.find((x) => x.slug === loc[loc.length - 1]);
+
+    return tStep ? tStep.id : 1;
+  }, [location, steps]);
+
+  const [step, activateStep] = useState(getLocationHash());
 
   const handleAddClick = useCallback(() => {}, []);
 
@@ -21,6 +35,14 @@ const Steps = ({ className, steps }) => {
     },
     [activateStep]
   );
+
+  useEffect(() => {
+    if (!firstRender) {
+      const tSlug = steps.find((x) => x.id === step).slug;
+
+      history.push(`${baseRoute}${tSlug}`);
+    }
+  }, [step, firstRender]);
 
   return (
     <section className={cns(st.container, className)}>
@@ -40,7 +62,26 @@ const Steps = ({ className, steps }) => {
               </li>
             ))}
         </ul>
-        <div className={st.stepContent}>{step === 1 && <CopymaticTopic />}</div>
+
+        <div className={st.stepContent}>
+          <Switch>
+            <Route path={`${baseRoute}ideas`}>
+              <CopymaticIdeas />
+            </Route>
+            <Route path={`${baseRoute}intros`}>
+              <CopymaticIntros />
+            </Route>
+            <Route path={`${baseRoute}outline`}>
+              <CopymaticOutline />
+            </Route>
+            {/* <Route path={`${baseRoute}draft`}>
+              <CopymaticDraf />
+            </Route>
+            <Route path={`${baseRoute}voiceover`}>
+              <CopymaticVoiceover />
+            </Route> */}
+          </Switch>
+        </div>
 
         <div className={st.nav}>
           <Button theme="gray" iconLeft="arrow-left" variant="small" outline onClick={() => handleStepClick(step - 1)}>

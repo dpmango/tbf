@@ -1,2 +1,4 @@
 export { default as CopymaticSteps } from './Steps';
-export { default as CopymaticTopic } from './Topic';
+export { default as CopymaticIdeas } from './Ideas';
+export { default as CopymaticIntros } from './Intros';
+export { default as CopymaticOutline } from './Outline';

@@ -27,7 +27,7 @@ const Routes = observer(() => {
           <Video />
         </ProtectedRoute>
 
-        <ProtectedRoute exact path="/copymatic">
+        <ProtectedRoute path="/copymatic">
           <Copymatic />
         </ProtectedRoute>
 

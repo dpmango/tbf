@@ -5,9 +5,10 @@ import cns from 'classnames';
 
 import { SvgIcon, Button, Checkbox, Input } from '@ui';
 
-import st from './Topic.module.scss';
+import st from './Ideas.module.scss';
+import sharedStyles from '@c/Copymatic/Copymatic.module.scss';
 
-const Topic = ({ className, steps }) => {
+const Ideas = ({ className, steps }) => {
   const [topic, setTopic] = useState('');
   const [topicSearch, setTopicSearch] = useState('');
   const [topicCloud, setTopicCloud] = useState([]);
@@ -57,7 +58,7 @@ const Topic = ({ className, steps }) => {
       <div className={st.grid}>
         <div className={st.col}>
           <div className={st.topic}>
-            <div className={st.topicLabel}>
+            <div className={sharedStyles.inputLabel}>
               <span>Topic</span>
               <i data-tip="tooltip content">
                 <SvgIcon name="info" />
@@ -96,7 +97,7 @@ const Topic = ({ className, steps }) => {
             <Button type="submit" block>
               Generate Ideas
             </Button>
-            <div className={st.helper}>
+            <div className={sharedStyles.helper}>
               <i data-tip="One idea is 10c cents">
                 <SvgIcon name="info" />
               </i>
@@ -107,7 +108,7 @@ const Topic = ({ className, steps }) => {
 
         {/* col */}
         <div className={st.col}>
-          <div className={st.radioGroup}>
+          <div className={cns(sharedStyles.radioGroup, st.radioGroup)}>
             {radioGroup &&
               radioGroup.map((r, idx) => (
                 <Checkbox
@@ -125,4 +126,4 @@ const Topic = ({ className, steps }) => {
   );
 };
 
-export default Topic;
+export default Ideas;

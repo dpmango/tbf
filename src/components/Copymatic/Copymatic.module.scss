@@ -1,0 +1,73 @@
+// shared styles
+.helper {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  line-height: 1.43;
+  color: $colorGray900;
+  i {
+    font-style: normal;
+    font-size: 0;
+    margin-right: 0.3rem;
+    color: $colorPrimary;
+    :global .svg-icon {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+.inputLabel {
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  font-weight: 600;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: $colorGray900;
+  i {
+    font-style: normal;
+    font-size: 0;
+    margin: 0 0.15rem;
+    color: $colorPrimary;
+    :global .svg-icon {
+      font-size: 0.8rem;
+    }
+  }
+  .counter {
+    margin-left: auto;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: $colorGray700;
+  }
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  :global .checkbox_wrapper {
+    width: 100%;
+    padding: 0.75rem 0.8rem;
+    background: $colorBg;
+    border-radius: 0.4rem;
+    border: 0.1rem solid transparent;
+    &:hover {
+      // background: white;
+      border-color: $colorPrimary;
+    }
+  }
+  :global .checkbox_label {
+    font-weight: 400;
+    font-size: 0.6rem;
+  }
+  :global .checkbox.active {
+    .checkbox_wrapper {
+      border-color: $colorPrimary;
+      color: $colorPrimary;
+    }
+  }
+}
