@@ -41,14 +41,14 @@ const Video = ({ className, videos }) => {
               </div>
             ))}
 
-          <div className={styles.add} onClick={handleAddClick}>
+          <Link to="/copymatic" className={styles.add} onClick={handleAddClick}>
             <div className={styles.addContent}>
               <div className={styles.addIcon}>
                 <SvgIcon name="plus-circle" />
               </div>
               <div className={styles.addTitle}>Start your first script</div>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </section>

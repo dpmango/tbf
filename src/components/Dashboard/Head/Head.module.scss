@@ -1,12 +1,17 @@
 .container {
   position: relative;
+  &._hasBorder {
+    .wrapper {
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid $borderColor;
+    }
+  }
 }
 
 .wrapper {
-  padding: 1.5rem 0 1.5rem;
+  padding: 1.5rem 0 2rem;
   display: flex;
   flex-wrap: wrap;
-  border-bottom: 1px solid $borderColor;
 }
 
 .head {

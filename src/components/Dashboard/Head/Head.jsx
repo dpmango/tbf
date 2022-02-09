@@ -4,17 +4,17 @@ import cns from 'classnames';
 
 import { SvgIcon, Button, Input } from '@ui';
 
-import styles from './HeadVideos.module.scss';
+import styles from './Head.module.scss';
 
-const HeadVideos = ({ className }) => {
+const HeadVideos = ({ className, includeDescription, hasBorder }) => {
   const [search, setSearch] = useState('');
   return (
-    <section className={cns(styles.container, className)}>
+    <section className={cns(styles.container, hasBorder && styles._hasBorder, className)}>
       <div className="container">
         <div className={styles.wrapper}>
           <div className={styles.head}>
             <div className={styles.title}>Welcome, Olivia</div>
-            <div className={styles.description}>Lets get started </div>
+            {includeDescription && <div className={styles.description}>Lets get started </div>}
           </div>
           <div className={styles.actions}>
             <div className={styles.button}>
@@ -37,6 +37,16 @@ const HeadVideos = ({ className }) => {
       </div>
     </section>
   );
+};
+
+HeadVideos.propTypes = {
+  className: PropTypes.string,
+  includeDescription: PropTypes.bool,
+  hasBorder: PropTypes.bool,
+};
+
+HeadVideos.defaultProps = {
+  hasBorder: true,
 };
 
 export default HeadVideos;

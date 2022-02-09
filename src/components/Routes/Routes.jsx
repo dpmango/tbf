@@ -10,6 +10,7 @@ import ProtectedRoute from './ProtectedRoute';
 import Login from './Login';
 import Dashboard from './Dashboard';
 import Video from './Video';
+import Copymatic from './Copymatic';
 // import NoMatch from './NoMatch';
 
 const Routes = observer(() => {
@@ -24,6 +25,10 @@ const Routes = observer(() => {
 
         <ProtectedRoute exact path="/video/:id">
           <Video />
+        </ProtectedRoute>
+
+        <ProtectedRoute exact path="/copymatic">
+          <Copymatic />
         </ProtectedRoute>
 
         <Route path="/login">{sessionId ? <Redirect to="/" /> : <Login />}</Route>

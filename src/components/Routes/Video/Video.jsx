@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { Helmet } from 'react-helmet';
 
 import { UiStoreContext } from '@store';
-import { DashboardHeadVideos, DashboardVideo } from '@c/Dashboard';
+import { DashboardHead, DashboardVideo } from '@c/Dashboard';
 
 const LoginPage = observer(() => {
   const uiContext = useContext(UiStoreContext);
@@ -14,7 +14,7 @@ const LoginPage = observer(() => {
         <title>TBF Login</title>
       </Helmet>
 
-      <DashboardHeadVideos />
+      <DashboardHead includeDescription={true} />
       <DashboardVideo
         video={{
           poster: '/img/videoCover-1.jpg',
