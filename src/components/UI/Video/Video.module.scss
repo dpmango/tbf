@@ -69,7 +69,7 @@
 
 .videoCaption {
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   top: 0;
   left: 0;
   right: 0;
@@ -181,10 +181,12 @@
     color: #fff;
     background: white;
     &::-moz-progress-bar {
-      background-color: #fff;
+      background-image: -moz-linear-gradient(left, rgba(white, 0.5), rgba(white, 0.5));
+      background-size: 100% 100%;
     }
     &::-webkit-progress-bar {
-      background-color: #fff;
+      background-image: -webkit-linear-gradient(left, rgba(white, 0.5), rgba(white, 0.5));
+      background-size: 100% 100%;
     }
     &::-webkit-progress-value {
       background-color: #fff;

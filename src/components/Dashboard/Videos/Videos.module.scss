@@ -80,6 +80,12 @@
   color: $colorPrimary;
 }
 
+.skeleton {
+  padding-bottom: 56.25%;
+  border-radius: 0.4rem;
+  background: $colorBg;
+}
+
 @include r($lg) {
   .grid {
     grid-template-columns: 1fr 1fr;

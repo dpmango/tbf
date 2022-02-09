@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import cns from 'classnames';
 
 import { SvgIcon, UiVideo } from '@ui';
@@ -9,18 +10,35 @@ import styles from './Videos.module.scss';
 const Video = ({ className, videos }) => {
   const handleAddClick = useCallback(() => {}, []);
 
+  const videosList = useMemo(() => {
+    const videosLength = videos.length;
+    const minVideos = 5;
+
+    if (videosLength < minVideos) {
+      return [...videos, ...[...Array(minVideos - videosLength).keys()].map(() => ({ skeleton: true }))];
+    }
+
+    return videos;
+  }, [videos]);
+
   return (
     <section className={cns(styles.container, className)}>
       <div className="container">
         <div className={styles.grid}>
-          {videos &&
-            videos.map((video, idx) => (
-              <UiVideo className={styles.video} video={video} key={video.id || idx}>
-                <div className={styles.videoCaption}>
-                  <SvgIcon name="play-button" />
-                  <div className={styles.videoCaptionTitle}>{video.caption}</div>
-                </div>
-              </UiVideo>
+          {videosList &&
+            videosList.map((video, idx) => (
+              <div className={styles.col} key={video.id || idx}>
+                {!video.skeleton ? (
+                  <UiVideo className={styles.video} video={video}>
+                    <Link to={`/video/${video.id}`} className={styles.videoCaption}>
+                      <SvgIcon name="play-button" />
+                      <div className={styles.videoCaptionTitle}>{video.caption}</div>
+                    </Link>
+                  </UiVideo>
+                ) : (
+                  <div className={styles.skeleton}></div>
+                )}
+              </div>
             ))}
 
           <div className={styles.add} onClick={handleAddClick}>

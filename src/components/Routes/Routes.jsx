@@ -9,6 +9,7 @@ import Layout from '@c/Layout/';
 import ProtectedRoute from './ProtectedRoute';
 import Login from './Login';
 import Dashboard from './Dashboard';
+import Video from './Video';
 // import NoMatch from './NoMatch';
 
 const Routes = observer(() => {
@@ -19,6 +20,10 @@ const Routes = observer(() => {
       <Switch>
         <ProtectedRoute exact path="/">
           <Dashboard />
+        </ProtectedRoute>
+
+        <ProtectedRoute exact path="/video/:id">
+          <Video />
         </ProtectedRoute>
 
         <Route path="/login">{sessionId ? <Redirect to="/" /> : <Login />}</Route>

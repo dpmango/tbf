@@ -6,7 +6,7 @@ import { SvgIcon } from '@ui';
 
 import styles from './Video.module.scss';
 
-const Video = ({ className, video, children }) => {
+const Video = ({ className, video, children, onProgress }) => {
   const [playState, setPlayState] = useState('pause');
   const [muteState, setMuteState] = useState('mute');
   const [progressPercent, setProgressPercent] = useState(0);
@@ -100,7 +100,9 @@ const Video = ({ className, video, children }) => {
       if (!progressRef.current.getAttribute('max')) progressRef.current.setAttribute('max', video.duration);
       progressRef.current.value = videoRef.current.currentTime;
 
-      setProgressPercent(Math.floor((videoRef.current.currentTime / videoRef.current.duration) * 100));
+      const percent = Math.floor((videoRef.current.currentTime / videoRef.current.duration) * 100);
+      setProgressPercent(percent);
+      onProgress && onProgress(percent);
     };
 
     // Wait for the video's meta data to be loaded, then set the progress bar's max value to the duration of the video
