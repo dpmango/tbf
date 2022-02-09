@@ -10,6 +10,7 @@ const Themes = {
   PRIMARY: 'primary',
   ACCENT: 'accent',
   BLACK: 'black',
+  GRAY: 'gray',
 };
 
 const Variants = {
@@ -22,6 +23,7 @@ const ThemeClasses = {
   [Themes.PRIMARY]: styles._primary,
   [Themes.ACCENT]: styles._accent,
   [Themes.BLACK]: styles._black,
+  [Themes.GRAY]: styles._gray,
 };
 
 const VariantClasses = {

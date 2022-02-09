@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import PropTypes from 'prop-types';
 import cns from 'classnames';
 
-import { SvgIcon, UiVideo, Input } from '@ui';
+import { SvgIcon, Button, Input } from '@ui';
 
 import styles from './HeadVideo.module.scss';
 
@@ -16,7 +16,13 @@ const HeadVideo = ({ className }) => {
             <div className={styles.title}>Welcome, Olivia</div>
             <div className={styles.description}>Lets get started </div>
           </div>
-          <div className={styles.action}>
+          <div className={styles.actions}>
+            <div className={styles.button}>
+              <Button theme="gray" variant="small">
+                <span>Credits</span>
+                <mark>3</mark>
+              </Button>
+            </div>
             <div className={styles.search}>
               <Input
                 iconLeft="search"

@@ -3,13 +3,14 @@
 }
 
 .wrapper {
-  padding: 2.5rem 0 1.5rem;
+  padding: 1.5rem 0 1.5rem;
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   border-bottom: 1px solid $borderColor;
 }
 
 .head {
+  margin-top: 1rem;
   flex: 1 0 auto;
   padding-right: 1rem;
 }
@@ -25,4 +26,42 @@
   font-size: 0.8rem;
   line-height: 1.5;
   color: $colorGray;
+}
+
+.actions {
+  min-width: 1px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.button {
+  flex: 0 0 auto;
+  margin-top: 1rem;
+  margin-right: 1rem;
+  mark {
+    margin-left: 0.4em;
+    background: $colorPrimary;
+    color: white;
+    min-width: 1.7rem;
+    padding: 0.2rem;
+    border-radius: 1.5rem;
+  }
+}
+
+.search {
+  margin-top: 1rem;
+  width: 370px;
+  min-width: 1px;
+}
+
+@include r($lg) {
+  .wrapper {
+    display: block;
+  }
+
+  .search {
+    width: 100%;
+    max-width: 370px;
+  }
 }

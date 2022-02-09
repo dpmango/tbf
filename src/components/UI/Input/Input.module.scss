@@ -13,12 +13,12 @@
     width: 100%;
     background: white;
     font-family: $baseFont;
-    font-size: 16px;
-    line-height: 16px;
+    font-size: 0.8rem;
+    line-height: 1;
     color: $fontColor;
     border: 1px solid $colorGray200;
     border-radius: 0.4rem;
-    padding: 0.5rem 0.8rem 0.5rem;
+    padding: 0.55rem 0.8rem 0.55rem;
     backface-visibility: hidden;
     transition: border 0.25s $ease, color 0.25s $ease, background 0.25s $ease;
     &::placeholder {
@@ -96,20 +96,24 @@
   position: absolute;
   left: 0.7rem;
   top: 50%;
+  width: 1rem;
   transform: translateY(-50%);
   color: $colorGray200;
   font-size: 1rem;
   line-height: 1;
+  pointer-events: none;
 }
 
 .iconLeft {
   position: absolute;
   right: 0.7rem;
   top: 50%;
+  width: 1rem;
   transform: translateY(-50%);
   color: $colorGray200;
   font-size: 1rem;
   line-height: 1;
+  pointer-events: none;
 }
 
 .error {

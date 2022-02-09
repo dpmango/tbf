@@ -13,7 +13,7 @@
   &:hover,
   &._opened {
     .wrapper {
-      width: 254px;
+      width: 12.7rem;
     }
     .menu {
       a {
@@ -44,7 +44,7 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-  width: 80px;
+  width: 4rem;
   padding: 1.5rem 0 1.3rem;
   border-right: 1px solid $borderColor;
   transition: width 0.25s $ease;
@@ -55,9 +55,11 @@
   flex: 0 0 auto;
   font-size: 0;
   margin-left: 1rem;
+  transform: translateX(-0.1rem);
   img,
   svg {
-    max-width: 100%;
+    width: 2rem;
+    height: 2rem;
   }
 }
 
@@ -147,7 +149,7 @@
   top: 1.2rem;
   font-size: 0.7rem;
   padding-right: 2rem;
-  width: 225px;
+  width: 11.25rem;
   line-height: 1.43;
   opacity: 0;
   transition: 0.25s $ease;
