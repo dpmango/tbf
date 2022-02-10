@@ -5,14 +5,26 @@
 
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 3rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1.6rem;
 }
 
 @include r($lg) {
   .grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1rem;
+  }
+}
+
+@include r($md) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@include r($sm) {
+  .grid {
     grid-template-columns: 1fr;
-    grid-gap: 2rem;
   }
 }
 

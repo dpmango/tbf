@@ -14,7 +14,7 @@
     background: $colorPrimary;
     color: white;
     &:hover {
-      background: $colorPrimaryDark;
+      background: rgba($colorPrimary, 0.8);
     }
 
     &._outline {
@@ -89,6 +89,22 @@
       }
     }
   }
+  &._muted {
+    background: #ababab;
+    color: white;
+    &:hover {
+      background: rgba(#ababab, 0.8);
+    }
+    &._outline {
+      background: transparent;
+      border: 1px solid #ababab;
+      color: $fontColor;
+      &:hover {
+        color: white;
+        background: #ababab;
+      }
+    }
+  }
   // variants
   &._small {
     padding: 0.4rem 0.8rem;
@@ -111,12 +127,16 @@
   }
   &._iconLeft {
     svg {
-      margin-right: 16px;
+      font-size: 1rem;
+      flex: 0 0 auto;
+      margin-right: 0.4rem;
     }
   }
   &._iconRight {
     svg {
-      margin-left: 16px;
+      font-size: 1rem;
+      flex: 0 0 auto;
+      margin-left: 0.4rem;
     }
   }
   &._loading {

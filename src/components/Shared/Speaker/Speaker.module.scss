@@ -1,0 +1,62 @@
+.speaker {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  background: $colorBg;
+  border-radius: 0.4rem;
+  padding: 1.8rem;
+}
+
+.avatar {
+  position: relative;
+  z-index: 1;
+  width: 2.8rem;
+  height: 2.8rem;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  border-radius: 50%;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.name {
+  margin-top: 1rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  line-height: 1.56;
+  color: $colorGray900;
+}
+
+.tags {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: $colorGray;
+}
+
+.cta {
+  margin-top: auto;
+  :global .btn {
+    min-width: 1px;
+    margin-top: 0.4rem;
+    padding: 0.35rem 0.7rem;
+    min-height: 2rem;
+  }
+  ._selected {
+    background: $colorPrimary50;
+    color: $colorPrimary;
+    &:hover {
+      background: $colorPrimary50;
+      color: $colorPrimary;
+    }
+  }
+}

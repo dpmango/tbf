@@ -11,6 +11,7 @@ const Themes = {
   ACCENT: 'accent',
   BLACK: 'black',
   GRAY: 'gray',
+  MUTED: 'muted',
 };
 
 const Variants = {
@@ -24,6 +25,7 @@ const ThemeClasses = {
   [Themes.ACCENT]: styles._accent,
   [Themes.BLACK]: styles._black,
   [Themes.GRAY]: styles._gray,
+  [Themes.MUTED]: styles._muted,
 };
 
 const VariantClasses = {
