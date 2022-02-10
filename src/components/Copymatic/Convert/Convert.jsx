@@ -1,16 +1,28 @@
-import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useRef, useEffect, useContext, useCallback } from 'react';
+import { observer } from 'mobx-react-lite';
 import { Link } from 'react-router-dom';
 import cns from 'classnames';
 
 import { SvgIcon, Button, Checkbox, Input, AudioList } from '@ui';
+import { UiStoreContext } from '@store';
+import { SharedSpeaker } from '@c/Shared';
+import { ContinueModal } from '@c/Modal';
 
 import st from './Convert.module.scss';
 import sharedStyles from '@c/Copymatic/Copymatic.module.scss';
 import { mockAudioList } from './Content';
-import { SharedSpeaker } from '@c/Shared';
 
-const Convert = ({ className }) => {
+const Convert = observer(({ className }) => {
+  const uiContext = useContext(UiStoreContext);
+
+  const openConfirmModal = useCallback(() => {
+    uiContext.setModal('continue', {
+      title: 'Are you sure you want to proceed?',
+      description: 'This is your last chance to review and make any changes. ',
+      ctaText: 'Proceed with Voiceover',
+    });
+  }, []);
+
   return (
     <section className={cns(st.container, className)}>
       <div className={st.head}>
@@ -53,14 +65,16 @@ const Convert = ({ className }) => {
             <SvgIcon name="stop-circle" />
           </div>
           <div className={st.panelAction}>
-            <Button theme="white" variant="small">
+            <Button theme="white" variant="small" onClick={openConfirmModal}>
               Convert
             </Button>
           </div>
         </div>
       </div>
+
+      <ContinueModal />
     </section>
   );
-};
+});
 
 export default Convert;

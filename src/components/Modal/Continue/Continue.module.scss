@@ -1,0 +1,78 @@
+.container {
+  padding: 1.5rem;
+  display: flex;
+}
+
+.icon {
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  color: $colorRed;
+  &::after {
+    display: inline-block;
+    content: ' ';
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate3d(-50%, -50%, 0);
+    background: #fee4e2;
+    border: 0.3rem solid #fef3f2;
+    border-radius: 50%;
+    animation: pulse 1.8s ease-out infinite;
+  }
+  :global .svg-icon {
+    position: relative;
+    z-index: 2;
+    font-size: 1rem;
+  }
+}
+
+@keyframes pulse {
+  from {
+    transform: translate3d(-50%, -50%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-50%, -50%, 0) scale(1.4);
+  }
+  100% {
+    transform: translate3d(-50%, -50%, 0) scale(1);
+  }
+}
+
+.content {
+  flex: 1 1 auto;
+  padding-left: 1rem;
+  font-size: 0.7rem;
+  line-height: 1.43;
+}
+
+.title {
+  font-weight: 500;
+  color: $colorGray900;
+}
+
+.description {
+  margin-top: 0.2rem;
+  color: $colorGray;
+}
+
+.cta {
+  margin-top: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: -0.8rem;
+  margin-right: -0.8rem;
+  :global .btn {
+    margin-right: 0.6rem;
+    margin-bottom: 0.6rem;
+    min-height: 2rem;
+  }
+}

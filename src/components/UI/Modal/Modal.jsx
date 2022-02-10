@@ -13,12 +13,12 @@ import styles2 from './Modal.scss';
 const sharedStyles = {
   content: {
     position: 'absolute',
-    background: '#3D3D46',
-    borderRadius: '10px',
+    background: '#FFFFFF',
+    borderRadius: '0.4rem',
     padding: 0,
     overflowY: 'auto',
     maxHeight: 'calc(100% - 16px)',
-    boxShadow: '5px 5px 20px rgba(0, 0, 0, 0.25)',
+    boxShadow: '0px 24px 48px -12px rgba(16, 24, 40, 0.25)',
   },
   overlay: {
     zIndex: 99,
@@ -28,7 +28,7 @@ const sharedStyles = {
 
 const mainStyles = {
   content: {
-    width: 'calc(100% - 16px)',
+    width: 'calc(100% - 1rem)',
     maxWidth: '1170px',
     top: '50%',
     left: '50%',
@@ -41,8 +41,8 @@ const mainStyles = {
 
 const narrowStyles = {
   content: {
-    width: 'calc(100% - 16px)',
-    maxWidth: '868px',
+    width: 'calc(100% - 1rem)',
+    maxWidth: '20rem',
     top: '50%',
     left: '50%',
     right: 'auto',
