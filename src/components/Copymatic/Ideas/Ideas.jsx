@@ -23,8 +23,10 @@ const Ideas = ({ className, steps }) => {
   );
 
   const handleAddTopic = useCallback(() => {
-    setTopicCloud([...topicCloud, { id: topicCloud[topicCloud.length - 1].id, label: topicSearch }]);
-    setTopicSearch('');
+    if (topicSearch && topicSearch.trim().length) {
+      setTopicCloud([...topicCloud, { id: topicCloud[topicCloud.length - 1].id + 1, label: topicSearch.trim() }]);
+      setTopicSearch('');
+    }
   }, [topicSearch, topicCloud]);
 
   useEffect(() => {
@@ -73,12 +75,12 @@ const Ideas = ({ className, steps }) => {
             <p className={cns('p-lg', st.topicCloudInfo)}>
               Please type the topic you want to write about or select from our tags below.
             </p>
-            <form className={st.topicCloudForm}>
+            <div className={st.topicCloudForm}>
               <Input value={topicSearch} onChange={(v) => setTopicSearch(v)} placeholder="Type your own topic..." />
               <Button variant="small" onClick={handleAddTopic}>
                 Add Topic
               </Button>
-            </form>
+            </div>
 
             <ul className={st.topicCloudList}>
               {topicCloud &&
