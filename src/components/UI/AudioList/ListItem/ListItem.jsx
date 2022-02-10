@@ -45,7 +45,7 @@ const ListItem = ({ className, id, audio, label, selectedAudio, onBoxSelect }) =
   return (
     <div className={cns(styles.box, className)}>
       <div className={styles.boxCheckbox}>
-        <Checkbox isChecked={selectedAudio.includes(id)} onChange={() => onBoxSelect(x.id)}></Checkbox>
+        <Checkbox isChecked={selectedAudio.includes(id)} onChange={() => onBoxSelect(id)}></Checkbox>
       </div>
       <div className={styles.boxActions}>
         <div className={styles.actionTimer}>
@@ -59,7 +59,7 @@ const ListItem = ({ className, id, audio, label, selectedAudio, onBoxSelect }) =
         </div>
         <div className={cns(styles.actionPlay, playState && styles._playing)} onClick={togglePlayState}>
           <SvgIcon name="play-circle" />
-          <SvgIcon name="pause" />
+          <SvgIcon name="stop-circle" />
         </div>
       </div>
 

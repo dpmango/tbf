@@ -40,7 +40,7 @@
   cursor: pointer;
   transition: color 0.25s $ease;
   :global .svg-icon {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
   &:hover {
     color: $colorGray900;
@@ -65,16 +65,37 @@
   pointer-events: none;
 }
 .actionPlay {
-  :global .svg-icon--pause {
+  :global .svg-icon--stop-circle {
     display: none;
-    transform: scale(0.8);
   }
   &._playing {
-    :global .svg-icon--pause {
+    :global .svg-icon--stop-circle {
       display: block;
     }
     :global .svg-icon--play-circle {
       display: none;
     }
+  }
+}
+
+@include r($md) {
+  .box {
+    flex-wrap: wrap;
+  }
+
+  .boxCheckbox {
+    flex: 0 0 1.6rem;
+    margin-right: 0;
+    order: 1;
+  }
+
+  .boxLabel {
+    flex: 0 0 calc(100% - 1.6rem);
+    order: 2;
+  }
+  .boxActions {
+    order: 3;
+    margin-top: 0.6rem;
+    flex: 1 1 100%;
   }
 }

@@ -72,6 +72,22 @@
       }
     }
   }
+  &._white {
+    background: $colorPrimary50;
+    color: $colorPrimary;
+    &:hover {
+      background: rgba($colorPrimary50, 0.8);
+    }
+    &._outline {
+      background: transparent;
+      border: 1px solid $colorPrimary50;
+      color: $colorPrimary50;
+      &:hover {
+        color: $colorPrimary;
+        background: $colorPrimary50;
+      }
+    }
+  }
   &._gray {
     background: $colorBg;
     color: $colorGray;

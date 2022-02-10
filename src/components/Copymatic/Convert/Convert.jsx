@@ -8,11 +8,57 @@ import { SvgIcon, Button, Checkbox, Input, AudioList } from '@ui';
 import st from './Convert.module.scss';
 import sharedStyles from '@c/Copymatic/Copymatic.module.scss';
 import { mockAudioList } from './Content';
+import { SharedSpeaker } from '@c/Shared';
 
 const Convert = ({ className }) => {
   return (
     <section className={cns(st.container, className)}>
-      <AudioList title="Cardiology - Heart Disease" list={mockAudioList} />
+      <div className={st.head}>
+        <SharedSpeaker
+          modifier="flat"
+          id={1}
+          avatar={'https://randomuser.me/api/portraits/men/1.jpg'}
+          name="Orlando"
+          surname="Moriarty"
+          tags="#Male #Middle-Aged #Low-Pitched #Powerful"
+        />
+      </div>
+
+      <AudioList className={st.list} title="Cardiology - Heart Disease" list={mockAudioList} />
+
+      <div className={st.panel}>
+        <div className={st.panelActions}>
+          <div className={st.panelAction} data-tip="report error">
+            <SvgIcon name="alert-circle" />
+          </div>
+          <div className={st.panelAction} data-tip="timer">
+            <SvgIcon name="clock" />
+          </div>
+          <div className={st.panelAction} data-tip="forawrd">
+            <SvgIcon name="flash" />
+          </div>
+          <div className={st.panelAction} data-tip="delete">
+            <SvgIcon name="delete" />
+          </div>
+        </div>
+
+        <div className={st.panelActions}>
+          <div className={st.panelAction} data-tip="music">
+            <SvgIcon name="music" />
+          </div>
+          <div className={st.panelAction} data-tip="play">
+            <SvgIcon name="play-circle" />
+          </div>
+          <div className={st.panelAction} data-tip="pause">
+            <SvgIcon name="stop-circle" />
+          </div>
+          <div className={st.panelAction}>
+            <Button theme="white" variant="small">
+              Convert
+            </Button>
+          </div>
+        </div>
+      </div>
     </section>
   );
 };

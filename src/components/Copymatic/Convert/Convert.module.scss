@@ -3,22 +3,63 @@
   margin-top: 2.2rem;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 3rem;
+.list {
+  margin-top: 1.2rem;
 }
 
-@include r($lg) {
-  .grid {
-    grid-template-columns: 1fr;
-    grid-gap: 2rem;
+.head {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid $borderColor;
+}
+
+.panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.6rem;
+  background: $colorPrimary;
+  border-radius: 0.4rem;
+  padding: 1rem 1.2rem;
+}
+
+.panelActions {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.panelAction {
+  flex: 0 0 auto;
+  font-size: 0;
+  padding: 0.2rem;
+  margin-right: 0.8rem;
+  cursor: pointer;
+  color: white;
+  transition: color 0.25s $ease;
+  :global .svg-icon {
+    font-size: 1.2rem;
+  }
+  :global .btn {
+    min-height: 1.8rem;
+  }
+  &:hover {
+    color: rgba(white, 0.7);
+  }
+  &:last-child {
+    margin-right: 0;
   }
 }
-.cta {
-  margin-top: 2rem;
-}
 
-.group {
-  margin-bottom: 1.5rem;
+@include r($sm) {
+  .panel {
+    padding-bottom: 0.4rem;
+  }
+
+  .panelActions {
+    flex-basis: 100%;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 0.6rem;
+  }
 }

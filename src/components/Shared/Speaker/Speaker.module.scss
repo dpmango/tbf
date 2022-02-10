@@ -60,3 +60,23 @@
     }
   }
 }
+
+.speaker._flat {
+  background: transparent;
+  padding: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  text-align: left;
+  .avatar {
+    margin-left: 0;
+    width: 3.2rem;
+    height: 3.2rem;
+    margin-right: 1.2rem;
+  }
+  .name {
+    margin-top: 0;
+  }
+  .tags {
+    margin-top: 0;
+  }
+}

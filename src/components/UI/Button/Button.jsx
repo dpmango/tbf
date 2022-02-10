@@ -10,6 +10,7 @@ const Themes = {
   PRIMARY: 'primary',
   ACCENT: 'accent',
   BLACK: 'black',
+  WHITE: 'white',
   GRAY: 'gray',
   MUTED: 'muted',
 };
@@ -24,6 +25,7 @@ const ThemeClasses = {
   [Themes.PRIMARY]: styles._primary,
   [Themes.ACCENT]: styles._accent,
   [Themes.BLACK]: styles._black,
+  [Themes.WHITE]: styles._white,
   [Themes.GRAY]: styles._gray,
   [Themes.MUTED]: styles._muted,
 };
