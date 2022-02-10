@@ -1,7 +1,7 @@
 import React, { memo, useState, useContext, useMemo, createContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cns from 'classnames';
-import BounceLoader from 'react-spinners/BounceLoader';
+import MoonLoader from 'react-spinners/MoonLoader';
 
 import { SvgIcon } from '@ui';
 import { AxiosInterceptors } from '@src/services';
@@ -9,7 +9,7 @@ import styles from './Loader.module.scss';
 
 const LoaderContext = createContext();
 
-const Loader = ({ className, ...props }) => {
+const Loader = ({ className, inline, pageBlocking, ...props }) => {
   const [active, setActive] = useState(false);
   const { isLoading } = useContext(LoaderContext);
 
@@ -20,22 +20,24 @@ const Loader = ({ className, ...props }) => {
   }, [isLoading, setActive]);
 
   return (
-    <div className={cns(styles.loader, active && styles._active, className)}>
-      <BounceLoader color="#3F51B5" loading={true} size={100} />
+    <div
+      className={cns(
+        styles.loader,
+        inline && styles._inline,
+        pageBlocking && styles._pageblocking,
+        active && styles._active,
+        className
+      )}>
+      <div className={styles.loaderBox}>
+        <MoonLoader color="#EB5509" loading={true} size={64} />
+        <div className={styles.label}>Please wait a few moments...</div>
+      </div>
     </div>
   );
 };
 
 const LoaderContextProvider = (props) => {
   const [isLoading, setLoading] = useState(false);
-
-  // const value = useMemo(
-  //   () => ({
-  //     isLoading,
-  //     setLoading,
-  //   }),
-  //   [isLoading]
-  // );
 
   return (
     <LoaderContext.Provider value={{ isLoading, setLoading }}>

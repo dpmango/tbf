@@ -1,10 +1,14 @@
-import Routes from '@c/Routes';
-import ReactTooltip from 'react-tooltip';
-import { useEventListener } from '@hooks';
-import { observer } from 'mobx-react-lite';
-import { SessionStoreContext } from '@store';
 import React, { useCallback, useContext } from 'react';
+import ReactTooltip from 'react-tooltip';
+import { observer } from 'mobx-react-lite';
+import { ToastProvider } from 'react-toast-notifications';
+
+import { SessionStoreContext } from '@store';
 import { LOCAL_STORAGE_SESSION } from '@config/localStorage';
+import { Toast, Loader, LoaderContextProvider } from '@ui';
+import { useEventListener } from '@hooks';
+
+import Routes from '@c/Routes';
 
 const App = observer(() => {
   const sessionContext = useContext(SessionStoreContext);
@@ -18,10 +22,13 @@ const App = observer(() => {
   useEventListener('storage', persistTabsStore);
 
   return (
-    <>
-      <Routes />
-      <ReactTooltip html={true} effect="solid" backgroundColor="#3D3D46" textColor="#FFFFFF" />
-    </>
+    <ToastProvider autoDismiss={true} autoDismissTimeout={10000} components={{ Toast: Toast }}>
+      <LoaderContextProvider>
+        <Routes />
+        <Loader />
+        <ReactTooltip html={true} effect="solid" backgroundColor="#3D3D46" textColor="#FFFFFF" />
+      </LoaderContextProvider>
+    </ToastProvider>
   );
 });
 

@@ -45,7 +45,7 @@ const Sidebar = observer(({ className }) => {
               </Link>
             </li>
             <li>
-              <Link to="/">
+              <Link to="/credits">
                 <SvgIcon name="coin-stack" />
                 <span>
                   Credits <i>3</i>
@@ -53,13 +53,13 @@ const Sidebar = observer(({ className }) => {
               </Link>
             </li>
             <li>
-              <Link to="/">
+              <Link to="/partners">
                 <SvgIcon name="users" />
                 <span>Partner</span>
               </Link>
             </li>
             <li>
-              <Link to="/">
+              <Link to="/benefits">
                 <SvgIcon name="benefits" />
                 <span>Benefits</span>
               </Link>
@@ -68,20 +68,20 @@ const Sidebar = observer(({ className }) => {
 
           <ul className={cns(styles.menu, styles._bottom)}>
             <li>
-              <Link to="/">
+              <Link to="/support">
                 <SvgIcon name="life-buoy" />
                 <span>Support</span>
               </Link>
             </li>
             <li>
-              <Link to="/">
+              <Link to="/settings">
                 <SvgIcon name="settings" />
                 <span>Settings</span>
               </Link>
             </li>
           </ul>
 
-          <div className={styles.profile}>
+          <Link to="/profile" className={styles.profile}>
             <div className={styles.profileAvatar}>
               <img src="/img/avatar.jpg" alt="your avatar" />
             </div>
@@ -92,7 +92,7 @@ const Sidebar = observer(({ className }) => {
                 <SvgIcon name="logout" />
               </div>
             </div>
-          </div>
+          </Link>
         </div>
       </aside>
     </>
