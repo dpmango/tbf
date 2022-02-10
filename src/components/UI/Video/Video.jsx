@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useRef, useLayoutEffect, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import cns from 'classnames';
 
@@ -80,7 +80,7 @@ const Video = ({ className, video, children, onProgress }) => {
     return `${percent}%`;
   }, [video.size]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!videoRef.current) return;
 
     const loadedMetaDataEvent = () => {

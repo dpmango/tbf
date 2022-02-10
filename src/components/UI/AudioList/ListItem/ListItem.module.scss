@@ -1,0 +1,80 @@
+.box {
+  display: flex;
+  align-items: center;
+  position: relative;
+  background: $colorBg;
+  border-radius: 0.4rem;
+  padding: 0.8rem;
+}
+
+.boxCheckbox {
+  flex: 0 0 auto;
+  margin-right: 0.8em;
+}
+
+.boxActions {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  margin-right: 0.8rem;
+}
+
+.boxLabel {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.43;
+  color: $colorGray900;
+}
+
+.actionTimer,
+.actionPlay,
+.actionFlash,
+.action {
+  color: $colorPrimary;
+  margin-right: 0.4rem;
+  font-size: 0;
+  min-width: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 0.25s $ease;
+  :global .svg-icon {
+    font-size: 0.8rem;
+  }
+  &:hover {
+    color: $colorGray900;
+  }
+}
+
+.actionTimer {
+  margin-right: 0;
+  span {
+    display: inline-block;
+    min-width: 2.2rem;
+    font-weight: 500;
+    margin-left: 0.4rem;
+    font-size: 0.6rem;
+  }
+}
+
+.actionPlayer {
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.actionPlay {
+  :global .svg-icon--pause {
+    display: none;
+    transform: scale(0.8);
+  }
+  &._playing {
+    :global .svg-icon--pause {
+      display: block;
+    }
+    :global .svg-icon--play-circle {
+      display: none;
+    }
+  }
+}

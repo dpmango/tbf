@@ -1,0 +1,58 @@
+.container {
+  position: relative;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  :global .svg-icon {
+    font-size: 2.2rem;
+    color: $colorPrimary;
+    margin-right: 0.8rem;
+  }
+}
+
+.headTitle {
+  position: relative;
+}
+
+.headActions {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  margin: 0.5rem 0 0.5rem auto;
+}
+
+.headCounter {
+  position: relative;
+  padding-left: 2rem;
+  font-weight: 500;
+  font-size: 0.7rem;
+  line-height: 1.43;
+  text-align: right;
+  color: $colorGray700;
+  &::before {
+    display: inline-block;
+    content: ' ';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 1rem;
+    width: 1px;
+    background: $borderColor;
+    pointer-events: none;
+  }
+}
+
+.list {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.listItem {
+  margin-bottom: 0.6rem;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

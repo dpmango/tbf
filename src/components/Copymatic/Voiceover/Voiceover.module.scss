@@ -9,14 +9,14 @@
   grid-gap: 1.6rem;
 }
 
-@include r($lg) {
+@include r($xl) {
   .grid {
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 1rem;
   }
 }
 
-@include r($md) {
+@include r($lg) {
   .grid {
     grid-template-columns: 1fr 1fr;
   }

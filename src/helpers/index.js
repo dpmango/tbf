@@ -1,5 +1,5 @@
 export { getEnv } from './Env';
-export { formatPrice, numberWithCommas, priceShort } from './Prices';
+export { formatPrice, numberWithCommas, numberWithFraction, priceShort } from './Numbers';
 export { findNodeById, findNodeByName } from './Objects';
 export { paginationBuilder } from './Pagination';
 export { Plurize } from './Plurize';

@@ -1,4 +1,6 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useLayoutEffect } from 'react';
+
+// TODO - useLayoutEffect for DOM elements
 
 export function useEventListener(eventName, handler, element = window) {
   const savedHandler = useRef();

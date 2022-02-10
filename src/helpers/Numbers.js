@@ -23,6 +23,10 @@ export const numberWithCommas = (number) => {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
+export const numberWithFraction = (number, frac) => {
+  return number.toLocaleString('en-US', { minimumFractionDigits: frac || 2, maximumFractionDigits: frac || 2 });
+};
+
 export const priceShort = (num, digits) => {
   const si = [
     { value: 1, symbol: '' },
