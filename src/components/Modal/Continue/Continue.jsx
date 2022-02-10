@@ -1,4 +1,4 @@
-import React, { useContext, useState, useCallback, useMemo } from 'react';
+import React, { useContext, useState, useCallback, useMemo, Children } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import cns from 'classnames';
@@ -10,15 +10,11 @@ import { UiStoreContext } from '@store';
 import styles from './Continue.module.scss';
 import { useEffect } from 'react';
 
-const formInitial = {
-  name: '',
-  surname: '',
-  email: '',
-};
-
-const Continue = observer(({ className }) => {
+const Continue = observer(({ className, onCtaClick, children }) => {
   const { modalParams } = useContext(UiStoreContext);
-  const [modalData, setModalData] = useState({});
+  const uiContext = useContext(UiStoreContext);
+
+  const [modalData, setModalData] = useState(null);
 
   useEffect(() => {
     if (modalParams) {
@@ -28,25 +24,27 @@ const Continue = observer(({ className }) => {
 
   return (
     <Modal name="continue" variant="narrow" className={className}>
-      <div className={styles.container}>
-        <div className={styles.icon}>
-          <SvgIcon name="alert-circle" />
-        </div>
-        {modalData && (
+      {modalData && (
+        <div className={styles.container}>
+          <div className={cns(styles.icon, modalData.iconType && styles[modalData.iconType])}>
+            <SvgIcon name={modalData.icon} key={modalData.icon} />
+          </div>
+
           <div className={styles.content}>
             <div className={styles.title}>{modalData.title}</div>
             <div className={styles.description}>{modalData.description}</div>
+            <div className={styles.body}>{children}</div>
             <div className={styles.cta}>
-              <Button theme="gray" outline variant="small">
+              <Button theme="gray" outline variant="small" onClick={() => uiContext.resetModal()}>
                 Cancel
               </Button>
-              <Button theme="primary" variant="small">
+              <Button theme="primary" variant="small" onClick={() => onCtaClick(modalData.action)}>
                 {modalData.ctaText}
               </Button>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </Modal>
   );
 });

@@ -12,7 +12,7 @@
   width: 1.6rem;
   height: 1.6rem;
   border-radius: 50%;
-  color: $colorRed;
+  color: $colorGray600;
   &::after {
     display: inline-block;
     content: ' ';
@@ -23,8 +23,8 @@
     width: 100%;
     height: 100%;
     transform: translate3d(-50%, -50%, 0);
-    background: #fee4e2;
-    border: 0.3rem solid #fef3f2;
+    background: #e2e2e2;
+    border: 0.3rem solid $colorBg;
     border-radius: 50%;
     animation: pulse 1.8s ease-out infinite;
   }
@@ -32,6 +32,13 @@
     position: relative;
     z-index: 2;
     font-size: 1rem;
+  }
+  &.alert {
+    color: $colorRed;
+    &::after {
+      background: #fee4e2;
+      border-color: #fef3f2;
+    }
   }
 }
 

@@ -11,3 +11,4 @@ export { default as Toast } from './Toast';
 export { default as UiVideo } from './Video';
 export { UiMap, UiMapMarker } from './Map';
 export { default as AudioList } from './AudioList';
+export { default as Progress } from './Progress';

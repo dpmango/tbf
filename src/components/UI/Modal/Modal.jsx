@@ -137,7 +137,7 @@ ModalComponent.propTypes = {
   variant: PropTypes.string,
   modifier: PropTypes.string,
   name: PropTypes.string.isRequired,
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
+  // children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
 ModalComponent.defaultProps = {
