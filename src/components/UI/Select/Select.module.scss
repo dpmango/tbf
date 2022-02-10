@@ -12,7 +12,7 @@
     width: 100%;
     background: white;
     font-family: $baseFont;
-    font-size: 16px;
+    font-size: 0.8rem;
     color: $fontColor;
     border: 1px solid $borderColor;
     border-radius: 5px;
@@ -33,7 +33,7 @@
         border-radius: 5px;
       }
       .react-select__single-value {
-        font-size: 14px;
+        font-size: 0.7rem;
         font-weight: 600;
       }
       .react-select__value-container {
@@ -48,7 +48,7 @@
 .label {
   display: block;
   font-weight: 500;
-  font-size: 12px;
+  font-size: 0.6rem;
   line-height: 14px;
   margin-bottom: 8px;
 }
@@ -58,7 +58,7 @@
   top: calc(100% + 5px);
   left: 0;
   display: inline-block;
-  font-size: 12px;
+  font-size: 0.6rem;
   color: $colorRed;
   font-weight: 500;
 }

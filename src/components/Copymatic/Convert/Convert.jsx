@@ -5,12 +5,12 @@ import cns from 'classnames';
 
 import { SvgIcon, Button, Checkbox, Input } from '@ui';
 
-import st from './Outline.module.scss';
+import st from './Convert.module.scss';
 import sharedStyles from '@c/Copymatic/Copymatic.module.scss';
 
 const maxLimit = 300;
 
-const Outline = ({ className }) => {
+const Convert = ({ className }) => {
   const [title, setTitle] = useState('');
   const [intro, setIntro] = useState('');
   const [radioGroup, setRadioGroup] = useState([]);
@@ -152,4 +152,4 @@ const Outline = ({ className }) => {
   );
 };
 
-export default Outline;
+export default Convert;

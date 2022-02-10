@@ -5,7 +5,14 @@ import cns from 'classnames';
 
 import { SvgIcon, Button, Input } from '@ui';
 import { useFirstRender } from '@hooks';
-import { CopymaticIdeas, CopymaticIntros, CopymaticOutline } from '@c/Copymatic';
+import {
+  CopymaticIdeas,
+  CopymaticIntros,
+  CopymaticOutline,
+  CopymaticDraft,
+  CopymaticVoiceover,
+  CopymaticConvert,
+} from '@c/Copymatic';
 
 import st from './Steps.module.scss';
 
@@ -16,20 +23,20 @@ const Steps = ({ className, steps }) => {
   const location = useLocation();
   const firstRender = useFirstRender();
 
-  const getLocationHash = useCallback(() => {
+  const getLocationId = useMemo(() => {
     const loc = location.pathname.split('/');
     const tStep = steps.find((x) => x.slug === loc[loc.length - 1]);
 
     return tStep ? tStep.id : 1;
   }, [location, steps]);
 
-  const [step, activateStep] = useState(getLocationHash());
+  const [step, activateStep] = useState(getLocationId);
 
   const handleAddClick = useCallback(() => {}, []);
 
   const handleStepClick = useCallback(
     (id) => {
-      if (id < 6 && id > 0) {
+      if (id <= 6 && id > 0) {
         activateStep(id);
       }
     },
@@ -45,21 +52,23 @@ const Steps = ({ className, steps }) => {
   return (
     <section className={cns(st.container, className)}>
       <div className="container">
-        <ul className={st.stepsList}>
-          {steps &&
-            steps.map((x, idx) => (
-              <li
-                key={x.id || idx}
-                className={cns(st.step, step === (x.id || idx) && st._active)}
-                onClick={() => handleStepClick(x.id)}>
-                <span className={st.steplabel}>Step {x.id}</span>
-                <div className={st.stepBox}>
-                  <SvgIcon name="checkmark" />
-                </div>
-                <div className={st.stepDescr}>{x.label}</div>
-              </li>
-            ))}
-        </ul>
+        <div className={st.stepsScroller}>
+          <ul className={st.stepsList}>
+            {steps &&
+              steps.map((x, idx) => (
+                <li
+                  key={x.id || idx}
+                  className={cns(st.step, step === (x.id || idx) && st._active)}
+                  onClick={() => handleStepClick(x.id)}>
+                  <span className={st.steplabel}>Step {x.id}</span>
+                  <div className={st.stepBox}>
+                    <SvgIcon name="checkmark" />
+                  </div>
+                  <div className={st.stepDescr}>{x.label}</div>
+                </li>
+              ))}
+          </ul>
+        </div>
 
         <div className={st.stepContent}>
           <Switch>
@@ -72,12 +81,15 @@ const Steps = ({ className, steps }) => {
             <Route path={`${baseRoute}outline`}>
               <CopymaticOutline />
             </Route>
-            {/* <Route path={`${baseRoute}draft`}>
-              <CopymaticDraf />
+            <Route path={`${baseRoute}draft`}>
+              <CopymaticDraft />
             </Route>
             <Route path={`${baseRoute}voiceover`}>
               <CopymaticVoiceover />
-            </Route> */}
+            </Route>
+            <Route path={`${baseRoute}convert`}>
+              <CopymaticConvert />
+            </Route>
           </Switch>
         </div>
 

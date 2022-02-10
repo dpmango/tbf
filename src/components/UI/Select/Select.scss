@@ -1,7 +1,7 @@
 .select-container {
   .react-select {
     &__control {
-      font-size: 16px;
+      font-size: 0.8rem;
       color: $fontColor;
       border: 1px solid $borderColor;
       min-height: 48px;
@@ -18,7 +18,7 @@
     }
     &__value-container {
       padding: 10px 0 10px 15px;
-      font-size: 16px;
+      font-size: 0.8rem;
     }
     &__indicator-separator {
       display: none;
@@ -37,7 +37,7 @@
     }
     &__option {
       font-weight: normal;
-      font-size: 16px;
+      font-size: 0.8rem;
       line-height: calc(19 / 16);
       padding: 14px 16px;
       white-space: nowrap;
@@ -67,7 +67,7 @@
       }
       &__option {
         font-weight: normal;
-        font-size: 14px;
+        font-size: 0.7rem;
         padding: 10px 8px;
       }
     }

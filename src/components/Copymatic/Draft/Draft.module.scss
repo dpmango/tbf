@@ -1,0 +1,105 @@
+.container {
+  position: relative;
+  margin-top: 2.2rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 3rem;
+}
+
+@include r($lg) {
+  .grid {
+    grid-template-columns: 1fr;
+    grid-gap: 2rem;
+  }
+}
+
+.cta {
+  margin-top: 2rem;
+}
+
+.group {
+  margin-bottom: 1.5rem;
+}
+
+.outline {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.outlineLabel {
+  flex: 0 0 4.25rem;
+  font-weight: 500;
+  font-size: 0.7rem;
+  line-height: 1.43;
+  color: $colorGray700;
+}
+
+.outlineInput {
+  flex: 1 1 auto;
+  padding-right: 0.5rem;
+}
+.outlineDelete {
+  flex: 0 0 auto;
+  margin-right: -0.5rem;
+  color: $colorPrimary;
+  cursor: pointer;
+  transition: color 0.25s $ease;
+  padding: 0.5rem;
+  &:hover {
+    color: $fontColor;
+  }
+}
+
+.addOutline {
+  margin-top: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  transition: color 0.25s $ease;
+  span {
+    flex: 0 0 4.25rem;
+    font-weight: 500;
+    font-size: 0.7rem;
+    line-height: 1.43;
+    color: $colorGray700;
+    transition: color 0.25s $ease;
+  }
+  :global .svg-icon {
+    flex: 0 0 auto;
+    font-size: 0.9rem;
+    color: $colorPrimary;
+  }
+  &:hover {
+    span {
+      color: $colorPrimary;
+    }
+  }
+}
+.preview {
+  padding: 2rem;
+  background: rgba($colorBg, 0.5);
+  border-radius: 0.4rem;
+}
+
+.previewSection {
+  margin-bottom: 1.8rem;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.previewText {
+  margin-top: 0.3rem;
+}
+
+.previewCta {
+  display: flex;
+  justify-content: center;
+  :global button {
+    background: white;
+  }
+}

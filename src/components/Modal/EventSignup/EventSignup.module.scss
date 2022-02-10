@@ -48,7 +48,7 @@
     margin-right: 0.5rem;
   }
   :global .checkbox .checkbox_label {
-    font-size: 16px;
+    font-size: 0.8rem;
     color: $colorGray;
   }
 
@@ -80,7 +80,7 @@
 
 .unitsNote {
   margin-top: 1rem;
-  font-size: 14px;
+  font-size: 0.7rem;
   line-height: 120%;
   letter-spacing: -0.025em;
   color: rgba(216, 216, 218, 0.9);
@@ -100,7 +100,7 @@
   p {
     margin-top: 0.6rem;
     margin-bottom: 0;
-    font-size: 14px;
+    font-size: 0.7rem;
     line-height: 140%;
     letter-spacing: -0.025em;
     color: #a4a4a4;
@@ -130,7 +130,7 @@
       padding: 0.5rem 1.2rem 0.5rem 0.8rem;
     }
     :global .checkbox .checkbox_label {
-      font-size: 14px;
+      font-size: 0.7rem;
       margin-top: -1px;
     }
   }

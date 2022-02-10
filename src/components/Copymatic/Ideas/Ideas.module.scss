@@ -9,6 +9,12 @@
   grid-gap: 3rem;
 }
 
+@include r($lg) {
+  .grid {
+    grid-template-columns: 1fr;
+    grid-gap: 2rem;
+  }
+}
 // .topic {
 // }
 

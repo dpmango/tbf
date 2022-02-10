@@ -6,6 +6,9 @@
   }
   textarea {
     resize: vertical;
+    line-height: 1.5;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
   }
   &_input {
     -webkit-appearance: none;
@@ -15,7 +18,7 @@
     font-family: $baseFont;
     font-size: 0.8rem;
     line-height: 1;
-    color: $fontColor;
+    color: $colorGray900;
     border: 1px solid $colorGray200;
     border-radius: 0.4rem;
     padding: 0.55rem 0.8rem 0.55rem;
@@ -59,7 +62,7 @@
     cursor: pointer;
     transition: color 0.25s $ease;
     :global .svg-icon {
-      font-size: 12px;
+      font-size: 0.6rem;
     }
     &:hover {
       color: $colorAccent;
@@ -121,7 +124,7 @@
   top: calc(100% + 5px);
   left: 0;
   display: inline-block;
-  font-size: 12px;
+  font-size: 0.6rem;
   color: $colorRed;
   font-weight: 500;
 }
