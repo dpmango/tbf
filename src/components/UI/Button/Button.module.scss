@@ -8,8 +8,9 @@
   padding: 0.4rem 1.2rem;
   font-size: 0.8rem;
   min-height: 2.2rem;
+  border: 1px solid transparent;
   border-radius: 0.4rem;
-  transition: background 0.25s $ease, color 0.25s $ease;
+  transition: background 0.25s $ease, color 0.25s $ease, border 0.25s $ease;
   &._primary {
     background: $colorPrimary;
     color: white;
@@ -72,26 +73,12 @@
       }
     }
   }
-  &._white {
-    background: $colorPrimary50;
-    color: $colorPrimary;
-    &:hover {
-      background: rgba($colorPrimary50, 0.8);
-    }
-    &._outline {
-      background: transparent;
-      border: 1px solid $colorPrimary50;
-      color: $colorPrimary50;
-      &:hover {
-        color: $colorPrimary;
-        background: $colorPrimary50;
-      }
-    }
-  }
+
   &._gray {
     background: $colorBg;
     color: $colorGray;
     &:hover {
+      border-color: $colorGray;
       background: rgba($colorBg, 0.8);
       color: $fontColor;
     }
@@ -121,7 +108,46 @@
       }
     }
   }
+  &._danger {
+    background: $colorPrimary50;
+    color: $colorPrimary;
+    &:hover {
+      background: rgba($colorPrimary50, 0.8);
+    }
+    &._outline {
+      background: transparent;
+      border: 1px solid $colorPrimary50;
+      color: $colorPrimary50;
+      &:hover {
+        color: $colorPrimary;
+        background: $colorPrimary50;
+      }
+    }
+  }
+  &._success {
+    background: #ecfdf3;
+    color: $colorGreen;
+    &:hover {
+      background: rgba(#ecfdf3, 0.8);
+    }
+    &._outline {
+      background: transparent;
+      border: 1px solid #ecfdf3;
+      color: $colorGreen;
+      &:hover {
+        color: $colorGreen;
+        background: #ecfdf3;
+      }
+    }
+  }
+
   // variants
+  &._sm {
+    padding: 0.3rem 0.8rem;
+    font-weight: 500;
+    font-size: 0.7rem;
+    min-height: 1.7rem;
+  }
   &._small {
     padding: 0.4rem 0.8rem;
     font-size: 0.7rem;

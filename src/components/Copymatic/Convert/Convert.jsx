@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useContext, useCallback } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import cns from 'classnames';
 
 import { SvgIcon, Button, AudioList, Progress } from '@ui';
@@ -15,6 +15,7 @@ import { mockAudioList } from './Content';
 let intervalId;
 
 const Convert = observer(({ className }) => {
+  const history = useHistory();
   const [upload, setUpload] = useState(null);
 
   const uiContext = useContext(UiStoreContext);
@@ -64,6 +65,7 @@ const Convert = observer(({ className }) => {
         uiContext.resetModal();
         setUpload(null);
         clearInterval(intervalId);
+        history.push('/script/1');
       } else {
       }
     },
@@ -112,7 +114,7 @@ const Convert = observer(({ className }) => {
             <SvgIcon name="stop-circle" />
           </div>
           <div className={st.panelAction}>
-            <Button theme="white" variant="small" onClick={openConfirmModal}>
+            <Button theme="danger" variant="small" onClick={openConfirmModal}>
               Convert
             </Button>
           </div>

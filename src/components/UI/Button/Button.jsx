@@ -10,14 +10,16 @@ const Themes = {
   PRIMARY: 'primary',
   ACCENT: 'accent',
   BLACK: 'black',
-  WHITE: 'white',
   GRAY: 'gray',
   MUTED: 'muted',
+  DANGER: 'danger',
+  SUCCESS: 'success',
 };
 
 const Variants = {
   DEFAULT: 'default',
   SMALL: 'small',
+  SM: 'sm',
   BIG: 'big',
 };
 
@@ -25,14 +27,16 @@ const ThemeClasses = {
   [Themes.PRIMARY]: styles._primary,
   [Themes.ACCENT]: styles._accent,
   [Themes.BLACK]: styles._black,
-  [Themes.WHITE]: styles._white,
   [Themes.GRAY]: styles._gray,
   [Themes.MUTED]: styles._muted,
+  [Themes.DANGER]: styles._danger,
+  [Themes.SUCCESS]: styles._success,
 };
 
 const VariantClasses = {
   [Variants.DEFAULT]: null,
   [Variants.SMALL]: styles._small,
+  [Variants.SM]: styles._sm,
   [Variants.BIG]: styles._big,
 };
 

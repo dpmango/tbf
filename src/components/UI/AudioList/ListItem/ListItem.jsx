@@ -28,13 +28,19 @@ const ListItem = ({ className, id, audio, label, selectedAudio, onBoxSelect }) =
     if (!audioRef.current) return;
 
     const progressEvent = (audioProcessingEvent) => {
-      setProgress(audioRef.current.currentTime);
+      setProgress(Math.round(audioRef.current.currentTime));
     };
 
+    const loadedMetaDataEvent = () => {
+      setProgress(Math.round(audioRef.current.duration));
+    };
+
+    audioRef.current.addEventListener('loadedmetadata', loadedMetaDataEvent);
     audioRef.current.addEventListener('timeupdate', progressEvent);
 
     return () => {
       try {
+        audioRef.current.removeEventListener('loadedmetadata', loadedMetaDataEvent);
         audioRef.current.removeEventListener('timeupdate', progressEvent);
       } catch (e) {
         console.warn('could not removeEventListener on timeupdate');

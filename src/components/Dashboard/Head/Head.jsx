@@ -14,7 +14,11 @@ const HeadVideos = ({ className, includeDescription, hasBorder }) => {
         <div className={styles.wrapper}>
           <div className={styles.head}>
             <div className={styles.title}>Welcome, Olivia</div>
-            {includeDescription && <div className={styles.description}>Lets get started </div>}
+            {includeDescription && (
+              <div className={styles.description}>
+                <>{includeDescription || 'Lets get started '}</>
+              </div>
+            )}
           </div>
           <div className={styles.actions}>
             <div className={styles.button}>
@@ -41,7 +45,7 @@ const HeadVideos = ({ className, includeDescription, hasBorder }) => {
 
 HeadVideos.propTypes = {
   className: PropTypes.string,
-  includeDescription: PropTypes.bool,
+  includeDescription: PropTypes.any,
   hasBorder: PropTypes.bool,
 };
 
