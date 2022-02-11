@@ -1,6 +1,6 @@
 .container {
   position: relative;
-  margin: 1rem 0;
+  margin: 1rem 0 0.4rem;
 }
 
 .grid {
@@ -8,5 +8,6 @@
   flex-wrap: wrap;
   :global .btn {
     margin-right: 0.6rem;
+    margin-bottom: 0.6rem;
   }
 }

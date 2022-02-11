@@ -78,3 +78,25 @@
   font-size: 0.9rem;
   line-height: 1.56;
 }
+
+@include r($lg) {
+  .videoCaption {
+    :global .svg-icon {
+      font-size: 2rem;
+    }
+  }
+  .videoCaptionTitle {
+    margin-top: 0.6rem;
+    font-size: 1.2rem;
+  }
+}
+@include r($sm) {
+  .videoCaption {
+    :global .svg-icon {
+      display: none;
+    }
+  }
+  .videoCaptionTitle {
+    margin-top: 0;
+  }
+}

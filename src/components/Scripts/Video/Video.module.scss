@@ -68,7 +68,7 @@
 .userTitle {
   font-weight: 600;
   font-size: 1.5rem;
-  line-height: 45px;
+  line-height: 1.5;
 }
 
 .userTags {
@@ -76,4 +76,39 @@
   font-size: 1.2rem;
   line-height: 1.5;
   color: #fff;
+}
+
+@include r($lg) {
+  .user {
+    max-width: 300px;
+    padding: 1rem 0.6rem 1rem 1.2rem;
+  }
+  .userAvatar {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .userTitle {
+    font-size: 1rem;
+  }
+  .userTags {
+    font-size: 0.8rem;
+  }
+  .videoCaptionTitle {
+    font-size: 1.2rem;
+  }
+}
+
+@include r($sm) {
+  .user {
+    position: absolute;
+    top: 0.4rem;
+    left: 0.4rem;
+    max-width: 3rem;
+    background: transparent;
+    padding: 0;
+  }
+  .userContent {
+    display: none;
+  }
 }

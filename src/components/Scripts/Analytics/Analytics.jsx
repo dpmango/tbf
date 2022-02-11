@@ -4,40 +4,23 @@ import { LineChart, Area, Line, XAxis, YAxis, CartesianGrid, Tooltip, Responsive
 import cns from 'classnames';
 
 import { SvgIcon, Button, Checkbox, Input } from '@ui';
+import { useWindowSize } from '@hooks';
 
 import st from './Analytics.module.scss';
 
-const generateChartMockData = () => {
-  const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-  return month.reduce((acc, x, idx) => {
-    const getNextValueFor = (key) => {
-      const firstItem = acc[0];
-      const yearModifier = 20 * (key % 2020); // 0, 20, 30
-
-      // each month growth by 10% from firstItem
-      const lastVal = firstItem ? (firstItem[key] + yearModifier) * (1 + (idx ? idx : 1) / 20) : 100;
-
-      const randomNum = Math.random() * (1.4 - 1.1) + 1.1;
-
-      return Math.floor(lastVal * randomNum);
-    };
-
-    acc.push({
-      name: x,
-      2020: getNextValueFor(2020),
-      2021: getNextValueFor(2021),
-      2022: getNextValueFor(2022),
-    });
-
-    return acc;
-  }, []);
-};
+import { generateChartMockData } from './Content';
 
 const Analytics = ({ className, hasBorder, steps, ...props }) => {
-  const [chartData, setChartData] = useState(generateChartMockData());
+  const { width } = useWindowSize();
+  const [chartData, setChartData] = useState(generateChartMockData('month'));
 
-  console.log(chartData);
+  const handlePeriodChange = useCallback(
+    (key) => {
+      setChartData(generateChartMockData(key));
+    },
+    [setChartData]
+  );
+
   return (
     <section className={cns(st.container, hasBorder && st._hasBorder, className)} {...props}>
       <div className="container">
@@ -52,13 +35,18 @@ const Analytics = ({ className, hasBorder, steps, ...props }) => {
                   height={240}
                   data={chartData}
                   margin={{
-                    top: 20,
-                    right: 0,
-                    left: 40,
-                    bottom: 20,
+                    top: width <= 992 ? 10 : 20,
+                    right: width <= 992 ? 0 : 20,
+                    left: width <= 992 ? 0 : 20,
+                    bottom: width <= 992 ? 0 : 20,
                   }}>
                   <CartesianGrid horizontal={true} vertical={false} />
-                  <XAxis dataKey="name" interval={1} tick={{ fontSize: 14, color: '#878787' }} />
+                  <XAxis
+                    dataKey="name"
+                    interval={'preserveEnd'}
+                    allowDataOverflow={true}
+                    tick={{ fontSize: 14, color: '#878787' }}
+                  />
                   {/* <YAxis /> */}
                   {/* <Tooltip /> */}
                   <Line type="natural" dot={false} dataKey="2020" stroke="#AB7C17" strokeWidth={2} />
@@ -66,6 +54,36 @@ const Analytics = ({ className, hasBorder, steps, ...props }) => {
                   <Line type="natural" dot={false} dataKey="2022" stroke="#CE9927" strokeWidth={2} />
                 </LineChart>
               </ResponsiveContainer>
+            </div>
+
+            <div className={st.chartControls}>
+              <div className={st.chartControlsPeriod}>
+                <Button variant="sm" theme="gray" outline onClick={() => handlePeriodChange('month')}>
+                  12 months
+                </Button>
+                <Button variant="sm" theme="gray" outline onClick={() => handlePeriodChange('30days')}>
+                  30 days
+                </Button>
+                <Button variant="sm" theme="gray" outline onClick={() => handlePeriodChange('7days')}>
+                  7 days
+                </Button>
+                <Button variant="sm" theme="gray" outline onClick={() => handlePeriodChange('hours')}>
+                  24 hours
+                </Button>
+              </div>
+              <div className={st.chartControlsCta}>
+                <Button iconLeft="calendar" variant="small" theme="gray" outline>
+                  Select Dates
+                </Button>
+                <Button
+                  iconLeft="filter"
+                  variant="small"
+                  theme="gray"
+                  outline
+                  onClick={() => handlePeriodChange('hours')}>
+                  Filters
+                </Button>
+              </div>
             </div>
           </div>
 

@@ -21,7 +21,6 @@
     &._outline {
       background: white;
       border-color: $colorGray200;
-      padding: 14px 24px;
       color: $colorPrimary;
       &:hover {
         color: white;
@@ -155,8 +154,8 @@
     min-height: 2.2rem;
   }
   &._big {
-    padding: 18px 15px;
-    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    min-height: 3rem;
   }
   &._block {
     display: block;
@@ -200,11 +199,5 @@
     &:hover {
       background: $colorBg;
     }
-  }
-}
-
-@include r($md) {
-  .btn {
-    padding: 1.2rem 25px;
   }
 }
