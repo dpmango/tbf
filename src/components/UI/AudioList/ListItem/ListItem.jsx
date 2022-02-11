@@ -15,10 +15,15 @@ const ListItem = ({ className, id, audio, label, selectedAudio, onBoxSelect }) =
   const togglePlayState = useCallback(() => {
     if (!audioRef.current) return;
 
-    if (playState) {
+    if (!audioRef.current.paused) {
       audioRef.current.pause();
       setPlayState(false);
     } else {
+      [...document.querySelectorAll('audio')].forEach((audio) => {
+        if (!audio.paused) {
+          audio.pause();
+        }
+      });
       audioRef.current.play();
       setPlayState(true);
     }

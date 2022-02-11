@@ -15,7 +15,7 @@ export const content = {
   },
   steps: [
     { id: 1, label: 'Script Complete', status: 3 },
-    { id: 2, label: 'Sign Declaration', status: 3 },
+    { id: 2, label: 'Sign Declaration', status: 2 },
     { id: 3, label: 'Accepted for Sponsorship', status: 1 },
     { id: 4, label: 'In Production', status: 1 },
     { id: 5, label: 'Live', status: 1 },
