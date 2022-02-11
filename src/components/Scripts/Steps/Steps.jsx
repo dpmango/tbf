@@ -15,7 +15,7 @@ const STATUS_CLASS = {
 
 const Steps = ({ className, steps, ...props }) => {
   return (
-    <div className={cns(st.container, className)} {...props}>
+    <section className={cns(st.container, className)} {...props}>
       <div className="container">
         <div className={st.scroller}>
           {steps &&
@@ -43,7 +43,7 @@ const Steps = ({ className, steps, ...props }) => {
             })}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

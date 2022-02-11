@@ -3,8 +3,8 @@ import { observer } from 'mobx-react-lite';
 import { Helmet } from 'react-helmet';
 
 import { UiStoreContext } from '@store';
-import { DashboardHead } from '@c/Dashboard';
-import { ScriptSteps, ScriptVideo } from '@c/Scripts';
+import { DashboardHead, DashboardTags, DashboardDocs } from '@c/Dashboard';
+import { ScriptSteps, ScriptVideo, ScriptActions } from '@c/Scripts';
 
 import { content } from './Content.js';
 
@@ -21,9 +21,10 @@ const ScriptPage = observer(() => {
 
       <ScriptSteps steps={content.steps} />
       <ScriptVideo video={{ ...content.video }} />
+      <ScriptActions />
 
-      {/* <DashboardTags /> */}
-      {/* <DashboardDocument {...content.documents} /> */}
+      <DashboardTags tags={content.tags} />
+      <DashboardDocs {...content.documents} />
     </>
   );
 });

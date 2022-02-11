@@ -15,7 +15,7 @@ const BenefitsPage = observer(() => {
         <title>Your credits (3)</title>
       </Helmet>
 
-      <DashboardHead includeDescription={'Your current sales summary and activity.'} />
+      <DashboardHead />
       <Loader pageBlocking={true} />
     </>
   );

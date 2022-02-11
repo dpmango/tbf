@@ -19,13 +19,14 @@
     }
 
     &._outline {
-      background: transparent;
-      border: 2px solid $colorPrimary;
+      background: white;
+      border-color: $colorGray200;
       padding: 14px 24px;
       color: $colorPrimary;
       &:hover {
         color: white;
         background: $colorPrimary;
+        border-color: $colorPrimary;
       }
     }
 

@@ -20,4 +20,23 @@ export const content = {
     { id: 4, label: 'In Production', status: 1 },
     { id: 5, label: 'Live', status: 1 },
   ],
+  tags: [
+    { id: 1, label: 'Heart Rhythm and Arrhythmias' },
+    { id: 2, label: 'HIV and Heart Disease' },
+    { id: 3, label: 'Hypertension' },
+    { id: 4, label: 'Imaging' },
+    { id: 5, label: 'Interventional Cardiology' },
+    { id: 6, label: 'Myocardial Biology' },
+    { id: 7, label: 'Heart Failure' },
+    { id: 8, label: 'Myocarditis' },
+    { id: 9, label: 'Aortic disease' },
+    { id: 10, label: 'Preventive Cardiology' },
+  ],
+  documents: {
+    title: 'Documents',
+    list: [
+      { id: 1, label: 'View your verification document', file: 'test.pdf' },
+      { id: 1, label: 'View your certification as a healthcare writer', file: 'test.pdf' },
+    ],
+  },
 };

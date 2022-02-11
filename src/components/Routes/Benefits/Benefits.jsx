@@ -16,7 +16,7 @@ const BenefitsPage = observer(() => {
         <title>Your Script</title>
       </Helmet>
 
-      <DashboardHead includeDescription={'Your current sales summary and activity.'} />
+      <DashboardHead />
       <Loader pageBlocking={true} />
     </>
   );

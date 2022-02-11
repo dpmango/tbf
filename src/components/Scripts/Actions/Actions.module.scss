@@ -1,0 +1,12 @@
+.container {
+  position: relative;
+  margin: 1rem 0;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  :global .btn {
+    margin-right: 0.6rem;
+  }
+}

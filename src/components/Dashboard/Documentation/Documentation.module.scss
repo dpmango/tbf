@@ -1,0 +1,63 @@
+.container {
+  position: relative;
+  margin: 3rem 0 3rem;
+}
+
+.grid {
+  margin: 1rem 0 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+}
+
+@include r($lg) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.file {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.6rem;
+  background: $colorBg;
+  border-radius: 0.4rem;
+}
+
+.fileIcon {
+  flex: 0 0 2.7rem;
+  img,
+  svg {
+    max-width: 100%;
+  }
+}
+.fileLabel {
+  padding-left: 1rem;
+  font-weight: 600;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: $colorGray700;
+}
+
+.fileCta {
+  margin-left: auto;
+  flex: 0 0 auto;
+  padding-left: 0.8rem;
+}
+
+@include r($sm) {
+  .file {
+    flex-wrap: wrap;
+  }
+  .fileIcon {
+    flex-basis: 2.5rem;
+  }
+  .fileLabel {
+    flex-basis: calc(100% - 2.5rem);
+  }
+  .fileCta {
+    margin-top: 1rem;
+    padding-left: 0;
+    width: 100%;
+  }
+}
