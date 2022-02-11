@@ -1,0 +1,55 @@
+.container {
+  position: relative;
+  margin: 3rem 0;
+  &._hasBorder {
+    margin-bottom: 0;
+    .grid {
+      padding-bottom: 3rem;
+      border-bottom: 1px solid $borderColor;
+    }
+  }
+}
+
+.grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 14rem;
+  grid-gap: 2rem;
+}
+
+.chart {
+  display: flex;
+  flex-direction: column;
+}
+
+.chartWrapper {
+  position: relative;
+  width: 100%;
+  border: 1px solid #d0d0d0;
+  border-radius: 8px;
+  padding: 1rem 2rem 1rem 1rem;
+  height: 15rem;
+}
+
+.qrCode {
+  background: rgba($colorBg, 0.5);
+  border-radius: 0.4rem;
+  padding: 3rem 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.qrCodeImage {
+  font-size: 0;
+  max-width: 10rem;
+  margin: 0 auto;
+  img {
+    width: 100%;
+  }
+}
+
+.qrCodeLabel {
+  font-weight: 500;
+  margin-top: 1rem;
+  text-align: center;
+}

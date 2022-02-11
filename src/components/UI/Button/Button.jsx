@@ -76,13 +76,13 @@ const Button = ({
   } else {
     return (
       <button className={classStyle} type={type || 'button'} {...props}>
-        {iconLeft && <SvgIcon name={iconLeft} />}
+        {iconLeft && <SvgIcon name={iconLeft} key={`${iconLeft}`} />}
 
         {children}
 
         {loading && <Spinner theme="button" color="#FFF" />}
 
-        {iconRight && <SvgIcon name={iconRight} />}
+        {iconRight && <SvgIcon name={iconRight} key={`${iconRight}`} />}
       </button>
     );
   }

@@ -13,7 +13,19 @@ const STATUS_CLASS = {
   3: 'compleate',
 };
 
-const Steps = ({ className, steps, ...props }) => {
+const Steps = ({ className, steps, onStepClick, ...props }) => {
+  const handleStepClick = useCallback(
+    ({ id, status }) => {
+      // active next next step (2 -> 3 status)
+      if (status === 2) {
+        const stepsUpdater = [...steps.map((x) => (x.id === id ? { ...x, status: 3 } : { ...x }))];
+
+        onStepClick && onStepClick(stepsUpdater);
+      }
+    },
+    [steps]
+  );
+
   return (
     <section className={cns(st.container, className)} {...props}>
       <div className="container">
@@ -36,7 +48,12 @@ const Steps = ({ className, steps, ...props }) => {
               }
 
               return (
-                <Button {...btnProps} variant="sm" className={st.label} key={g.id || idx}>
+                <Button
+                  {...btnProps}
+                  variant="sm"
+                  className={st.label}
+                  key={g.id || idx}
+                  onClick={() => handleStepClick(g)}>
                   {g.label}
                 </Button>
               );
