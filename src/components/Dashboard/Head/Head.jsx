@@ -6,7 +6,7 @@ import { SvgIcon, Button, Input } from '@ui';
 
 import styles from './Head.module.scss';
 
-const HeadVideos = ({ className, includeDescription, hasBorder }) => {
+const Head = ({ className, includeDescription, hasBorder }) => {
   const [search, setSearch] = useState('');
   return (
     <section className={cns(styles.container, hasBorder && styles._hasBorder, className)}>
@@ -43,14 +43,14 @@ const HeadVideos = ({ className, includeDescription, hasBorder }) => {
   );
 };
 
-HeadVideos.propTypes = {
+Head.propTypes = {
   className: PropTypes.string,
   includeDescription: PropTypes.any,
   hasBorder: PropTypes.bool,
 };
 
-HeadVideos.defaultProps = {
+Head.defaultProps = {
   hasBorder: true,
 };
 
-export default HeadVideos;
+export default Head;

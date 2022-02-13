@@ -15,6 +15,7 @@ import Copymatic from './Copymatic';
 import Script from './Script';
 import Benefits from './Benefits';
 import Credits from './Credits';
+import Article from './Article';
 // import NoMatch from './NoMatch';
 
 const Routes = observer(() => {
@@ -45,6 +46,10 @@ const Routes = observer(() => {
 
         <ProtectedRoute path="/credits">
           <Credits />
+        </ProtectedRoute>
+
+        <ProtectedRoute path="/article/:id">
+          <Article />
         </ProtectedRoute>
 
         <Route path="/login">{sessionId ? <Redirect to="/" /> : <Login />}</Route>

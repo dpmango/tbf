@@ -36,7 +36,7 @@ export const content = {
     title: 'Documents',
     list: [
       { id: 1, label: 'View your verification document', file: 'test.pdf' },
-      { id: 1, label: 'View your certification as a healthcare writer', file: 'test.pdf' },
+      { id: 2, label: 'View your certification as a healthcare writer', file: 'test.pdf' },
     ],
   },
 };

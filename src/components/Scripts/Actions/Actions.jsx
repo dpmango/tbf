@@ -13,7 +13,9 @@ const Actions = ({ className, steps, ...props }) => {
       <div className="container">
         <div className={st.grid}>
           <Button outline>Get your script sponsored</Button>
-          <Button outline>Do you want to play this in your office?</Button>
+          <Link to="/article/1">
+            <Button outline>Do you want to play this in your office?</Button>
+          </Link>
           <Button>This will expire in 13:23:59</Button>
         </div>
       </div>
