@@ -3,9 +3,9 @@ import { observer } from 'mobx-react-lite';
 import { Helmet } from 'react-helmet';
 
 import { UiStoreContext } from '@store';
-import { Loader } from '@ui';
 import { DashboardHead } from '@c/Dashboard';
-import { ScriptSteps, ScriptVideo } from '@c/Scripts';
+import { BenefitsGrid } from '@c/Benefits';
+import { content } from './Content';
 
 const BenefitsPage = observer(() => {
   const uiContext = useContext(UiStoreContext);
@@ -13,11 +13,11 @@ const BenefitsPage = observer(() => {
   return (
     <>
       <Helmet>
-        <title>Your Script</title>
+        <title>Your Benefits</title>
       </Helmet>
 
-      <DashboardHead />
-      <Loader pageBlocking={true} />
+      <DashboardHead includeDescription="Benefits" />
+      <BenefitsGrid list={content.grid} />
     </>
   );
 });

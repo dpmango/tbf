@@ -1,0 +1,111 @@
+.container {
+  position: relative;
+  margin: 2rem 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-auto-flow: row dense;
+  grid-gap: 1.5rem;
+}
+
+@include r($lg) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@include r($sm) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.col {
+  background: $colorBg;
+  border-radius: 0.4rem;
+  display: flex;
+  align-items: center;
+  min-height: 7rem;
+  padding: 1rem 2rem;
+  transition: background 0.25s $ease;
+  cursor: pointer;
+  &._active,
+  &:hover {
+    background: $colorPrimary50;
+  }
+  &._active {
+    .colTitle {
+      color: $colorPrimary;
+    }
+  }
+}
+
+.colIcon {
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  color: $colorPrimary;
+  &::after {
+    display: inline-block;
+    content: ' ';
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate3d(-50%, -50%, 0);
+    background: white;
+    border: 0.5rem solid #fafafa;
+    border-radius: 50%;
+    // animation: pulse 1.8s ease-out infinite;
+  }
+  :global .svg-icon {
+    position: relative;
+    z-index: 2;
+    font-size: 1.5rem;
+  }
+}
+
+.colContent {
+  flex: 1 1 auto;
+  padding-left: 1.6rem;
+}
+
+.colTitle {
+  font-weight: 600;
+  font-size: 0.9rem;
+  line-height: 1.33;
+  color: $colorGray900;
+  transition: color 0.25s $ease;
+}
+
+.colDescription {
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: $colorGray;
+}
+
+.expanded {
+  grid-column: 1 / span 3;
+  border: 1px solid $colorGray200;
+  border-radius: 0.4rem;
+  display: flex;
+  align-items: center;
+  padding: 3rem 2.5rem 3.4rem;
+  .colTitle {
+    font-weight: 500;
+    font-size: 1rem;
+  }
+  .colContent {
+    max-width: 38rem;
+  }
+}
