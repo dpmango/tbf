@@ -13,7 +13,7 @@
     "lint:css:fix": "stylelint './src/**/*.{css,less,scss,sass}' --fix",
     "deploy": "yarn build:test && cp build/index.html build/200.html && surge --project ./build --domain tbf.surge.sh",
     "eject": "react-scripts eject",
-    "prod": "clear && env-cmd -f ./.env.prod.json cross-env GENERATE_SOURCEMAP=false craco build --stats --prod && rsync --delete -avzi build/* root@nbf:/var/www/buzzier_front"
+    "prod": "clear && env-cmd -f ./.env.prod.json cross-env GENERATE_SOURCEMAP=false craco build --stats --prod && rsync --delete -avzi build/* root@cc:/var/www/tbf_front"
   },
   "husky": {
     "hooks": {

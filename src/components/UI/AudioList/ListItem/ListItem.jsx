@@ -56,7 +56,7 @@ const ListItem = ({ className, id, audio, label, selectedAudio, onBoxSelect }) =
   return (
     <div className={cns(styles.box, className)}>
       <div className={styles.boxCheckbox}>
-        <Checkbox isChecked={selectedAudio.includes(id)} onChange={() => onBoxSelect(id)}></Checkbox>
+        <Checkbox isChecked={selectedAudio.includes(id)} onChange={() => onBoxSelect(id)} />
       </div>
       <div className={styles.boxActions}>
         <div className={styles.actionTimer}>

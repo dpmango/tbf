@@ -1,11 +1,9 @@
-import React, { useRef, useEffect, useState, useContext, useCallback, memo } from 'react';
+import React, { memo, useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import cns from 'classnames';
 
 import { SessionStoreContext } from '@store';
 import { Button, Input } from '@ui';
-
-import { handleAuthRequestError } from './utils/requestHandlers';
 import styles from './Login.module.scss';
 
 const Login = () => {
@@ -28,7 +26,6 @@ const Login = () => {
   const handleSubmit = useCallback(
     (event) => {
       event.preventDefault();
-
       sessionContext.setSession({ sessionId: '123' });
       // .auth(passwordValue || '')
       // .then(() => {
@@ -49,11 +46,11 @@ const Login = () => {
   return (
     <div className="auth mt-2 mb-2">
       <form className={styles.wrapper} onSubmit={handleSubmit}>
-        <div className={styles.title}>Авторизация</div>
+        <div className={styles.title}>Log in</div>
 
         <Input
-          label="Пароль"
-          placeholder="Пароль"
+          label="Password"
+          placeholder="Password"
           type="password"
           value={passwordValue}
           onChange={handlePasswordChange}
