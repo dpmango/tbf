@@ -1,0 +1,81 @@
+.container {
+  position: relative;
+  margin: 0 0 2rem;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid $borderColor;
+}
+
+.headContent {
+  padding-right: 1rem;
+}
+
+.headActions {
+  margin-left: auto;
+  :global .btn {
+    margin-right: 0.7rem;
+    margin-bottom: 0.7rem;
+    min-height: 2rem;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.headDescription {
+  margin: 0.2rem 0;
+  font-size: 0.7rem;
+  line-height: 1.43;
+  color: $colorGray;
+}
+
+.section {
+  display: flex;
+  padding: 1rem 0;
+  border-bottom: 1px solid $borderColor;
+}
+
+.sectionLabel {
+  flex: 0 0 $col4;
+  font-weight: 500;
+  font-size: 0.7rem;
+  line-height: 1.43;
+  color: $colorGray700;
+  p {
+    margin: 0.4rem 0 0;
+    color: $colorGray;
+    max-width: 14rem;
+  }
+}
+
+.sectionContent {
+  flex: 0 0 $col8;
+  padding-left: 2rem;
+}
+
+.contentRows {
+  display: flex;
+  grid-gap: 0.8rem;
+  > * {
+    flex: 1 1 auto;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.8rem 0;
+  :global .btn {
+    margin-right: 0.6rem;
+    margin-bottom: 0.6rem;
+    min-height: 2rem;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

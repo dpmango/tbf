@@ -17,6 +17,7 @@ import Script from './Script';
 import Benefits from './Benefits';
 import Credits from './Credits';
 import Article from './Article';
+import Profile from './Profile';
 // import NoMatch from './NoMatch';
 
 const Routes = observer(() => {
@@ -60,6 +61,10 @@ const Routes = observer(() => {
 
         <ProtectedRoute path="/article/:id">
           <Article />
+        </ProtectedRoute>
+
+        <ProtectedRoute path="/profile">
+          <Profile />
         </ProtectedRoute>
 
         <Route path="/login">{sessionId ? <Redirect to="/" /> : <Login />}</Route>

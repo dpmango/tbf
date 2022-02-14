@@ -87,7 +87,7 @@ const Sidebar = observer(({ className }) => {
               </Link>
             </li>
             <li>
-              <Link to="/settings">
+              <Link to="/profile">
                 <SvgIcon name="settings" />
                 <span>Settings</span>
               </Link>

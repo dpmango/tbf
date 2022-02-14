@@ -1,0 +1,58 @@
+.container {
+  position: relative;
+  margin-top: 2.5rem;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 1.5rem;
+  line-height: 1.27;
+  color: $colorGray900;
+}
+
+.nav {
+  list-style: none;
+  margin: 0.9rem 0 0;
+  padding: 0;
+  display: flex;
+  border-bottom: 1px solid $borderColor;
+  li {
+    display: block;
+    margin-right: 0.8rem;
+  }
+  a {
+    position: relative;
+    display: inline-block;
+    padding: 0 0.2rem 0.8rem;
+    font-weight: 500;
+    font-size: 0.7rem;
+    line-height: 1.43;
+    color: $colorGray;
+    transition: color 0.25s $ease;
+    &::after {
+      display: inline-block;
+      content: ' ';
+      position: absolute;
+      height: 2px;
+      left: 0;
+      width: 0;
+      bottom: 0;
+      background: $colorPrimary700;
+      will-change: width;
+      transition: width 0.25s $ease;
+    }
+    &:hover {
+      color: $colorPrimary700;
+    }
+    &:global.active {
+      color: $colorPrimary700;
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+}
