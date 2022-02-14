@@ -1,0 +1,69 @@
+.container {
+  position: relative;
+  margin: 4rem 0;
+}
+
+.head {
+  text-align: center;
+}
+
+.grid {
+  margin-top: 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 0.6rem;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: $colorBg;
+  border-radius: 0.4rem;
+  text-align: center;
+  padding: 1.8rem 2rem;
+}
+
+.colBadge {
+  font-weight: 500;
+  font-size: 0.7rem;
+  line-height: 1.43;
+  background: #fff;
+  border-radius: 0.8rem;
+  padding: 0.2rem 0.8rem;
+  &._brown {
+    color: #99550c;
+  }
+  &._yellow {
+    color: #eeb534;
+  }
+  &._red {
+    color: #eb5509;
+  }
+}
+
+.colTitle {
+  margin: auto 0;
+  padding: 0.5rem 0 1.4rem;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: $colorGray900;
+}
+
+.colCta {
+  margin-top: auto;
+}
+
+@include r($lg) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@include r($sm) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

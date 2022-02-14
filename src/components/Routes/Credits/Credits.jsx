@@ -5,7 +5,9 @@ import { Helmet } from 'react-helmet';
 import { UiStoreContext } from '@store';
 import { DashboardHead } from '@c/Dashboard';
 import { BannerSharing, BannerPurchase } from '@c/Banner';
-import { CreditsInvite } from '@c/Credits';
+import { CreditsInvite, CreditsPurchase } from '@c/Credits';
+import { ContentFaq } from '@c/Content';
+
 import { content } from './Content';
 
 const BenefitsPage = observer(() => {
@@ -21,6 +23,8 @@ const BenefitsPage = observer(() => {
       <BannerSharing />
       <CreditsInvite invites={content.invites} />
       <BannerPurchase className="mt-4" />
+      <CreditsPurchase />
+      <ContentFaq {...content.faq} />
     </>
   );
 });
