@@ -1,7 +1,7 @@
 export const ErrorMessages = {
-  500: 'С сервером что-то не так',
-  422: 'Неправильный логин или пароль',
-  DEFAULT: 'Что-то пошло не так :(',
+  500: 'Something went wrong',
+  422: 'Please check your login and password',
+  DEFAULT: 'Something went wrong',
 };
 
 export const handleAuthRequestError = (error, setError) => {

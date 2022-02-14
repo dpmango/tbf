@@ -5,7 +5,7 @@ import { ToastProvider } from 'react-toast-notifications';
 
 import { SessionStoreContext } from '@store';
 import { LOCAL_STORAGE_SESSION } from '@config/localStorage';
-import { Toast, Loader, LoaderContextProvider } from '@ui';
+import { Loader, LoaderContextProvider, Toast } from '@ui';
 import { useEventListener } from '@hooks';
 
 import Routes from '@c/Routes';
