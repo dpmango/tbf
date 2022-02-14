@@ -53,10 +53,6 @@
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
-  }
-
-  &_clear {
-    right: 0;
     color: $colorPrimary;
     padding: 11px 12px;
     cursor: pointer;
@@ -88,11 +84,11 @@
 
 .label {
   display: block;
-  margin-bottom: 0.6rem;
-  font-weight: bold;
-  font-size: 0.9rem;
-  line-height: 1.2rem;
-  color: #d8d8da;
+  margin-bottom: 0.3rem;
+  font-weight: 500;
+  font-size: 0.7rem;
+  line-height: 1.43;
+  color: $colorGray700;
 }
 
 .iconLeft {
@@ -102,21 +98,27 @@
   width: 1rem;
   transform: translateY(-50%);
   color: $colorGray200;
-  font-size: 1rem;
+  font-size: 0;
   line-height: 1;
   pointer-events: none;
+  :global .svg-icon {
+    font-size: 1rem;
+  }
 }
 
-.iconLeft {
+.iconRight {
   position: absolute;
   right: 0.7rem;
   top: 50%;
   width: 1rem;
   transform: translateY(-50%);
   color: $colorGray200;
-  font-size: 1rem;
+  font-size: 0;
   line-height: 1;
   pointer-events: none;
+  :global .svg-icon {
+    font-size: 1rem;
+  }
 }
 
 .error {

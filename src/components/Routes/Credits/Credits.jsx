@@ -3,8 +3,10 @@ import { observer } from 'mobx-react-lite';
 import { Helmet } from 'react-helmet';
 
 import { UiStoreContext } from '@store';
-import { Loader } from '@ui';
 import { DashboardHead } from '@c/Dashboard';
+import { BannerSharing, BannerPurchase } from '@c/Banner';
+import { CreditsInvite } from '@c/Credits';
+import { content } from './Content';
 
 const BenefitsPage = observer(() => {
   const uiContext = useContext(UiStoreContext);
@@ -15,8 +17,10 @@ const BenefitsPage = observer(() => {
         <title>Your credits (3)</title>
       </Helmet>
 
-      <DashboardHead />
-      <Loader pageBlocking={true} />
+      <DashboardHead includeDescription="Earn or Purchase Credits " />
+      <BannerSharing />
+      <CreditsInvite invites={content.invites} />
+      <BannerPurchase className="mt-4" />
     </>
   );
 });

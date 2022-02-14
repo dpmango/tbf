@@ -1,0 +1,28 @@
+.container {
+  position: relative;
+  margin: 2rem 0;
+}
+
+.wrapper {
+  position: relative;
+  z-index: 1;
+  min-height: 17rem;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1rem 3rem;
+  border-radius: 0.4rem;
+  overflow: hidden;
+  color: white;
+  background: #f5bb9e url('./assets/bannerSharing-decor.svg') no-repeat center center;
+  background-size: cover;
+  background-position: left center;
+}
+
+.title {
+  position: relative;
+  z-index: 2;
+  max-width: 29.5rem;
+  margin: auto;
+  text-align: center;
+  line-height: 1.27;
+}

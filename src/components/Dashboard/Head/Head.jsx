@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import cns from 'classnames';
 
 import { SvgIcon, Button, Input } from '@ui';
@@ -22,10 +23,12 @@ const Head = ({ className, includeDescription, hasBorder }) => {
           </div>
           <div className={styles.actions}>
             <div className={styles.button}>
-              <Button theme="gray" variant="small">
-                <span>Credits</span>
-                <mark>3</mark>
-              </Button>
+              <Link to="/credits">
+                <Button theme="gray" variant="small">
+                  <span>Credits</span>
+                  <mark>3</mark>
+                </Button>
+              </Link>
             </div>
             <div className={styles.search}>
               <Input
