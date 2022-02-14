@@ -31,6 +31,7 @@ const Input = ({
   onChange,
   mask,
   error,
+  helper,
   showError,
   ...props
 }) => {
@@ -117,6 +118,8 @@ const Input = ({
         {clearIcon}
 
         {error && showError && <div className={styles.error}>{error}</div>}
+
+        {helper && <div className={styles.helper}>{helper}</div>}
       </div>
     </div>
   );

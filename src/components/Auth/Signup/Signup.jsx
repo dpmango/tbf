@@ -6,15 +6,18 @@ import { useToasts } from 'react-toast-notifications';
 
 import { SessionStoreContext } from '@store';
 import { Button, Input } from '@ui';
-import styles from './Login.module.scss';
+import styles from './Signup.module.scss';
 import { ReactComponent as Logo } from '@assets/logo.svg';
 
 const formInitial = {
+  name: '',
   email: '',
   password: '',
+  npi: '',
+  specialty: '',
 };
 
-const Login = () => {
+const Signup = () => {
   const history = useHistory();
 
   const [error, setError] = useState(null);
@@ -26,7 +29,9 @@ const Login = () => {
 
   const handleValidation = (values) => {
     const errors = {};
-    if (!values.email) {
+    if (!values.name) {
+      errors.name = 'Please enter your name';
+    } else if (!values.email) {
       errors.email = 'Please enter your email';
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
       errors.email = 'Please enter a valid email';
@@ -71,8 +76,25 @@ const Login = () => {
                 <Logo />
               </Link>
 
-              <div className={cns('h2-title', styles.title)}>Log In</div>
-              {/* <p className="p-regular">Start your 30-day free trial.</p> */}
+              <div className={cns('h2-title', styles.title)}>Create an account</div>
+              <p className="p-regular">Start your 30-day free trial.</p>
+            </div>
+
+            <div className={styles.group}>
+              <Field type="text" name="name">
+                {({ field, form: { setFieldValue }, meta }) => (
+                  <Input
+                    label="First name*"
+                    placeholder="Enter your name"
+                    value={field.value}
+                    error={meta.touched && meta.error}
+                    onChange={(v) => {
+                      setFieldValue(field.name, v);
+                      setFieldError(field.name);
+                    }}
+                  />
+                )}
+              </Field>
             </div>
 
             <div className={styles.group}>
@@ -99,7 +121,42 @@ const Login = () => {
                   <Input
                     label="Password*"
                     type="password"
-                    placeholder="Enter your password"
+                    placeholder="Create a password"
+                    helper="Must be at least 8 characters."
+                    value={field.value}
+                    error={meta.touched && meta.error}
+                    onChange={(v) => {
+                      setFieldValue(field.name, v);
+                      setFieldError(field.name);
+                    }}
+                  />
+                )}
+              </Field>
+            </div>
+
+            <div className={styles.group}>
+              <Field type="text" name="npi">
+                {({ field, form: { setFieldValue }, meta }) => (
+                  <Input
+                    label="NPI #"
+                    placeholder="Enter your NPI number"
+                    value={field.value}
+                    error={meta.touched && meta.error}
+                    onChange={(v) => {
+                      setFieldValue(field.name, v);
+                      setFieldError(field.name);
+                    }}
+                  />
+                )}
+              </Field>
+            </div>
+
+            <div className={styles.group}>
+              <Field type="text" name="npi">
+                {({ field, form: { setFieldValue }, meta }) => (
+                  <Input
+                    label="Specialty"
+                    placeholder="Enter specialty"
                     value={field.value}
                     error={meta.touched && meta.error}
                     onChange={(v) => {
@@ -118,8 +175,8 @@ const Login = () => {
             </Button>
 
             <div className={styles.helper}>
-              Do not have an account?&nbsp;
-              <Link to="/signup">Signup</Link>
+              Already have an account?&nbsp;
+              <Link to="/login">Login</Link>
             </div>
           </Form>
         )}
@@ -128,4 +185,4 @@ const Login = () => {
   );
 };
 
-export default memo(Login);
+export default memo(Signup);

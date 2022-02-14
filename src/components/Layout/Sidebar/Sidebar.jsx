@@ -1,12 +1,12 @@
 import React, { useContext, useState, useRef, useCallback, useMemo, useEffect } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useHistory } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import cns from 'classnames';
 import throttle from 'lodash/throttle';
 
 import { SvgIcon, Button } from '@ui';
 import { useOnClickOutside, useEventListener, useWindowSize } from '@hooks';
-import { UiStoreContext } from '@store';
+import { UiStoreContext, SessionStoreContext } from '@store';
 
 import styles from './Sidebar.module.scss';
 import { ReactComponent as Logo } from '@assets/logo.svg';
@@ -14,10 +14,12 @@ import { ReactComponent as Logo } from '@assets/logo.svg';
 const Sidebar = observer(({ className }) => {
   const [menuOpened, setMenuOpened] = useState(false);
   const { width } = useWindowSize();
+  const history = useHistory();
 
   const sidebarRef = useRef(null);
 
   const uiContext = useContext(UiStoreContext);
+  const sessionContext = useContext(SessionStoreContext);
 
   // useOnClickOutside(
   //   sidebarRef,
@@ -28,6 +30,17 @@ const Sidebar = observer(({ className }) => {
   //     [setMenuOpened]
   //   )
   // );
+
+  const logOut = useCallback(
+    (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      sessionContext.setSession({ sessionId: null });
+      history.push('/login');
+    },
+    [sessionContext.setSession]
+  );
 
   return (
     <>
@@ -88,7 +101,7 @@ const Sidebar = observer(({ className }) => {
             <div className={styles.profileContent}>
               <div className={styles.profileName}>Dr James Moriarty</div>
               <div className={styles.profileEmail}>moriarty@untitledui.com</div>
-              <div className={styles.profileLogout}>
+              <div className={styles.profileLogout} onClick={logOut}>
                 <SvgIcon name="logout" />
               </div>
             </div>

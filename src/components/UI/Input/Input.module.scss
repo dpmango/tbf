@@ -131,6 +131,13 @@
   font-weight: 500;
 }
 
+.helper {
+  margin-top: 0.2rem;
+  font-size: 0.7rem;
+  line-height: 1.43;
+  color: $colorGray;
+}
+
 input:disabled,
 textarea:disabled,
 input:disabled::placeholder,

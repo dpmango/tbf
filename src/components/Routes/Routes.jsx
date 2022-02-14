@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { Router, Switch, Route, Redirect } from 'react-router-dom';
+import React, { useContext, useMemo } from 'react';
+import { Router, Switch, Route, Redirect, useLocation } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 
 import history from '@config/history';
@@ -9,6 +9,7 @@ import Layout from '@c/Layout/';
 
 import ProtectedRoute from './ProtectedRoute';
 import Login from './Login';
+import Signup from './Signup';
 import Dashboard from './Dashboard';
 import Video from './Video';
 import Copymatic from './Copymatic';
@@ -20,9 +21,18 @@ import Article from './Article';
 
 const Routes = observer(() => {
   const { sessionId } = useContext(SessionStoreContext);
+  const location = useLocation();
+
+  const layoutVariant = useMemo(() => {
+    if (['/login', '/signup', '/recover'].includes(location.pathname)) {
+      return 'auth';
+    }
+
+    return 'main';
+  }, [location]);
 
   return (
-    <Layout variant="main">
+    <Layout variant={layoutVariant}>
       <Switch>
         <ProtectedRoute exact path="/">
           <Dashboard />
@@ -53,6 +63,7 @@ const Routes = observer(() => {
         </ProtectedRoute>
 
         <Route path="/login">{sessionId ? <Redirect to="/" /> : <Login />}</Route>
+        <Route path="/signup">{sessionId ? <Redirect to="/" /> : <Signup />}</Route>
 
         <Route>
           <Loader pageBlocking={true} />

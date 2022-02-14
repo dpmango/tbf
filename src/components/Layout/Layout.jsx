@@ -8,16 +8,18 @@ import styles from './Layout.module.scss';
 
 const Variants = {
   MAIN: 'main',
+  AUTH: 'auth',
 };
 
 const VariantClasses = {
   [Variants.MAIN]: '',
+  [Variants.AUTH]: styles._auth,
 };
 
 const Layout = ({ variant, children }) => {
   return (
     <div className={cns(styles.layout, variant && VariantClasses[variant])}>
-      <Sidebar />
+      {variant === Variants.MAIN && <Sidebar />}
 
       <main className={styles.main}>{children}</main>
     </div>
@@ -30,7 +32,7 @@ Layout.propTypes = {
 };
 
 Layout.defaultProps = {
-  variant: Variants.SIMPLE,
+  variant: Variants.MAIN,
 };
 
 export default Layout;
