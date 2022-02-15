@@ -2,10 +2,12 @@ import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import cns from 'classnames';
+import { useDropzone } from 'react-dropzone';
 
 import { SvgIcon, Button, Select, Input } from '@ui';
 
 import st from './Settings.module.scss';
+import { STATUS_CODES } from 'http';
 
 const Settings = ({ className, steps, ...props }) => {
   const [honor, setHonor] = useState({ value: 1, label: 'Dr.' });
@@ -14,6 +16,14 @@ const Settings = ({ className, steps, ...props }) => {
   const [email, setEmail] = useState('moriarty@untitledui.com');
   const [title, setTitle] = useState('MD, MRCP');
   const [altEmail, setAltEmail] = useState('');
+  // eslint-disable-next-line quotes
+  const [bio, setBio] = useState("I'm a Cardiologist based in Melbourne, Australia. I specialise in heart surgeries.");
+
+  const onDrop = useCallback((acceptedFiles) => {
+    console.log(acceptedFiles);
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
     <section className={cns(st.container, className)} {...props}>
@@ -56,8 +66,31 @@ const Settings = ({ className, steps, ...props }) => {
           <div className={st.sectionLabel}>
             Your photo
             <p>This will be publicly displayed on your video and profile.</p>
+            <div className={st.sectionTooltip} data-tip="Tooltip content">
+              <SvgIcon name="alert-circle" />
+            </div>
           </div>
-          <div className={st.sectionContent}></div>
+          <div className={st.sectionContent}>
+            <div className={st.photo}>
+              <div className={st.photoCurrent}>
+                <img src="/img/avatar.jpg" alt="your avatar" />
+              </div>
+              <div className={st.photoUploader}>
+                <div {...getRootProps()}>
+                  <input {...getInputProps()} />
+                  <div className={st.uploderPlaceholder}>
+                    <div className={st.uploaderPlaceholderIcon}>
+                      <SvgIcon name="upload-cloud" />
+                    </div>
+                    <div className={st.uploaderPlaceholderLabel}>
+                      <span>Click to upload</span> or drag and drop
+                    </div>
+                    <div className={st.uploaderPlaceholderDesc}>PNG or JPG (min. 1400x1400px)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* section  */}
@@ -110,7 +143,9 @@ const Settings = ({ className, steps, ...props }) => {
             Bio
             <p>Write a short introduction.</p>
           </div>
-          <div className={st.sectionContent}></div>
+          <div className={st.sectionContent}>
+            <Input type="textarea" rows={4} value={bio} onChange={(v) => setBio(v)} />
+          </div>
         </div>
 
         {/* section  */}
