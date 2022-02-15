@@ -13,7 +13,7 @@ const DashboardPage = observer(() => {
   return (
     <>
       <Helmet>
-        <title>TBF</title>
+        <title>The Better Foundation</title>
       </Helmet>
 
       <DashboardHead includeDescription={true} />

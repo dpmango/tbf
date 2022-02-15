@@ -11,7 +11,7 @@ const LoginPage = observer(() => {
   return (
     <>
       <Helmet>
-        <title>TBF Login</title>
+        <title>The Better Foundation - Login</title>
       </Helmet>
 
       <AuthLogin />
