@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
   background: #fff;
   border: 1px dashed $colorGray200;
   border-radius: 0.4rem;
@@ -130,6 +131,7 @@
 }
 
 .uploaderProcessTitle {
+  padding-right: 1rem;
   font-weight: 500;
   font-size: 0.7rem;
   line-height: 1.43;

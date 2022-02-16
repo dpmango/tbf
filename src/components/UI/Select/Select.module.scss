@@ -1,8 +1,5 @@
 .select {
   display: block;
-  &._mw-160 {
-    max-width: 160px;
-  }
   &_wrapper {
     position: relative;
   }
@@ -16,7 +13,7 @@
     color: $fontColor;
     border: 1px solid $borderColor;
     border-radius: 5px;
-    padding: 14px 15px;
+    padding: 0.55rem 0.8rem 0.55rem;
     transition: border 0.25s $ease, color 0.25s $ease, background 0.25s $ease;
     &::placeholder {
       color: rgba($fontColor, 0.5);
@@ -47,10 +44,11 @@
 
 .label {
   display: block;
+  margin-bottom: 0.3rem;
   font-weight: 500;
-  font-size: 0.6rem;
-  line-height: 14px;
-  margin-bottom: 8px;
+  font-size: 0.7rem;
+  line-height: 1.43;
+  color: $colorGray700;
 }
 
 .error {

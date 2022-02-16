@@ -124,3 +124,36 @@
   flex: 1 1 auto;
   padding-left: 1rem;
 }
+
+@include r($lg) {
+  .section {
+    display: block;
+  }
+
+  .sectionLabel {
+    margin-bottom: 0.6rem;
+  }
+
+  .sectionContent {
+    padding-left: 0;
+  }
+}
+
+@include r($sm) {
+  .head {
+    display: block;
+  }
+  .headActions {
+    margin-top: 0.6rem;
+    margin-left: 0;
+    :global .btn {
+      margin-bottom: 0;
+    }
+  }
+  .contentRows {
+    display: block;
+    > * {
+      margin-bottom: 0.6rem;
+    }
+  }
+}

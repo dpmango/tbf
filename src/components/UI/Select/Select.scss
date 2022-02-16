@@ -3,9 +3,9 @@
     &__control {
       font-size: 0.8rem;
       color: $fontColor;
-      border: 1px solid $borderColor;
-      min-height: 48px;
-      border-radius: 12px;
+      border: 1px solid $colorGray200;
+      min-height: 2.2rem;
+      border-radius: 0.4rem;
       &--menu-is-open {
         z-index: 10;
       }
@@ -17,7 +17,7 @@
       }
     }
     &__value-container {
-      padding: 10px 0 10px 15px;
+      padding: 0.4rem 0 0.4rem 0.8rem;
       font-size: 0.8rem;
     }
     &__indicator-separator {
