@@ -12,3 +12,4 @@ export { default as UiVideo } from './Video';
 export { UiMap, UiMapMarker } from './Map';
 export { default as AudioList } from './AudioList';
 export { default as Progress } from './Progress';
+export { default as Upload } from './Upload';

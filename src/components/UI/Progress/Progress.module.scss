@@ -1,8 +1,17 @@
 .progress {
   margin: 0.4rem 0;
+  &._inline {
+    display: flex;
+    align-items: center;
+    .progressLabel {
+      margin-top: 0;
+      padding-left: 0.4rem;
+    }
+  }
 }
 
 .progressBar {
+  flex: 1 1 auto;
   position: relative;
   z-index: 1;
   height: 0.4rem;

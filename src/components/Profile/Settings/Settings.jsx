@@ -2,12 +2,10 @@ import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import cns from 'classnames';
-import { useDropzone } from 'react-dropzone';
 
-import { SvgIcon, Button, Select, Input } from '@ui';
+import { SvgIcon, Button, Select, Input, Upload, Progress } from '@ui';
 
 import st from './Settings.module.scss';
-import { STATUS_CODES } from 'http';
 
 const Settings = ({ className, steps, ...props }) => {
   const [honor, setHonor] = useState({ value: 1, label: 'Dr.' });
@@ -18,12 +16,6 @@ const Settings = ({ className, steps, ...props }) => {
   const [altEmail, setAltEmail] = useState('');
   // eslint-disable-next-line quotes
   const [bio, setBio] = useState("I'm a Cardiologist based in Melbourne, Australia. I specialise in heart surgeries.");
-
-  const onDrop = useCallback((acceptedFiles) => {
-    console.log(acceptedFiles);
-  }, []);
-
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
     <section className={cns(st.container, className)} {...props}>
@@ -76,18 +68,7 @@ const Settings = ({ className, steps, ...props }) => {
                 <img src="/img/avatar.jpg" alt="your avatar" />
               </div>
               <div className={st.photoUploader}>
-                <div {...getRootProps()}>
-                  <input {...getInputProps()} />
-                  <div className={st.uploderPlaceholder}>
-                    <div className={st.uploaderPlaceholderIcon}>
-                      <SvgIcon name="upload-cloud" />
-                    </div>
-                    <div className={st.uploaderPlaceholderLabel}>
-                      <span>Click to upload</span> or drag and drop
-                    </div>
-                    <div className={st.uploaderPlaceholderDesc}>PNG or JPG (min. 1400x1400px)</div>
-                  </div>
-                </div>
+                <Upload placeholder="PNG or JPG (min. 1400x1400px)" />
               </div>
             </div>
           </div>
@@ -144,7 +125,7 @@ const Settings = ({ className, steps, ...props }) => {
             <p>Write a short introduction.</p>
           </div>
           <div className={st.sectionContent}>
-            <Input type="textarea" rows={4} value={bio} onChange={(v) => setBio(v)} />
+            <Input type="textarea" rows={4} value={bio} helper="275 characters left" onChange={(v) => setBio(v)} />
           </div>
         </div>
 
@@ -154,7 +135,36 @@ const Settings = ({ className, steps, ...props }) => {
             Portfolio projects
             <p>Share a few snippets of your work.</p>
           </div>
-          <div className={st.sectionContent}></div>
+          <div className={st.sectionContent}>
+            {/* uploderProcess */}
+            <Upload
+              placeholder="PNG or JPG (min. 1400x1400px)"
+              file={{
+                title: 'Declaration form',
+                meta: '200 KB',
+                icon: 'file',
+                progress: 100,
+              }}
+            />
+            <Upload
+              placeholder="PNG or JPG (min. 1400x1400px)"
+              file={{
+                title: 'Dashboard prototype recording.mp4',
+                meta: '16 MB',
+                icon: 'film',
+                progress: 40,
+              }}
+            />{' '}
+            <Upload
+              placeholder="PNG or JPG (min. 1400x1400px)"
+              file={{
+                title: 'Dashboard prototype FINAL.fig',
+                meta: '4.2 KB',
+                // icon: 'file',
+                progress: 80,
+              }}
+            />
+          </div>
         </div>
 
         <div className={st.actions}>
