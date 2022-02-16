@@ -11,7 +11,7 @@ const LoginPage = observer(() => {
   return (
     <>
       <Helmet>
-        <title>TBF Login</title>
+        <title>The Better Foundation - How to get started</title>
       </Helmet>
 
       <DashboardHead includeDescription={true} />

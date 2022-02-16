@@ -13,7 +13,7 @@ const CopymaticPage = observer(() => {
   return (
     <>
       <Helmet>
-        <title>TBF Copymatic</title>
+        <title>The Better Foundation - Copymatic</title>
       </Helmet>
 
       <DashboardHead hasBorder={false} />

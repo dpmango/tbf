@@ -40,7 +40,6 @@ export default class SessionStore {
     let sessionId = null;
     let sessionNumber = null;
 
-    // ищет последнюю актуальную версию сессии. every позволяет выйти из цикла
     const versionsList = ['session_0.0.1'];
     versionsList.reverse().every((key) => {
       const lsSession = localStorage.getItem(key);
