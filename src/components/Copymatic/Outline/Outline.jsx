@@ -1,75 +1,43 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
 import cns from 'classnames';
-
-import { Button, Checkbox, Input, SvgIcon } from '@ui';
-
-import st from './Outline.module.scss';
-import sharedStyles from '@c/Copymatic/Copymatic.module.scss';
-import { SessionStoreContext } from '../../../store';
+import { api } from '../Ideas/Ideas';
 import { observer } from 'mobx-react';
+import st from './Outline.module.scss';
+import React, { useContext, useState } from 'react';
+import { SessionStoreContext } from '../../../store';
+import { Button, Checkbox, Input, SvgIcon } from '@ui';
+import sharedStyles from '@c/Copymatic/Copymatic.module.scss';
 
 const maxLimit = 300;
 
 const Outline = observer(({ className }) => {
-  const [intro, setIntro] = useState('');
-  const [radioGroup, setRadioGroup] = useState([]);
-  const [selectedRadio, setSelectedRadio] = useState(null);
   const sessionContext = useContext(SessionStoreContext);
+  const [running, setRunning] = useState(false);
 
-  const handleTitleChange = (title) => sessionContext.setTitle(title);
+  const handleTitleChange = (title) => {
+    const t = sessionContext.title;
+    t.label = title;
+    sessionContext.setTitle(t);
+  };
 
-  const handleIntroChange = useCallback(
-    (v) => {
-      if (intro.length <= maxLimit) {
-        setIntro(v);
-      }
-    },
-    [intro, setIntro]
-  );
-
-  useEffect(() => {
-    setRadioGroup([
-      {
-        id: 1,
-        label: `Section 1: What’s the Difference Between a Cardiologist and Heart Doctor?<br/><br/>
-          Section 2: Find the Right Doctor for You<br/><br/>
-          Section 3: Check Out the Doctor's Education and Training<br/><br/>
-          Section 4: Look for Doctors With High Success Rates<br/><br/>
-          Section 5: Read Reviews From Other Patients<br/><br/>
-          Section 6: Conclusion.`,
-      },
-      {
-        id: 2,
-        label: `Section 1: Defining what a cardiologist is<br/><br/>
-        Section 2: What to look for when searching for a cardiologist<br/><br/>
-        Section 3: How to find reviews of the cardiologist<br/><br/>
-        Section 4: Conclusion.`,
-      },
-      {
-        id: 3,
-        label: `Section 1: What to Look for in a Doctor<br/><br/>
-        Section 2: Finding the Right Doctor<br/><br/>
-        Section 3: Making an Appointment with a Cardiologist<br/><br/>
-        Section 4: Should I Hire a Personal Assistant?<br/><br/>
-        Section 5: Conclusion.`,
-      },
-      {
-        id: 4,
-        label: `Section 1: What to look for in a cardiologist?<br/><br/>
-        Section 2: How to find the right doctor?<br/><br/>
-        Section 3: What are other people saying about the cardiologist?<br/><br/>
-        Section 4: Conclusion.`,
-      },
-      {
-        id: 5,
-        label: `Section 1: What is a cardiologist?<br/><br/>
-        Section 2: How to find a cardiologist.<br/><br/>
-        Section 3: Expert tips for finding the best doctor.<br/><br/>
-        Section 4: Conclusion.`,
-      },
-    ]);
-  }, []);
-
+  const handleIntroChange = (intro) => sessionContext.setIntro(intro);
+  const generateOutlines = () => {
+    if (Object.keys(sessionContext.title).length > 0 && !running) {
+      setRunning(true);
+      api
+        .post('/cm', { blog_title: sessionContext.title.label, model: 'blog-outline' })
+        .then((response) => {
+          if (response.data && response.data.ideas) {
+            let outlines = [];
+            for (let k in response.data.ideas) {
+              outlines.push({ id: k, label: response.data.ideas[k] });
+            }
+            sessionContext.setOutlines(outlines);
+          }
+        })
+        .catch((error) => console.log(error))
+        .finally(() => setRunning(false));
+    }
+  };
   return (
     <section className={cns(st.container, className)}>
       <div className={st.grid}>
@@ -77,19 +45,19 @@ const Outline = observer(({ className }) => {
           <div className={st.group}>
             <div className={sharedStyles.inputLabel}>
               <span>Title</span>
-              <i data-tip="tooltip content">
+              <i data-tip="Title">
                 <SvgIcon name="info" />
               </i>
 
               <span>*</span>
 
               <div className={sharedStyles.counter}>
-                {sessionContext.title.length} / {maxLimit}
+                {sessionContext.title.label && sessionContext.title.label.length} / {maxLimit}
               </div>
             </div>
 
             <Input
-              value={sessionContext.title}
+              value={sessionContext.title.label}
               onChange={handleTitleChange}
               placeholder="How to Find a Cardiologist - An Expert Guide"
             />
@@ -103,22 +71,33 @@ const Outline = observer(({ className }) => {
               </i>
               <span>*</span>
               <div className={sharedStyles.counter}>
-                {intro.length} / {maxLimit}
+                {sessionContext.intro.label && sessionContext.intro.label.length} / {maxLimit}
               </div>
             </div>
 
-            <Input type="textarea" rows={8} value={intro} onChange={handleIntroChange} placeholder="Intro" />
+            <Input
+              type="textarea"
+              rows={8}
+              value={sessionContext.intro.label}
+              onChange={handleIntroChange}
+              placeholder="Intro"
+            />
           </div>
 
           <div className={st.cta}>
-            <Button type="submit" block>
+            <Button
+              onClick={generateOutlines}
+              disabled={Object.keys(sessionContext.title).length === 0}
+              loading={running}
+              type="submit"
+              block>
               Generate Outline
             </Button>
             <div className={sharedStyles.helper}>
               <i data-tip="One idea is 10c cents">
                 <SvgIcon name="info" />
               </i>
-              Each Generate costs a credit
+              Each generate costs a credit
             </div>
           </div>
         </div>
@@ -126,13 +105,13 @@ const Outline = observer(({ className }) => {
         {/* col */}
         <div className={st.col}>
           <div className={sharedStyles.radioGroup}>
-            {radioGroup &&
-              radioGroup.map((r, idx) => (
+            {sessionContext.outlines &&
+              sessionContext.outlines.map((r, idx) => (
                 <Checkbox
                   type="radio"
                   key={r.id || idx}
-                  isChecked={selectedRadio === r.id}
-                  onChange={() => setSelectedRadio(r.id)}>
+                  isChecked={sessionContext.outline.id === r.id}
+                  onChange={() => sessionContext.setOutline(r)}>
                   <span dangerouslySetInnerHTML={{ __html: r.label }} />
                 </Checkbox>
               ))}

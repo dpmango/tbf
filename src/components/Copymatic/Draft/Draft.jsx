@@ -179,7 +179,7 @@ const Draft = ({ className }) => {
               <i data-tip="One idea is 10c cents">
                 <SvgIcon name="info" />
               </i>
-              Each Generate costs a credit
+              Each generate costs a credit
             </div>
           </div>
         </div>

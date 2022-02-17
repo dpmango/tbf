@@ -26,6 +26,9 @@ export default class SessionStore {
   intros = [];
   intro = {};
 
+  outlines = [];
+  outline = {};
+
   constructor() {
     makeAutoObservable(this);
 
@@ -44,28 +47,36 @@ export default class SessionStore {
     });
   }
 
-  setTopic(topic) {
-    runInAction(() => (this.topic = topic));
+  setTopic(data) {
+    runInAction(() => (this.topic = data));
   }
 
-  setTopics(topics) {
-    runInAction(() => (this.topics = topics));
+  setTopics(data) {
+    runInAction(() => (this.topics = data));
   }
 
-  setTitle(title) {
-    runInAction(() => (this.title = title));
+  setTitle(data) {
+    runInAction(() => (this.title = data));
   }
 
-  setTitles(titles) {
-    runInAction(() => (this.titles = titles));
+  setTitles(data) {
+    runInAction(() => (this.titles = data));
   }
 
-  setIntro(intro) {
-    runInAction(() => (this.intro = intro));
+  setIntro(data) {
+    runInAction(() => (this.intro = data));
   }
 
-  setIntros(intros) {
-    runInAction(() => (this.intros = intros));
+  setIntros(data) {
+    runInAction(() => (this.intros = data));
+  }
+
+  setOutline(data) {
+    runInAction(() => (this.outline = data));
+  }
+
+  setOutlines(data) {
+    runInAction(() => (this.outlines = data));
   }
 
   // api actions

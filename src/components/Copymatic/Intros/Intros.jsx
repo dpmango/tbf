@@ -10,10 +10,8 @@ import sharedStyles from '@c/Copymatic/Copymatic.module.scss';
 const maxLimit = 300;
 
 const Intros = observer(({ className }) => {
-  const [radioGroup, setRadioGroup] = useState([]);
-  //const [selectedRadio, setSelectedRadio] = useState(null);
-  const [running, setRunning] = useState(false);
   const sessionContext = useContext(SessionStoreContext);
+  const [running, setRunning] = useState(false);
 
   const generateIntros = () => {
     if (Object.keys(sessionContext.title).length > 0 && !running) {
