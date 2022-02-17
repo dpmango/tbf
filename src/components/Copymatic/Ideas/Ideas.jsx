@@ -1,59 +1,64 @@
-import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
 import cns from 'classnames';
-
-import { SvgIcon, Button, Checkbox, Input } from '@ui';
-
 import st from './Ideas.module.scss';
+import { observer } from 'mobx-react';
+import React, { useContext, useState } from 'react';
+import { SessionStoreContext } from '../../../store';
+import { Button, Checkbox, Input, SvgIcon } from '@ui';
 import sharedStyles from '@c/Copymatic/Copymatic.module.scss';
 
-const Ideas = ({ className, steps }) => {
-  const [topic, setTopic] = useState('');
+const API_BASE_URL = 'https://api2.buzz.fit/v1';
+
+export const api = axios.create({
+  withCredentials: false,
+  baseURL: API_BASE_URL,
+  timeout: 10000,
+  headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+});
+
+const Ideas = observer(({ className }) => {
+  const sessionContext = useContext(SessionStoreContext);
+  const [running, setRunning] = useState(false);
   const [topicSearch, setTopicSearch] = useState('');
-  const [topicCloud, setTopicCloud] = useState([]);
-  const [radioGroup, setRadioGroup] = useState([]);
-  const [selectedRadio, setSelectedRadio] = useState(null);
 
-  const handleTopicSelect = useCallback(
-    (id) => {
-      setTopicCloud([...topicCloud.map((x) => ({ ...x, selected: x.id === id }))]);
-    },
-    [topicCloud]
-  );
+  const handleTopicSelect = (selected) => {
+    sessionContext.setTopic(selected);
+    sessionContext.setTopics([...sessionContext.topics.map((x) => ({ ...x, selected: x.id === selected.id }))]);
+  };
 
-  const handleAddTopic = useCallback(() => {
+  const generateIdeas = () => {
+    if (Object.keys(sessionContext.topic).length > 0 && !running) {
+      setRunning(true);
+      api
+        .post('/cm', { topic: sessionContext.topic.label, model: 'blog-titles' })
+        .then((response) => {
+          if (response.data && response.data.ideas) {
+            let titles = [];
+            for (let k in response.data.ideas) {
+              titles.push({ id: k, label: response.data.ideas[k] });
+            }
+            sessionContext.setTitles(titles);
+          }
+        })
+        .catch((error) => console.log(error))
+        .finally(() => setRunning(false));
+    }
+  };
+
+  const handleAddTopic = (e) => {
+    e.preventDefault();
+
     if (topicSearch && topicSearch.trim().length) {
-      setTopicCloud([...topicCloud, { id: topicCloud[topicCloud.length - 1].id + 1, label: topicSearch.trim() }]);
+      const topic = {
+        id: sessionContext.topics[sessionContext.topics.length - 1].id + 1,
+        label: topicSearch.trim(),
+        selected: true,
+      };
+      sessionContext.setTopics([...sessionContext.topics, topic]);
+      handleTopicSelect(topic);
       setTopicSearch('');
     }
-  }, [topicSearch, topicCloud]);
-
-  useEffect(() => {
-    setTopic('Your speciality is cardiology');
-    setTopicCloud([
-      { id: 1, label: 'Heart Rhythm and Arrhythmias' },
-      { id: 2, label: 'HIV and Heart Disease' },
-      { id: 3, label: 'Hypertension' },
-      { id: 4, label: 'Imaging' },
-      { id: 5, label: 'Interventional Cardiology', selected: true },
-      { id: 6, label: 'Myocardial Biology/Heart Failure' },
-      { id: 7, label: 'Myocarditis' },
-      { id: 8, label: 'Aortic disease' },
-      { id: 9, label: 'Preventive Cardiology' },
-    ]);
-    setRadioGroup([
-      { id: 1, label: 'How to Find a Cardiologist - An Expert Guide.' },
-      { id: 2, label: 'The Best Cardiology Jobs in the Medical Science Field.' },
-      { id: 3, label: 'How to Tell Whether You Are Suffering from a Heart Problem.' },
-      { id: 4, label: 'How to Become a Cardiologist: A Guide for Medical Science Students.' },
-      { id: 5, label: 'The Best Cardiology Jobs in the Medical Science Field.' },
-      { id: 6, label: 'The Best Cardiology Jobs in the Medical Science Field.' },
-      { id: 7, label: 'How to Tell Whether You Are Suffering from a Heart Problem.' },
-      { id: 8, label: 'How to Become a Cardiologist: A Guide for Medical Science Students.' },
-      { id: 9, label: 'How to Tell Whether You Are Suffering from a Heart Problem.' },
-    ]);
-  }, []);
+  };
 
   return (
     <section className={cns(st.container, className)}>
@@ -62,13 +67,11 @@ const Ideas = ({ className, steps }) => {
           <div className={st.topic}>
             <div className={sharedStyles.inputLabel}>
               <span>Topic</span>
-              <i data-tip="tooltip content">
+              <i data-tip="Tooltip content">
                 <SvgIcon name="info" />
               </i>
-
-              <span>*</span>
             </div>
-            <div className={st.topicValue}>{topic}</div>
+            <div className={st.topicValue}>Your specialty is cardiology.</div>
           </div>
 
           <div className={st.topicCloud}>
@@ -76,18 +79,20 @@ const Ideas = ({ className, steps }) => {
               Please type the topic you want to write about or select from our tags below.
             </p>
             <div className={st.topicCloudForm}>
-              <Input value={topicSearch} onChange={(v) => setTopicSearch(v)} placeholder="Type your own topic..." />
-              <Button variant="small" onClick={handleAddTopic}>
-                Add Topic
-              </Button>
+              <form onSubmit={handleAddTopic}>
+                <Input value={topicSearch} onChange={(v) => setTopicSearch(v)} placeholder="Type your own topic" />
+                <Button variant="small" onClick={handleAddTopic}>
+                  Add topic
+                </Button>
+              </form>
             </div>
 
             <ul className={st.topicCloudList}>
-              {topicCloud &&
-                topicCloud.map((x, idx) => (
+              {sessionContext.topics &&
+                sessionContext.topics.map((x, idx) => (
                   <li
                     className={cns(x.selected && st._selected)}
-                    onClick={() => handleTopicSelect(x.id)}
+                    onClick={() => handleTopicSelect(x)}
                     key={x.id || idx}>
                     {x.label}
                   </li>
@@ -96,14 +101,19 @@ const Ideas = ({ className, steps }) => {
           </div>
 
           <div className={st.cta}>
-            <Button type="submit" block>
-              Generate Ideas
+            <Button
+              disabled={Object.keys(sessionContext.topic).length === 0}
+              loading={running}
+              type="submit"
+              block
+              onClick={generateIdeas}>
+              {running ? '' : 'Generate ideas'}
             </Button>
             <div className={sharedStyles.helper}>
-              <i data-tip="One idea is 10c cents">
+              <i data-tip="Each generate costs a credit">
                 <SvgIcon name="info" />
               </i>
-              Each Generate costs a credit
+              Each generate costs a credit
             </div>
           </div>
         </div>
@@ -111,13 +121,15 @@ const Ideas = ({ className, steps }) => {
         {/* col */}
         <div className={st.col}>
           <div className={cns(sharedStyles.radioGroup, st.radioGroup)}>
-            {radioGroup &&
-              radioGroup.map((r, idx) => (
+            {sessionContext.titles &&
+              sessionContext.titles.map((r, idx) => (
                 <Checkbox
                   type="radio"
                   key={r.id || idx}
-                  isChecked={selectedRadio === r.id}
-                  onChange={() => setSelectedRadio(r.id)}>
+                  isChecked={sessionContext.title.id === r.id}
+                  onChange={() => {
+                    sessionContext.setTitle(r);
+                  }}>
                   {r.label}
                 </Checkbox>
               ))}
@@ -126,6 +138,6 @@ const Ideas = ({ className, steps }) => {
       </div>
     </section>
   );
-};
+});
 
 export default Ideas;

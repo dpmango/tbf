@@ -1,14 +1,10 @@
-import React, { useContext, useState, useCallback, useMemo, Children } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import cns from 'classnames';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { useToasts } from 'react-toast-notifications';
 
-import { Modal, SvgIcon, Button } from '@ui';
+import { Button, Modal, SvgIcon } from '@ui';
 import { UiStoreContext } from '@store';
 import styles from './Continue.module.scss';
-import { useEffect } from 'react';
 
 const Continue = observer(({ className, onCtaClick, children }) => {
   const { modalParams } = useContext(UiStoreContext);

@@ -14,7 +14,7 @@ export const content = {
     {
       id: 3,
       slug: 'outline',
-      label: 'Get an Outline',
+      label: 'Get an outline',
     },
     {
       id: 4,
@@ -24,7 +24,7 @@ export const content = {
     {
       id: 5,
       slug: 'voiceover',
-      label: 'Select Voiceover',
+      label: 'Select voiceover',
     },
     {
       id: 6,

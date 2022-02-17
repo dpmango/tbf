@@ -15,7 +15,8 @@ class SessionService extends ApiService {
   }
 
   async alive(req) {
-    try {
+    return true;
+    /*try {
       const { data } = await api.alive(req);
 
       return [null, data];
@@ -23,7 +24,7 @@ class SessionService extends ApiService {
       this.handleError(error);
 
       return [error, null];
-    }
+    }*/
   }
 }
 

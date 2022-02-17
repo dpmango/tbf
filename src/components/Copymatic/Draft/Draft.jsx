@@ -1,9 +1,7 @@
-import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
 import cns from 'classnames';
 
-import { SvgIcon, Button, Checkbox, Input } from '@ui';
+import { Button, Input, SvgIcon } from '@ui';
 
 import st from './Draft.module.scss';
 import sharedStyles from '@c/Copymatic/Copymatic.module.scss';
@@ -112,9 +110,7 @@ const Draft = ({ className }) => {
               <i data-tip="tooltip content">
                 <SvgIcon name="info" />
               </i>
-
               <span>*</span>
-
               <div className={sharedStyles.counter}>
                 {title.length} / {maxLimit}
               </div>
@@ -133,9 +129,7 @@ const Draft = ({ className }) => {
               <i data-tip="tooltip content">
                 <SvgIcon name="info" />
               </i>
-
               <span>*</span>
-
               <div className={sharedStyles.counter}>
                 {intro.length} / {maxLimit}
               </div>

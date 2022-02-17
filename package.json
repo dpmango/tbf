@@ -33,7 +33,7 @@
     "@googlemaps/react-wrapper": "^1.1.20",
     "@googlemaps/typescript-guards": "^1.0.4",
     "aos": "^3.0.0-beta.6",
-    "axios": "^0.21.4",
+    "axios": "^0.26.0",
     "classnames": "^2.3.1",
     "dayjs": "^1.10.7",
     "fast-equals": "^2.0.4",

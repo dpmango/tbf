@@ -61,7 +61,7 @@ const Sidebar = observer(({ className }) => {
               <Link to="/credits">
                 <SvgIcon name="coin-stack" />
                 <span>
-                  Credits <i>3</i>
+                  Credits <i>100</i>
                 </span>
               </Link>
             </li>

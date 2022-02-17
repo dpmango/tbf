@@ -1,6 +1,4 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { computedFn } from 'mobx-utils';
-import axios from 'axios';
 
 import { LOCAL_STORAGE_SESSION } from '@config/localStorage';
 import service from './api-service';
@@ -8,12 +6,32 @@ import service from './api-service';
 export default class SessionStore {
   sessionId = null;
   sessionNumber = null;
+  // CM step 1
+  topics = [
+    { id: 1, label: 'Heart Rhythm and Arrhythmias' },
+    { id: 2, label: 'HIV and Heart Disease' },
+    { id: 3, label: 'Hypertension' },
+    { id: 4, label: 'Imaging' },
+    { id: 5, label: 'Interventional Cardiology' },
+    { id: 6, label: 'Heart Failure' },
+    { id: 7, label: 'Electrocardiogram' },
+    { id: 8, label: 'Aortic disease' },
+    { id: 9, label: 'Preventive Cardiology' },
+  ];
+  topic = {};
+
+  titles = [];
+  title = {};
+
+  intros = [];
+  intro = {};
 
   constructor() {
     makeAutoObservable(this);
 
     this.init();
   }
+
   // inner actions
   setSession(newSession) {
     const { sessionId, sessionNumber } = newSession;
@@ -26,14 +44,38 @@ export default class SessionStore {
     });
   }
 
+  setTopic(topic) {
+    runInAction(() => (this.topic = topic));
+  }
+
+  setTopics(topics) {
+    runInAction(() => (this.topics = topics));
+  }
+
+  setTitle(title) {
+    runInAction(() => (this.title = title));
+  }
+
+  setTitles(titles) {
+    runInAction(() => (this.titles = titles));
+  }
+
+  setIntro(intro) {
+    runInAction(() => (this.intro = intro));
+  }
+
+  setIntros(intros) {
+    runInAction(() => (this.intros = intros));
+  }
+
   // api actions
   /**
    @action init
    @description
-    сперва пытаемся получить сессию из localStorage либо создаем новую
-    делаем запрос на alive сессии
-    при ошибках пересоздаем сессию
-  **/
+   сперва пытаемся получить сессию из localStorage либо создаем новую
+   делаем запрос на alive сессии
+   при ошибках пересоздаем сессию
+   **/
   async init() {
     // migration
     let useMigration = false;

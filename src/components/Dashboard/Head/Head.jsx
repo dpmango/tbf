@@ -26,7 +26,7 @@ const Head = ({ className, includeDescription, hasBorder }) => {
               <Link to="/credits">
                 <Button theme="gray" variant="small">
                   <span>Credits</span>
-                  <mark>3</mark>
+                  <mark>100</mark>
                 </Button>
               </Link>
             </div>

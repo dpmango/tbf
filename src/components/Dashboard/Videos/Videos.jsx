@@ -36,12 +36,12 @@ const Video = ({ className, videos }) => {
                     </Link>
                   </UiVideo>
                 ) : (
-                  <div className={styles.skeleton}></div>
+                  <div className={styles.skeleton} />
                 )}
               </div>
             ))}
 
-          <Link to="/copymatic" className={styles.add} onClick={handleAddClick}>
+          <Link to="/create" className={styles.add} onClick={handleAddClick}>
             <div className={styles.addContent}>
               <div className={styles.addIcon}>
                 <SvgIcon name="plus-circle" />

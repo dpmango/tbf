@@ -11,9 +11,11 @@
   border: 1px solid transparent;
   border-radius: 0.4rem;
   transition: background 0.25s $ease, color 0.25s $ease, border 0.25s $ease;
+
   &._primary {
     background: $colorPrimary;
     color: white;
+
     &:hover {
       background: rgba($colorPrimary, 0.8);
     }
@@ -22,6 +24,7 @@
       background: white;
       border-color: $colorGray200;
       color: $colorPrimary;
+
       &:hover {
         color: white;
         background: $colorPrimary;
@@ -34,6 +37,7 @@
       border-color: rgba(black, 0.3);
       cursor: not-allowed;
       pointer-events: none;
+
       &:hover {
         background: transparent;
         color: rgba(black, 0.3);
@@ -41,32 +45,40 @@
       }
     }
   }
+
   &._accent {
     background: $colorAccent;
     color: white;
+
     &:hover {
       background: rgba($colorAccent, 0.8);
     }
+
     &._outline {
       background: transparent;
       border: 1px solid $colorAccent;
       color: $colorAccent;
+
       &:hover {
         color: white;
         background: $colorAccent;
       }
     }
   }
+
   &._black {
     background: $fontColor;
     color: white;
+
     &:hover {
       background: rgba($fontColor, 0.8);
     }
+
     &._outline {
       background: transparent;
       border: 1px solid $fontColor;
       color: $fontColor;
+
       &:hover {
         color: white;
         background: $fontColor;
@@ -77,63 +89,78 @@
   &._gray {
     background: $colorBg;
     color: $colorGray;
+
     &:hover {
       border-color: $colorGray;
       background: rgba($colorBg, 0.8);
       color: $fontColor;
     }
+
     &._outline {
       background: transparent;
       border: 1px solid $colorGray;
       color: $colorGray;
+
       &:hover {
         color: white;
         background: $fontColor;
       }
     }
   }
+
   &._muted {
     background: #ababab;
     color: white;
+
     &:hover {
       background: rgba(#ababab, 0.8);
     }
+
     &._outline {
       background: transparent;
       border: 1px solid #ababab;
       color: $fontColor;
+
       &:hover {
         color: white;
         background: #ababab;
       }
     }
   }
+
   &._danger {
     background: $colorPrimary50;
     color: $colorPrimary;
+
     &:hover {
       background: rgba($colorPrimary50, 0.8);
     }
+
     &._outline {
       background: transparent;
       border: 1px solid $colorPrimary50;
       color: $colorPrimary50;
+
       &:hover {
         color: $colorPrimary;
         background: $colorPrimary50;
       }
     }
   }
+
   &._success {
     background: #ecfdf3;
     color: $colorGreen;
+
     &:hover {
       background: rgba(#ecfdf3, 0.8);
     }
+
     &._outline {
       background: transparent;
       border: 1px solid #ecfdf3;
       color: $colorGreen;
+
       &:hover {
         color: $colorGreen;
         background: #ecfdf3;
@@ -148,15 +175,18 @@
     font-size: 0.7rem;
     min-height: 1.7rem;
   }
+
   &._small {
     padding: 0.4rem 0.8rem;
     font-size: 0.7rem;
     min-height: 2.2rem;
   }
+
   &._big {
     font-size: 0.9rem;
     padding: 0.8rem 1.4rem;
     min-height: 3rem;
+
     &._iconLeft,
     &._iconRight {
       svg {
@@ -164,16 +194,19 @@
       }
     }
   }
+
   &._block {
     display: block;
     width: 100%;
   }
+
   // icons
   &._iconed {
     display: inline-flex;
     align-items: center;
     justify-content: center;
   }
+
   &._iconLeft {
     svg {
       font-size: 1rem;
@@ -181,6 +214,7 @@
       margin-right: 0.4rem;
     }
   }
+
   &._iconRight {
     svg {
       font-size: 1rem;
@@ -188,21 +222,18 @@
       margin-left: 0.4rem;
     }
   }
+
   &._loading {
     position: relative;
-    // font-size: 0;
     color: transparent;
-    .spinner {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-    }
   }
+
   &[disabled] {
     background: $colorBg;
     color: $fontColor;
     cursor: not-allowed;
     pointer-events: none;
+
     &:hover {
       background: $colorBg;
     }

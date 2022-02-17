@@ -1,27 +1,24 @@
-import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
-import PropTypes from 'prop-types';
-import { Switch, Route, Link, useHistory, useLocation } from 'react-router-dom';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import cns from 'classnames';
 
-import { SvgIcon, Button, Input } from '@ui';
-import { useFirstRender } from '@hooks';
+import { Button, SvgIcon } from '@ui';
 import {
+  CopymaticConvert,
+  CopymaticDraft,
   CopymaticIdeas,
   CopymaticIntros,
   CopymaticOutline,
-  CopymaticDraft,
   CopymaticVoiceover,
-  CopymaticConvert,
 } from '@c/Copymatic';
 
 import st from './Steps.module.scss';
 
-const baseRoute = '/copymatic/';
+const baseRoute = '/create/';
 
 const Steps = ({ className, steps }) => {
   let history = useHistory();
   const location = useLocation();
-  const firstRender = useFirstRender();
 
   const getLocationId = useMemo(() => {
     const loc = location.pathname.split('/');
@@ -31,8 +28,6 @@ const Steps = ({ className, steps }) => {
   }, [location, steps]);
 
   const [step, activateStep] = useState(getLocationId);
-
-  const handleAddClick = useCallback(() => {}, []);
 
   const handleStepClick = useCallback(
     (id) => {
@@ -94,9 +89,16 @@ const Steps = ({ className, steps }) => {
         </div>
 
         <div className={st.nav}>
-          <Button theme="gray" iconLeft="arrow-left" variant="small" outline onClick={() => handleStepClick(step - 1)}>
-            Prev
-          </Button>
+          {step > 1 && (
+            <Button
+              theme="gray"
+              iconLeft="arrow-left"
+              variant="small"
+              outline
+              onClick={() => handleStepClick(step - 1)}>
+              Previous
+            </Button>
+          )}
           <Button
             theme="gray"
             iconRight="arrow-right"

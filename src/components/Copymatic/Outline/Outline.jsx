@@ -1,29 +1,22 @@
-import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import cns from 'classnames';
 
-import { SvgIcon, Button, Checkbox, Input } from '@ui';
+import { Button, Checkbox, Input, SvgIcon } from '@ui';
 
 import st from './Outline.module.scss';
 import sharedStyles from '@c/Copymatic/Copymatic.module.scss';
+import { SessionStoreContext } from '../../../store';
+import { observer } from 'mobx-react';
 
 const maxLimit = 300;
 
-const Outline = ({ className }) => {
-  const [title, setTitle] = useState('');
+const Outline = observer(({ className }) => {
   const [intro, setIntro] = useState('');
   const [radioGroup, setRadioGroup] = useState([]);
   const [selectedRadio, setSelectedRadio] = useState(null);
+  const sessionContext = useContext(SessionStoreContext);
 
-  const handleTitleChange = useCallback(
-    (v) => {
-      if (title.length <= maxLimit) {
-        setTitle(v);
-      }
-    },
-    [title, setTitle]
-  );
+  const handleTitleChange = (title) => sessionContext.setTitle(title);
 
   const handleIntroChange = useCallback(
     (v) => {
@@ -91,14 +84,14 @@ const Outline = ({ className }) => {
               <span>*</span>
 
               <div className={sharedStyles.counter}>
-                {title.length} / {maxLimit}
+                {sessionContext.title.length} / {maxLimit}
               </div>
             </div>
 
             <Input
-              value={title}
+              value={sessionContext.title}
               onChange={handleTitleChange}
-              placeholder="How to Find a Cardiologist - An Expert Guide."
+              placeholder="How to Find a Cardiologist - An Expert Guide"
             />
           </div>
 
@@ -108,15 +101,13 @@ const Outline = ({ className }) => {
               <i data-tip="tooltip content">
                 <SvgIcon name="info" />
               </i>
-
               <span>*</span>
-
               <div className={sharedStyles.counter}>
                 {intro.length} / {maxLimit}
               </div>
             </div>
 
-            <Input type="textarea" rows={8} value={intro} onChange={handleIntroChange} placeholder="Intro ..." />
+            <Input type="textarea" rows={8} value={intro} onChange={handleIntroChange} placeholder="Intro" />
           </div>
 
           <div className={st.cta}>
@@ -150,6 +141,6 @@ const Outline = ({ className }) => {
       </div>
     </section>
   );
-};
+});
 
 export default Outline;

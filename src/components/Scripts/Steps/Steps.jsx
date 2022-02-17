@@ -1,16 +1,14 @@
-import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import React, { useCallback } from 'react';
 import cns from 'classnames';
 
-import { SvgIcon, Button, Checkbox, Input } from '@ui';
+import { Button } from '@ui';
 
 import st from './Steps.module.scss';
 
 const STATUS_CLASS = {
   1: 'new',
   2: 'await',
-  3: 'compleate',
+  3: 'complete',
 };
 
 const Steps = ({ className, steps, onStepClick, ...props }) => {
