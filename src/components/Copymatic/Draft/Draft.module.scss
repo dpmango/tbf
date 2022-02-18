@@ -9,6 +9,24 @@
   grid-gap: 3rem;
 }
 
+p[data-slate-node='element'] {
+  line-height: 140%;
+  font-size: 1rem;
+  color: lighten(black, 40%);
+}
+
+h1[data-slate-node='element'] {
+  line-height: 120%;
+  font-size: 2rem;
+  color: lighten(black, 10%);
+}
+
+h2[data-slate-node='element'] {
+  line-height: 120%;
+  font-size: 1.4rem;
+  color: lighten(black, 25%);
+}
+
 @include r($lg) {
   .grid {
     grid-template-columns: 1fr;
@@ -110,6 +128,11 @@
 
 .previewText {
   margin-top: 0.3rem;
+}
+
+.previewWrapper {
+  padding: 2rem 1rem;
+  height: 80vh;
 }
 
 .previewCta {

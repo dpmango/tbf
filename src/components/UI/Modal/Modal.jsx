@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
@@ -8,7 +8,7 @@ import { UiStoreContext } from '@store/UiStore';
 import { SvgIcon } from '@ui';
 
 import styles from './Modal.module.scss';
-import styles2 from './Modal.scss';
+import './Modal.scss';
 
 const sharedStyles = {
   content: {
@@ -137,7 +137,6 @@ ModalComponent.propTypes = {
   variant: PropTypes.string,
   modifier: PropTypes.string,
   name: PropTypes.string.isRequired,
-  // children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
 };
 
 ModalComponent.defaultProps = {

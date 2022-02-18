@@ -2,9 +2,11 @@
   position: relative;
   z-index: 1;
   overflow: hidden;
+
   &._white {
     .close {
       color: #b8b8b8;
+
       &:hover {
         color: $colorPrimary;
       }
@@ -22,12 +24,15 @@
   cursor: pointer;
   color: $colorGray;
   transition: color 0.25s $ease;
+
   :global .svg-icon {
     font-size: 0.8rem;
+
     &.svg-icon--arrow-left {
       display: none;
     }
   }
+
   &:hover {
     color: $colorPrimary;
   }
@@ -35,16 +40,16 @@
 
 .content {
   display: block;
+
   &._full {
+    padding: 0 1rem;
+    overflow-y: scroll;
+    height: 100%;
     flex: 1 0 auto;
     display: flex;
     flex-direction: column;
   }
 }
-
-// ._narrow {
-//   padding: 1rem;
-// }
 
 @include r($md) {
   .head {
