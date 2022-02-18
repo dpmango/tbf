@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 import cns from 'classnames';
 
@@ -13,12 +13,15 @@ import {
 } from '@c/Copymatic';
 
 import st from './Steps.module.scss';
+import { SessionStoreContext } from '../../../store';
+import { observer } from 'mobx-react';
 
 const baseRoute = '/create/';
 
-const Steps = ({ className, steps }) => {
+const Steps = observer(({ className, steps }) => {
   let history = useHistory();
   const location = useLocation();
+  const sessionContext = useContext(SessionStoreContext);
 
   const getLocationId = useMemo(() => {
     const loc = location.pathname.split('/');
@@ -44,6 +47,24 @@ const Steps = ({ className, steps }) => {
     history.push(`${baseRoute}${tSlug}`);
   }, [step]);
 
+  // https://www.slatejs.org/examples/richtext
+  let next = true;
+  if (step === 1) {
+    next = sessionContext.title.label && sessionContext.title.label.length > 0;
+  }
+
+  if (step === 2) {
+    next = sessionContext.intro.label && sessionContext.intro.label.length > 0;
+  }
+
+  if (step === 3) {
+    next = sessionContext.outline.label && sessionContext.outline.label.length > 0;
+  }
+
+  if (step === 4) {
+    next = sessionContext.paragraphs && sessionContext.paragraphs.length > 0;
+  }
+
   return (
     <section className={cns(st.container, className)}>
       <div className="container">
@@ -53,8 +74,9 @@ const Steps = ({ className, steps }) => {
               steps.map((x, idx) => (
                 <li
                   key={x.id || idx}
-                  className={cns(st.step, step === (x.id || idx) && st._active)}
-                  onClick={() => handleStepClick(x.id)}>
+                  className={cns(st.step, step === (x.id || idx) && st._active, step > (x.id || idx) && st._done)}
+                  //onClick={() => handleStepClick(x.id)}
+                >
                   <span className={st.steplabel}>Step {x.id}</span>
                   <div className={st.stepBox}>
                     <SvgIcon name="checkmark" />
@@ -89,17 +111,17 @@ const Steps = ({ className, steps }) => {
         </div>
 
         <div className={st.nav}>
-          {step > 1 && (
-            <Button
-              theme="gray"
-              iconLeft="arrow-left"
-              variant="small"
-              outline
-              onClick={() => handleStepClick(step - 1)}>
-              Previous
-            </Button>
-          )}
           <Button
+            className={step === 1 && st.hidden}
+            theme="gray"
+            iconLeft="arrow-left"
+            variant="small"
+            outline
+            onClick={() => handleStepClick(step - 1)}>
+            Previous
+          </Button>
+          <Button
+            className={(step === 6 || !next) && st.hidden}
             theme="gray"
             iconRight="arrow-right"
             variant="small"
@@ -111,6 +133,6 @@ const Steps = ({ className, steps }) => {
       </div>
     </section>
   );
-};
+});
 
 export default Steps;

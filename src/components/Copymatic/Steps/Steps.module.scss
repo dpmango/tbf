@@ -3,6 +3,11 @@
   padding: 0 0 0.65rem;
 }
 
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .stepsList {
   flex: 0 0 100%;
   display: flex;
@@ -61,6 +66,28 @@
 
   &:last-child {
     border-radius: 0 8px 8px 0;
+  }
+
+  &._done {
+    background: $colorBg;
+
+    .stepBox {
+      border-color: transparent;
+      background: lighten($colorPrimary, 20%);
+
+      :global .svg-icon {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    .stepLabel {
+      color: $colorGray900;
+    }
+
+    .stepDescr {
+      display: none !important;
+    }
   }
 
   &._active {

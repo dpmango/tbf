@@ -23,14 +23,19 @@ const Outline = observer(({ className }) => {
   const generateOutlines = () => {
     if (Object.keys(sessionContext.title).length > 0 && !running) {
       setRunning(true);
+      sessionContext.setOutline([]);
+      sessionContext.setOutlines([]);
+
       api
         .post('/cm', { blog_title: sessionContext.title.label, model: 'blog-outline' })
         .then((response) => {
           if (response.data && response.data.ideas) {
             let outlines = [];
             for (let k in response.data.ideas) {
-              outlines.push({ id: k, label: response.data.ideas[k] });
+              const outline = response.data.ideas[k].split('<br>').map((v) => v.replace('\n', '').trim('-').trim());
+              outlines.push({ id: k, label: outline });
             }
+            sessionContext.setOutline([]);
             sessionContext.setOutlines(outlines);
           }
         })
@@ -38,6 +43,7 @@ const Outline = observer(({ className }) => {
         .finally(() => setRunning(false));
     }
   };
+
   return (
     <section className={cns(st.container, className)}>
       <div className={st.grid}>
@@ -48,9 +54,7 @@ const Outline = observer(({ className }) => {
               <i data-tip="Title">
                 <SvgIcon name="info" />
               </i>
-
               <span>*</span>
-
               <div className={sharedStyles.counter}>
                 {sessionContext.title.label && sessionContext.title.label.length} / {maxLimit}
               </div>
@@ -94,7 +98,7 @@ const Outline = observer(({ className }) => {
               Generate Outline
             </Button>
             <div className={sharedStyles.helper}>
-              <i data-tip="One idea is 10c cents">
+              <i data-tip="Each generate costs a credit">
                 <SvgIcon name="info" />
               </i>
               Each generate costs a credit
@@ -111,8 +115,18 @@ const Outline = observer(({ className }) => {
                   type="radio"
                   key={r.id || idx}
                   isChecked={sessionContext.outline.id === r.id}
-                  onChange={() => sessionContext.setOutline(r)}>
-                  <span dangerouslySetInnerHTML={{ __html: r.label }} />
+                  onChange={() => {
+                    sessionContext.setOutline(r);
+                  }}>
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: r.label
+                        .map((v, k) => {
+                          return k + 1 + '. ' + v;
+                        })
+                        .join('<br>'),
+                    }}
+                  />
                 </Checkbox>
               ))}
           </div>

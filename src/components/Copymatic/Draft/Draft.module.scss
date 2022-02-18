@@ -25,9 +25,8 @@
 }
 
 .outline {
-  display: flex;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .outlineLabel {
@@ -36,19 +35,31 @@
   font-size: 0.7rem;
   line-height: 1.43;
   color: $colorGray700;
+  display: block;
+  margin-bottom: 2px;
 }
 
 .outlineInput {
   flex: 1 1 auto;
   padding-right: 0.5rem;
+  display: flex;
+  width: 100%;
 }
+
+.outlineInputWrapper {
+  width: 100%;
+  display: inline-block;
+  vertical-align: baseline;
+}
+
 .outlineDelete {
   flex: 0 0 auto;
   margin-right: -0.5rem;
   color: $colorPrimary;
   cursor: pointer;
   transition: color 0.25s $ease;
-  padding: 0.5rem;
+  padding: 0.5rem 0 0 0.5rem;
+
   &:hover {
     color: $fontColor;
   }
@@ -60,6 +71,7 @@
   align-items: center;
   cursor: pointer;
   transition: color 0.25s $ease;
+
   span {
     flex: 0 0 4.25rem;
     font-weight: 500;
@@ -68,17 +80,20 @@
     color: $colorGray700;
     transition: color 0.25s $ease;
   }
+
   :global .svg-icon {
     flex: 0 0 auto;
     font-size: 0.9rem;
     color: $colorPrimary;
   }
+
   &:hover {
     span {
       color: $colorPrimary;
     }
   }
 }
+
 .preview {
   padding: 2rem;
   background: rgba($colorBg, 0.5);
@@ -87,6 +102,7 @@
 
 .previewSection {
   margin-bottom: 1.8rem;
+
   &:last-child {
     margin-bottom: 0;
   }
@@ -99,6 +115,7 @@
 .previewCta {
   display: flex;
   justify-content: center;
+
   :global button {
     background: white;
   }

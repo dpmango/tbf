@@ -16,6 +16,9 @@ const Intros = observer(({ className }) => {
   const generateIntros = () => {
     if (Object.keys(sessionContext.title).length > 0 && !running) {
       setRunning(true);
+      sessionContext.setIntro({});
+      sessionContext.setIntros([]);
+
       api
         .post('/cm', { blog_title: sessionContext.title.label, model: 'blog-intros' })
         .then((response) => {

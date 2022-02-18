@@ -27,7 +27,9 @@ export default class SessionStore {
   intro = {};
 
   outlines = [];
-  outline = {};
+  outline = [];
+
+  paragraphs = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -77,6 +79,10 @@ export default class SessionStore {
 
   setOutlines(data) {
     runInAction(() => (this.outlines = data));
+  }
+
+  setParagraphs(data) {
+    runInAction(() => (this.paragraphs = data));
   }
 
   // api actions

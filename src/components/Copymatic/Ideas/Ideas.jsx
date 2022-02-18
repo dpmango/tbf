@@ -21,14 +21,34 @@ const Ideas = observer(({ className }) => {
   const [running, setRunning] = useState(false);
   const [topicSearch, setTopicSearch] = useState('');
 
+  const reset = () => {
+    // reset article title
+    sessionContext.setTitles([]);
+    sessionContext.setTitle({});
+
+    // reset article intro
+    sessionContext.setIntros([]);
+    sessionContext.setIntro({});
+
+    // reset outlines
+    sessionContext.setOutline([]);
+    sessionContext.setOutlines([]);
+
+    // reset content
+    sessionContext.setParagraphs([]);
+  };
+
   const handleTopicSelect = (selected) => {
     sessionContext.setTopic(selected);
     sessionContext.setTopics([...sessionContext.topics.map((x) => ({ ...x, selected: x.id === selected.id }))]);
+    reset();
   };
 
   const generateIdeas = () => {
     if (Object.keys(sessionContext.topic).length > 0 && !running) {
       setRunning(true);
+      reset();
+
       api
         .post('/cm', { topic: sessionContext.topic.label, model: 'blog-titles' })
         .then((response) => {
@@ -37,6 +57,7 @@ const Ideas = observer(({ className }) => {
             for (let k in response.data.ideas) {
               titles.push({ id: k, label: response.data.ideas[k] });
             }
+            reset();
             sessionContext.setTitles(titles);
           }
         })
@@ -57,6 +78,7 @@ const Ideas = observer(({ className }) => {
       sessionContext.setTopics([...sessionContext.topics, topic]);
       handleTopicSelect(topic);
       setTopicSearch('');
+      sessionContext.setTitle({});
     }
   };
 

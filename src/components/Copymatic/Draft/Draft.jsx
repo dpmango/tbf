@@ -1,36 +1,52 @@
-import React, { useCallback, useEffect, useState } from 'react';
 import cns from 'classnames';
-
-import { Button, Input, SvgIcon } from '@ui';
-
+import { value } from 'lodash/seq';
 import st from './Draft.module.scss';
+import { api } from '../Ideas/Ideas';
+import { observer } from 'mobx-react';
+import { Button, Input, SvgIcon } from '@ui';
+import { SessionStoreContext } from '../../../store';
 import sharedStyles from '@c/Copymatic/Copymatic.module.scss';
+import React, { useCallback, useContext, useState } from 'react';
 
 const maxLimit = 300;
 
-const Draft = ({ className }) => {
-  const [title, setTitle] = useState('');
-  const [intro, setIntro] = useState('');
-  const [preview, setPreview] = useState([]);
+const Draft = observer(({ className }) => {
+  const sessionContext = useContext(SessionStoreContext);
+  const [running, setRunning] = useState(false);
   const [outlines, setOutlines] = useState([]);
 
-  const handleTitleChange = useCallback(
-    (v) => {
-      if (title.length <= maxLimit) {
-        setTitle(v);
-      }
-    },
-    [title]
-  );
+  const handleTitleChange = (title) => {
+    const t = sessionContext.title;
+    t.label = title;
+    sessionContext.setTitle(t);
+  };
 
-  const handleIntroChange = useCallback(
-    (v) => {
-      if (intro.length <= maxLimit) {
-        setIntro(v);
-      }
-    },
-    [intro]
-  );
+  const handleIntroChange = (intro) => sessionContext.setIntro(intro);
+
+  const generateDraft = () => {
+    if (Object.keys(sessionContext.title).length > 0 && !running) {
+      setRunning(true);
+
+      Promise.all(
+        sessionContext.outline.label.map((v) => {
+          return api.post('/cm', {
+            blog_title: sessionContext.title.label,
+            subheading: v,
+            model: 'paragraph-writer',
+          });
+        })
+      )
+        .then((values) => {
+          const p = [];
+          values.map((v) => {
+            p.push(v.data.ideas[1]);
+          });
+          sessionContext.setParagraphs(p);
+        })
+        .catch((error) => console.log(error))
+        .finally(() => setRunning(false));
+    }
+  };
 
   const handleOutlineChange = useCallback(
     (value, id) => {
@@ -52,54 +68,6 @@ const Draft = ({ className }) => {
     setOutlines([...outlines, ...[{ id: nextId, label: `Section ${nextId}`, value: '' }]]);
   }, [outlines]);
 
-  useEffect(() => {
-    setPreview([
-      {
-        title: 'What to look for in a cardiologist?',
-        intro:
-          'Finding a cardiologist is not as simple as it sounds. With so many choices and variables, it can be difficult to know where to look. The good news is that we’ve got your back! We’ve compiled a list of tips and tricks on how to find the best cardiologist for you. This blog will cover: - What to look for in a cardiologist - How to find their contact information - How to establish rapport with them.',
-      },
-      {
-        title: 'How to find the right doctor?',
-        intro:
-          'Finding a cardiologist is not as simple as it sounds. With so many choices and variables, it can be difficult to know where to look. The good news is that we’ve got your back! We’ve compiled a list of tips and tricks on how to find the best cardiologist for you. This blog will cover: - What to look for in a cardiologist - How to find their contact information - How to establish rapport with them.',
-      },
-      {
-        title: 'What are other people saying about the cardiologist?',
-        intro:
-          'Finding a cardiologist is not as simple as it sounds. With so many choices and variables, it can be difficult to know where to look. The good news is that we’ve got your back! We’ve compiled a list of tips and tricks on how to find the best cardiologist for you. This blog will cover: - What to look for in a cardiologist - How to find their contact information - How to establish rapport with them.',
-      },
-      {
-        title: 'Conclusion.',
-        intro: `Finding a cardiologist is not as simple as it sounds. With so many choices and variables, it can be difficult to know where to look. The good news is that we’ve got your back! We’ve compiled a list of tips and tricks on how to find the best cardiologist for you. This blog will cover: - What to look for in a cardiologist - How to find their contact information - How to establish rapport with them.<br/><br/>
-        Finding a cardiologist is not as simple as it sounds. With so many`,
-      },
-    ]);
-
-    setOutlines([
-      {
-        id: 1,
-        label: 'Section 1',
-        value: 'How to find the right doctor?',
-      },
-      {
-        id: 2,
-        label: 'Section 2',
-        value: 'How to find the right doctor?',
-      },
-      {
-        id: 3,
-        label: 'Section 3',
-        value: 'What are other people saying about the cardiologist?',
-      },
-      {
-        id: 4,
-        label: 'Section 4',
-        value: 'Conclusion.',
-      },
-    ]);
-  }, []);
-
   return (
     <section className={cns(st.container, className)}>
       <div className={st.grid}>
@@ -112,14 +80,14 @@ const Draft = ({ className }) => {
               </i>
               <span>*</span>
               <div className={sharedStyles.counter}>
-                {title.length} / {maxLimit}
+                {sessionContext.title.label && sessionContext.title.label.length} / {maxLimit}
               </div>
             </div>
 
             <Input
-              value={title}
+              value={sessionContext.title.label}
               onChange={handleTitleChange}
-              placeholder="How to Find a Cardiologist - An Expert Guide."
+              placeholder="How to Find a Cardiologist - An Expert Guide"
             />
           </div>
 
@@ -131,36 +99,43 @@ const Draft = ({ className }) => {
               </i>
               <span>*</span>
               <div className={sharedStyles.counter}>
-                {intro.length} / {maxLimit}
+                {sessionContext.intro.label && sessionContext.intro.label.length} / {maxLimit}
               </div>
             </div>
 
-            <Input type="textarea" rows={8} value={intro} onChange={handleIntroChange} placeholder="Intro ..." />
+            <Input
+              type="textarea"
+              rows={8}
+              value={sessionContext.intro.label}
+              onChange={handleIntroChange}
+              placeholder="Intro"
+            />
           </div>
 
           <div className={st.group}>
             <div className={sharedStyles.inputLabel}>
-              <span>Article Outline</span>
-              <i data-tip="tooltip content">
+              <span>Article outline</span>
+              <i data-tip="Article outline">
                 <SvgIcon name="info" />
               </i>
               <span>*</span>
             </div>
 
-            {outlines &&
-              outlines.map((outline, idx) => (
+            {sessionContext.outline.label &&
+              sessionContext.outline.label.map((outline, idx) => (
                 <div className={st.outline} key={outline.id || idx}>
-                  <div className={st.outlineLabel}>{outline.label}</div>
+                  <div className={st.outlineLabel}>Section {idx + 1}</div>
                   <div className={st.outlineInput}>
                     <Input
+                      className={st.outlineInputWrapper}
                       type="textarea"
-                      value={outline.value}
+                      value={outline}
                       onChange={(v) => handleOutlineChange(v, outline.id)}
                       placeholder=""
                     />
-                  </div>
-                  <div className={st.outlineDelete} onClick={() => handleOutlineDelete(outline.id)}>
-                    <SvgIcon name="delete" />
+                    <div className={st.outlineDelete} onClick={() => handleOutlineDelete(outline.id)}>
+                      <SvgIcon name="delete" />
+                    </div>
                   </div>
                 </div>
               ))}
@@ -172,11 +147,16 @@ const Draft = ({ className }) => {
           </div>
 
           <div className={st.cta}>
-            <Button type="submit" block>
-              Generate Outline
+            <Button
+              onClick={generateDraft}
+              disabled={Object.keys(sessionContext.title).length === 0}
+              loading={running}
+              type="submit"
+              block>
+              Generate draft
             </Button>
             <div className={sharedStyles.helper}>
-              <i data-tip="One idea is 10c cents">
+              <i data-tip="Each generate costs a credit">
                 <SvgIcon name="info" />
               </i>
               Each generate costs a credit
@@ -187,11 +167,13 @@ const Draft = ({ className }) => {
         {/* col */}
         <div className={st.col}>
           <div className={st.preview}>
-            {preview &&
-              preview.map((x, idx) => (
-                <div className={st.previewSection} key={x.id || idx}>
-                  <h4 className={cns('h4-title c-gray-900')}>{x.title}</h4>
-                  <p className={cns('p-small', st.previewText)} dangerouslySetInnerHTML={{ __html: x.intro }} />
+            <h3 className={cns('h3-title c-gray-900')}>{sessionContext.title.label}</h3>
+            <p className={cns('p-intro', st.previewText)}>{sessionContext.intro.label}</p>
+            {sessionContext.paragraphs &&
+              sessionContext.paragraphs.map((x, idx) => (
+                <div className={st.previewSection} key={idx}>
+                  <h4 className={cns('h4-title c-gray-900')}>{sessionContext.outline.label[idx]}</h4>
+                  <p className={cns('p-small', st.previewText)} dangerouslySetInnerHTML={{ __html: x }} />
                 </div>
               ))}
 
@@ -205,6 +187,6 @@ const Draft = ({ className }) => {
       </div>
     </section>
   );
-};
+});
 
 export default Draft;
