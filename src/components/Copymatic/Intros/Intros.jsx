@@ -35,11 +35,7 @@ const Intros = observer(({ className }) => {
     }
   };
 
-  const handleTitleChange = (title) => {
-    const t = sessionContext.title;
-    t.label = title;
-    sessionContext.setTitle(t);
-  };
+  const handleTitleChange = (value) => sessionContext.setTitle({ id: sessionContext.title.id, label: value });
 
   return (
     <section className={cns(st.container, className)}>

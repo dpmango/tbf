@@ -15,16 +15,11 @@ const Draft = observer(({ className }) => {
   const [running, setRunning] = useState(false);
   const [outlines, setOutlines] = useState([]);
 
-  const handleTitleChange = (title) => {
-    const t = sessionContext.title;
-    t.label = title;
-    sessionContext.setTitle(t);
-  };
-
-  const handleIntroChange = (intro) => sessionContext.setIntro(intro);
+  const handleTitleChange = (value) => sessionContext.setTitle({ id: sessionContext.title.id, label: value });
+  const handleIntroChange = (value) => sessionContext.setIntro({ id: sessionContext.intro.id, label: value });
 
   const generateDraft = () => {
-    if (Object.keys(sessionContext.title).length > 0 && !running) {
+    if (sessionContext.title.label && sessionContext.outline.label && !running) {
       setRunning(true);
 
       Promise.all(
@@ -48,19 +43,22 @@ const Draft = observer(({ className }) => {
     }
   };
 
-  const handleOutlineChange = useCallback(
-    (value, id) => {
-      setOutlines([...outlines.map((x) => (x.id === id ? { ...x, ...{ value: value } } : { ...x }))]);
-    },
-    [outlines]
-  );
+  const handleOutlineChange = (value, id) => {
+    setOutlines([...outlines.map((x) => (x.id === id ? { ...x, ...{ value: value } } : { ...x }))]);
 
-  const handleOutlineDelete = useCallback(
-    (id) => {
-      setOutlines([...outlines.filter((x) => x.id !== id)]);
-    },
-    [outlines]
-  );
+    const l = [...sessionContext.outline.label.map((v, i) => (i === id ? value : v))];
+    sessionContext.setOutline({ id: sessionContext.outline.id, label: l });
+    console.log(l);
+  };
+
+  const handleOutlineDelete = (id) => {
+    const l = [...sessionContext.outline.label.filter((v, i) => i !== id)];
+    const p = [...sessionContext.paragraphs.filter((v, i) => i !== id)];
+    sessionContext.setOutline({ id: sessionContext.outline.id, label: l });
+    sessionContext.setParagraphs(p);
+
+    console.log(id, sessionContext.outline.id, sessionContext.outline.label);
+  };
 
   const handleAddOutline = useCallback(() => {
     const nextId = outlines[outlines.length - 1].id + 1;
@@ -123,17 +121,17 @@ const Draft = observer(({ className }) => {
 
             {sessionContext.outline.label &&
               sessionContext.outline.label.map((outline, idx) => (
-                <div className={st.outline} key={outline.id || idx}>
+                <div className={st.outline} key={idx}>
                   <div className={st.outlineLabel}>Section {idx + 1}</div>
                   <div className={st.outlineInput}>
                     <Input
                       className={st.outlineInputWrapper}
                       type="textarea"
                       value={outline}
-                      onChange={(v) => handleOutlineChange(v, outline.id)}
+                      onChange={(v) => handleOutlineChange(v, idx)}
                       placeholder=""
                     />
-                    <div className={st.outlineDelete} onClick={() => handleOutlineDelete(outline.id)}>
+                    <div className={st.outlineDelete} onClick={() => handleOutlineDelete(idx)}>
                       <SvgIcon name="delete" />
                     </div>
                   </div>
@@ -149,7 +147,7 @@ const Draft = observer(({ className }) => {
           <div className={st.cta}>
             <Button
               onClick={generateDraft}
-              disabled={Object.keys(sessionContext.title).length === 0}
+              disabled={Object.keys(sessionContext.title).length === 0 || sessionContext.outline.label.length === 0}
               loading={running}
               type="submit"
               block>
@@ -169,13 +167,18 @@ const Draft = observer(({ className }) => {
           <div className={st.preview}>
             <h3 className={cns('h3-title c-gray-900')}>{sessionContext.title.label}</h3>
             <p className={cns('p-intro', st.previewText)}>{sessionContext.intro.label}</p>
+
             {sessionContext.paragraphs &&
-              sessionContext.paragraphs.map((x, idx) => (
-                <div className={st.previewSection} key={idx}>
-                  <h4 className={cns('h4-title c-gray-900')}>{sessionContext.outline.label[idx]}</h4>
-                  <p className={cns('p-small', st.previewText)} dangerouslySetInnerHTML={{ __html: x }} />
-                </div>
-              ))}
+              sessionContext.outline.label &&
+              sessionContext.paragraphs.map(
+                (x, idx) =>
+                  sessionContext.outline.label[idx] && (
+                    <div className={st.previewSection} key={idx}>
+                      <h4 className={cns('h4-title c-gray-900')}>{sessionContext.outline.label[idx]}</h4>
+                      <p className={cns('p-small', st.previewText)} dangerouslySetInnerHTML={{ __html: x }} />
+                    </div>
+                  )
+              )}
 
             <div className={st.previewCta}>
               <Button theme="gray" outline iconLeft="eye">

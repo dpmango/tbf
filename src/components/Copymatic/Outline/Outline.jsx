@@ -13,13 +13,9 @@ const Outline = observer(({ className }) => {
   const sessionContext = useContext(SessionStoreContext);
   const [running, setRunning] = useState(false);
 
-  const handleTitleChange = (title) => {
-    const t = sessionContext.title;
-    t.label = title;
-    sessionContext.setTitle(t);
-  };
+  const handleTitleChange = (value) => sessionContext.setTitle({ id: sessionContext.title.id, label: value });
+  const handleIntroChange = (value) => sessionContext.setIntro({ id: sessionContext.intro.id, label: value });
 
-  const handleIntroChange = (intro) => sessionContext.setIntro(intro);
   const generateOutlines = () => {
     if (Object.keys(sessionContext.title).length > 0 && !running) {
       setRunning(true);
@@ -95,7 +91,7 @@ const Outline = observer(({ className }) => {
               loading={running}
               type="submit"
               block>
-              Generate Outline
+              Generate outline
             </Button>
             <div className={sharedStyles.helper}>
               <i data-tip="Each generate costs a credit">
