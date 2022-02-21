@@ -38,23 +38,26 @@
 }
 
 .tags {
-  margin-top: 0.4rem;
-  font-size: 0.8rem;
+  margin: 0.4rem 0;
+  font-size: 0.7rem;
   line-height: 1.5;
   color: $colorGray;
 }
 
 .cta {
   margin-top: auto;
+
   :global .btn {
     min-width: 1px;
     margin-top: 0.4rem;
     padding: 0.35rem 0.7rem;
     min-height: 2rem;
   }
+
   ._selected {
     background: $colorPrimary50;
     color: $colorPrimary;
+
     &:hover {
       background: $colorPrimary50;
       color: $colorPrimary;
@@ -68,15 +71,18 @@
   flex-direction: row;
   justify-content: flex-start;
   text-align: left;
+
   .avatar {
     margin-left: 0;
     width: 3.2rem;
     height: 3.2rem;
     margin-right: 1.2rem;
   }
+
   .name {
     margin-top: 0;
   }
+
   .tags {
     margin-top: 0;
   }

@@ -1,75 +1,71 @@
-import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
 import cns from 'classnames';
-
-import { SvgIcon, Button, Checkbox, Input } from '@ui';
-import { SharedSpeaker } from '@c/Shared';
 import st from './Voiceover.module.scss';
-import sharedStyles from '@c/Copymatic/Copymatic.module.scss';
+import { SharedSpeaker } from '@c/Shared';
+import React, { useEffect, useState } from 'react';
 
-const maxLimit = 300;
+const lovoApiUrl = 'https://api.lovo.ai/v1';
+const lovoApiKey =
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxYmM3YzRjN2E2NWNkMDAxMmNiMDY2OCIsImlhdCI6MTY0NTQ0Mjc3NjE4M30.MEBEULtFggw4aIy_u2ND3iEAoXaIspYpj3mcu_GTUjY';
+
+export const lovo = axios.create({
+  responseType: 'arraybuffer',
+  withCredentials: false,
+  baseURL: lovoApiUrl,
+  timeout: 3600 * 1000,
+  headers: { 'Content-Type': 'application/json', Accept: 'application/json', apiKey: lovoApiKey },
+});
+
+export let source;
+export const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+export const playStream = (buffer) => {
+  source = audioCtx.createBufferSource();
+  source.connect(audioCtx.destination);
+
+  source.buffer = buffer;
+  source.loop = false;
+  source.start();
+};
+
+export const stopStream = () => {
+  try {
+    source.stop();
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 const Voiceover = ({ className }) => {
   const [speakers, setSpeakers] = useState([]);
   const [selectedSpeaker, setSelectedSpeaker] = useState(null);
 
-  const handleSpeakerSelect = useCallback((id) => {
-    setSelectedSpeaker(id);
-  }, []);
+  const handleSpeakerSelect = (id) => setSelectedSpeaker(id);
 
   useEffect(() => {
-    setSpeakers([
-      {
-        id: 1,
-        avatar: 'https://randomuser.me/api/portraits/women/64.jpg',
-        name: 'Olivia',
-        tags: '#Female #Middle-Aged #HIgh-Pitched #Calming',
-      },
-      {
-        id: 2,
-        avatar: 'https://randomuser.me/api/portraits/men/64.jpg',
-        name: 'James',
-        tags: '#Male #Middle-Aged #Low-Pitched #Powerful',
-      },
-      {
-        id: 3,
-        avatar: 'https://randomuser.me/api/portraits/women/4.jpg',
-        name: 'Lana',
-        tags: '#Female #Middle-Aged #Medium-Pitched #Mild',
-      },
-      {
-        id: 4,
-        avatar: 'https://randomuser.me/api/portraits/women/61.jpg',
-        name: 'Demi',
-        tags: '#Female #Middle-Aged #Low-Pitched #Normal',
-      },
+    lovo
+      .get('/skins?is_premium=true', { responseType: 'json' })
+      .then((response) => {
+        if (response.data && response.data.success) {
+          const speakers = [];
 
-      {
-        id: 5,
-        avatar: 'https://randomuser.me/api/portraits/women/5.jpg',
-        name: 'Candice',
-        tags: '#Female #Middle-Aged #Low-Pitched #Mild',
-      },
-      {
-        id: 6,
-        avatar: 'https://randomuser.me/api/portraits/women/46.jpg',
-        name: 'Natalie',
-        tags: '#Female #Middle-Aged #Low-Pitched #Calming',
-      },
-      {
-        id: 7,
-        avatar: 'https://randomuser.me/api/portraits/men/42.jpg',
-        name: 'Peter',
-        tags: '#Male #Middle-Aged #Low-Pitched #Normal',
-      },
-      {
-        id: 8,
-        avatar: 'https://randomuser.me/api/portraits/men/20.jpg',
-        name: 'Orlando',
-        tags: '#Male #Middle-Aged #Low-Pitched #Normal',
-      },
-    ]);
+          response.data.data.map((x, idx) => {
+            const tags = '#' + x.tags.map((v) => v.content).join(' #');
+
+            speakers.push({
+              id: idx,
+              avatar: tags.toLowerCase().includes('female')
+                ? 'https://randomuser.me/api/portraits/women/' + idx + '.jpg'
+                : 'https://randomuser.me/api/portraits/men/' + idx + '.jpg',
+              name: x.name,
+              tags: tags,
+            });
+          });
+
+          setSpeakers(speakers);
+        }
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   return (
