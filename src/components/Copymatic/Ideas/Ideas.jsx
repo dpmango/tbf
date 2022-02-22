@@ -8,6 +8,7 @@ import { Button, Checkbox, Input, SvgIcon } from '@ui';
 import sharedStyles from '@c/Copymatic/Copymatic.module.scss';
 
 const API_BASE_URL = 'https://api2.buzz.fit/v1';
+// const API_BASE_URL = 'http://api.buzz.d/v1';
 
 export const api = axios.create({
   withCredentials: false,

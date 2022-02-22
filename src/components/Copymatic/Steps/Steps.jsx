@@ -65,6 +65,10 @@ const Steps = observer(({ className, steps }) => {
     next = sessionContext.paragraphs && sessionContext.paragraphs.length > 0;
   }
 
+  if (step === 5) {
+    next = sessionContext.speaker !== '';
+  }
+
   return (
     <section className={cns(st.container, className)}>
       <div className="container">
