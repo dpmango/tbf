@@ -7,7 +7,7 @@ import React, { useContext, useState } from 'react';
 import { SessionStoreContext } from '../../../store';
 import { audioCtx, playStream, stopStream } from '../../Copymatic/Voiceover/Voiceover';
 
-const Speaker = observer(({ className, avatar, name, surname, tags, id, modifier }) => {
+const Speaker = observer(({ className, speaker, modifier, cta }) => {
   const [running, setRunning] = useState(false);
   const sessionContext = useContext(SessionStoreContext);
 
@@ -20,7 +20,7 @@ const Speaker = observer(({ className, avatar, name, surname, tags, id, modifier
         .post(
           '/lovo/conversion',
           {
-            speaker_id: name,
+            speaker_id: speaker.name,
             text: 'If you are looking for the perfect voice, then I am your best option!',
           },
           {
@@ -37,35 +37,39 @@ const Speaker = observer(({ className, avatar, name, surname, tags, id, modifier
     }
   };
 
+  const selected = sessionContext.speaker && sessionContext.speaker.name === speaker.name;
+
   return (
     <div className={cns(st.speaker, modifier && st[`_${modifier}`], className)}>
       <div className={st.avatar}>
-        <img src={avatar} alt={name} />
+        <img src={speaker.avatar} alt={speaker.name} />
       </div>
       <div className={st.content}>
-        <div className={st.name}>
-          {name} {surname}
-        </div>
-        <div className={st.tags}>{tags}</div>
+        <div className={st.name}>{speaker.name}</div>
+        <div className={st.tags}>{speaker.tags}</div>
         <div className={st.cta}>
-          <Button
-            loading={running}
-            onClick={() => listenToVoice(id)}
-            theme="primary"
-            variant="small"
-            iconLeft="play-circle"
-            block>
-            <span>Listen to Voice</span>
-          </Button>
-          <Button
-            theme="muted"
-            className={cns('', sessionContext.speaker === name && st._selected)}
-            onClick={() => sessionContext.setSpeaker(name)}
-            variant="small"
-            block
-            iconRight={sessionContext.speaker === name ? 'check-circle' : null}>
-            {sessionContext.speaker === name ? <span>Selected</span> : <span>Select voice</span>}
-          </Button>
+          {cta && (
+            <>
+              <Button
+                loading={running}
+                onClick={listenToVoice}
+                theme="primary"
+                variant="small"
+                iconLeft="play-circle"
+                block>
+                <span>Listen to Voice</span>
+              </Button>
+              <Button
+                theme="muted"
+                className={cns('', selected && st._selected)}
+                onClick={() => sessionContext.setSpeaker(speaker)}
+                variant="small"
+                block
+                iconRight={selected ? 'check-circle' : null}>
+                {selected ? <span>Selected</span> : <span>Select voice</span>}
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </div>

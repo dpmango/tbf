@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import cns from 'classnames';
 
-import { SvgIcon, Button, Input } from '@ui';
+import { Button, Input } from '@ui';
 
 import styles from './Head.module.scss';
 
@@ -14,7 +14,7 @@ const Head = ({ className, includeDescription, hasBorder }) => {
       <div className="container">
         <div className={styles.wrapper}>
           <div className={styles.head}>
-            <div className={styles.title}>Welcome, Olivia</div>
+            <div className={styles.title}>Welcome, James</div>
             {includeDescription && (
               <div className={styles.description}>
                 <>{includeDescription || 'Lets get started '}</>

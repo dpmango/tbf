@@ -19,14 +19,14 @@
   z-index: 5;
   top: 1.3rem;
   right: 1.3rem;
-  padding: 0.4rem;
+  padding: 0;
   font-size: 0;
   cursor: pointer;
   color: $colorGray;
   transition: color 0.25s $ease;
 
   :global .svg-icon {
-    font-size: 0.8rem;
+    font-size: 0.6rem;
 
     &.svg-icon--arrow-left {
       display: none;

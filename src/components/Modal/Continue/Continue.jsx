@@ -6,7 +6,7 @@ import { Button, Modal, SvgIcon } from '@ui';
 import { UiStoreContext } from '@store';
 import styles from './Continue.module.scss';
 
-const Continue = observer(({ className, onCtaClick, children }) => {
+const Continue = observer(({ className, onCtaClick, cta, children }) => {
   const { modalParams } = useContext(UiStoreContext);
   const uiContext = useContext(UiStoreContext);
 
@@ -30,14 +30,16 @@ const Continue = observer(({ className, onCtaClick, children }) => {
             <div className={styles.title}>{modalData.title}</div>
             <div className={styles.description}>{modalData.description}</div>
             <div className={styles.body}>{children}</div>
-            <div className={styles.cta}>
-              <Button theme="gray" outline variant="small" onClick={() => uiContext.resetModal()}>
-                Cancel
-              </Button>
-              <Button theme="primary" variant="small" onClick={() => onCtaClick(modalData.action)}>
-                {modalData.ctaText}
-              </Button>
-            </div>
+            {cta && (
+              <div className={styles.cta}>
+                <Button theme="gray" outline variant="small" onClick={() => uiContext.resetModal()}>
+                  Cancel
+                </Button>
+                <Button theme="primary" variant="small" onClick={() => onCtaClick(modalData.action)}>
+                  {modalData.ctaText}
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       )}

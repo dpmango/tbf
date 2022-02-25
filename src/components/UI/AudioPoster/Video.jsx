@@ -5,7 +5,7 @@ import { SvgIcon } from '@ui';
 
 import styles from './Video.module.scss';
 
-const Video = ({ className, video, children, onProgress }) => {
+const AudioPoster = ({ className, video, children, onProgress }) => {
   const [playState, setPlayState] = useState('pause');
   const [muteState, setMuteState] = useState('mute');
   const [progressPercent, setProgressPercent] = useState(0);
@@ -126,11 +126,9 @@ const Video = ({ className, video, children, onProgress }) => {
   }, [videoRef.current, progressRef.current]);
 
   return (
-    <div className={cns(styles.video, playState && styles[playState], className)}>
-      <div className={styles.videoBody} style={{ paddingBottom: aspectRatio }}>
-        <video poster={video.poster} ref={videoRef}>
-          <source src={video.source} />
-        </video>
+    <div className={cns(styles.video, className)}>
+      <div className={styles.videoBody} style={{ paddingBottom: aspectRatio, backgroundImage: `url(${video.poster})` }}>
+        <audio ref={videoRef} src={video.source} />
       </div>
 
       <div className={styles.videoControls}>
@@ -161,4 +159,4 @@ const Video = ({ className, video, children, onProgress }) => {
   );
 };
 
-export default Video;
+export default AudioPoster;

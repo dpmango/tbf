@@ -116,7 +116,7 @@ const Steps = observer(({ className, steps }) => {
 
         <div className={st.nav}>
           <Button
-            className={step === 1 && st.hidden}
+            className={step === 1 ? st.hidden : ''}
             theme="gray"
             iconLeft="arrow-left"
             variant="small"
@@ -125,7 +125,7 @@ const Steps = observer(({ className, steps }) => {
             Previous
           </Button>
           <Button
-            className={(step === 6 || !next) && st.hidden}
+            className={step === 6 || !next ? st.hidden : ''}
             theme="gray"
             iconRight="arrow-right"
             variant="small"

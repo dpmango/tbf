@@ -1,57 +1,60 @@
-import React, { memo, useState, useCallback, useLayoutEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import cns from 'classnames';
-
-import { SvgIcon, Checkbox } from '@ui';
-import { numberWithFraction } from '@helpers';
+import { Checkbox, SvgIcon } from '@ui';
 import styles from './ListItem.module.scss';
+import { numberWithFraction } from '@helpers';
+import { api } from '../../../Copymatic/Ideas/Ideas';
+import { SessionStoreContext } from '../../../../store';
+import { audioCtx, playStream, stopStream } from '../../../Copymatic/Voiceover/Voiceover';
+import React, { memo, useContext, useState } from 'react';
 
 const ListItem = ({ className, id, audio, label, selectedAudio, onBoxSelect }) => {
   const [progress, setProgress] = useState(0);
   const [playState, setPlayState] = useState(false);
+  const [running, setRunning] = useState(false);
+  const sessionContext = useContext(SessionStoreContext);
 
-  const audioRef = useRef(null);
-
-  const togglePlayState = useCallback(() => {
-    if (!audioRef.current) return;
-
-    if (!audioRef.current.paused) {
-      audioRef.current.pause();
+  const playLine = () => {
+    if (playState) {
+      stopStream();
       setPlayState(false);
-    } else {
-      [...document.querySelectorAll('audio')].forEach((audio) => {
-        if (!audio.paused) {
-          audio.pause();
-        }
-      });
-      audioRef.current.play();
-      setPlayState(true);
+
+      return;
     }
-  }, [playState, audioRef.current]);
 
-  useLayoutEffect(() => {
-    if (!audioRef.current) return;
+    const speaker = sessionContext.speaker.name ? sessionContext.speaker.name : 'Tim Calkney HD';
 
-    const progressEvent = (audioProcessingEvent) => {
-      setProgress(Math.round(audioRef.current.currentTime));
-    };
+    if (!running) {
+      setPlayState(true);
+      setRunning(true);
+      stopStream();
 
-    const loadedMetaDataEvent = () => {
-      setProgress(Math.round(audioRef.current.duration));
-    };
+      api
+        .post(
+          '/lovo/conversion',
+          {
+            speaker_id: speaker,
+            text: label,
+          },
+          {
+            responseType: 'arraybuffer',
+          }
+        )
+        .then((response) => {
+          if (response.data) {
+            audioCtx.decodeAudioData(response.data).then((buffer) => {
+              playStream(buffer, () => {
+                setPlayState(false);
+              });
 
-    audioRef.current.addEventListener('loadedmetadata', loadedMetaDataEvent);
-    audioRef.current.addEventListener('timeupdate', progressEvent);
-
-    return () => {
-      try {
-        audioRef.current.removeEventListener('loadedmetadata', loadedMetaDataEvent);
-        audioRef.current.removeEventListener('timeupdate', progressEvent);
-      } catch (e) {
-        console.warn('could not removeEventListener on timeupdate');
-      }
-    };
-  }, [audioRef.current]);
+              setProgress(buffer.duration);
+              //console.log(audioCtx.state, buffer.length, buffer.duration);
+            });
+          }
+        })
+        .catch((error) => console.log(error))
+        .finally(() => setRunning(false));
+    }
+  };
 
   return (
     <div className={cns(styles.box, className)}>
@@ -64,11 +67,11 @@ const ListItem = ({ className, id, audio, label, selectedAudio, onBoxSelect }) =
           <span>{numberWithFraction(progress)}s</span>
         </div>
 
-        <div className={styles.actionPlayer}>{audio && <audio ref={audioRef} src={audio} autoPlay={false} />}</div>
+        <div className={styles.actionPlayer} />
         <div className={styles.actionFlash}>
           <SvgIcon name="flash" />
         </div>
-        <div className={cns(styles.actionPlay, playState && styles._playing)} onClick={togglePlayState}>
+        <div className={cns(styles.actionPlay, playState && styles._playing)} onClick={playLine}>
           <SvgIcon name="play-circle" />
           <SvgIcon name="stop-circle" />
         </div>

@@ -13,7 +13,7 @@ const API_BASE_URL = 'https://api2.buzz.fit/v1';
 export const api = axios.create({
   withCredentials: false,
   baseURL: API_BASE_URL,
-  timeout: 10000,
+  timeout: 120 * 1000, // 120s timeout
   headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
 });
 

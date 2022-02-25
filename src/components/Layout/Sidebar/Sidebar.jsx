@@ -96,10 +96,10 @@ const Sidebar = observer(({ className }) => {
 
           <Link to="/profile" className={styles.profile}>
             <div className={styles.profileAvatar}>
-              <img src="/img/avatar.jpg" alt="your avatar" />
+              <img src="https://randomuser.me/api/portraits/men/64.jpg" alt="Your avatar" />
             </div>
             <div className={styles.profileContent}>
-              <div className={styles.profileName}>Dr James Moriarty</div>
+              <div className={styles.profileName}>Dr. James Moriarty</div>
               <div className={styles.profileEmail}>moriarty@untitledui.com</div>
               <div className={styles.profileLogout} onClick={logOut}>
                 <SvgIcon name="logout" />

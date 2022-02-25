@@ -7,7 +7,7 @@ import { UiStoreContext } from '@store';
 import st from './Progress.module.scss';
 
 const Progress = ({ className, progress, inline }) => {
-  const uiContext = useContext(UiStoreContext);
+  progress = Math.floor(progress);
 
   return (
     <div className={cns(st.progress, inline && st._inline, className)}>
@@ -15,7 +15,7 @@ const Progress = ({ className, progress, inline }) => {
         <span className={st.progressValue} style={{ width: `${progress}%` }} />
       </div>
       <div className={st.progressLabel}>
-        {progress}% {!inline && 'Uploaded'}
+        {progress}% {!inline && 'rendered'}
       </div>
     </div>
   );

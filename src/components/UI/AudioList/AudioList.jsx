@@ -1,17 +1,17 @@
-import React, { memo, useState, useCallback, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
+import React, { memo, useCallback, useContext, useEffect, useState } from 'react';
 import cns from 'classnames';
 
-import { SvgIcon, Checkbox } from '@ui';
+import { Checkbox, SvgIcon } from '@ui';
 import { useFirstRender } from '@hooks';
 
 import ListItem from './ListItem';
 import styles from './AudioList.module.scss';
+import { SessionStoreContext } from '../../../store';
 
 const AudioList = ({ children, className, title, list, syncComponentState, ...props }) => {
   const classComputed = cns(styles.container, className, 'audioList');
   const firstRender = useFirstRender();
-
+  const sessionContext = useContext(SessionStoreContext);
   const [selectAll, setSelectAll] = useState(false); // toggle state
   const [selectedAudio, setSelectedAudio] = useState([]); // holds list of selected ID's
 
@@ -44,8 +44,7 @@ const AudioList = ({ children, className, title, list, syncComponentState, ...pr
   return (
     <div className={classComputed}>
       <div className={styles.head}>
-        <SvgIcon name="plus-circle" />
-        <div className={cns('h3-title', styles.headTitle)}>{title}</div>
+        <div className={cns('h3-title', styles.headTitle)}>Cardiology - {sessionContext.title.label}</div>
         <div className={styles.headActions}>
           <Checkbox
             isChecked={selectAll && list.length === selectedAudio.length}
@@ -60,8 +59,8 @@ const AudioList = ({ children, className, title, list, syncComponentState, ...pr
         {list &&
           list.map((x, idx) => (
             <ListItem
-              className={styles.listItem}
               key={x.id || idx}
+              className={styles.listItem}
               selectedAudio={selectedAudio}
               onBoxSelect={handleBoxSelect}
               {...x}

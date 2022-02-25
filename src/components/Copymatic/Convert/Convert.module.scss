@@ -16,7 +16,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-top: 0.6rem;
   background: $colorPrimary;
   border-radius: 0.4rem;
@@ -37,15 +37,19 @@
   cursor: pointer;
   color: white;
   transition: color 0.25s $ease;
+
   :global .svg-icon {
     font-size: 1.2rem;
   }
+
   :global .btn {
     min-height: 1.8rem;
   }
+
   &:hover {
     color: rgba(white, 0.7);
   }
+
   &:last-child {
     margin-right: 0;
   }

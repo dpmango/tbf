@@ -35,7 +35,7 @@ const Steps = ({ className, steps, onStepClick, ...props }) => {
                 theme: 'gray',
               };
 
-              if (statusClass === 'compleate') {
+              if (statusClass === 'complete') {
                 btnProps.theme = 'success';
                 btnProps.iconLeft = 'check-circle';
               } else if (statusClass === 'await') {
@@ -44,6 +44,7 @@ const Steps = ({ className, steps, onStepClick, ...props }) => {
               } else if (statusClass === 'new') {
                 btnProps.theme = 'gray';
               }
+              console.log(statusClass, btnProps);
 
               return (
                 <Button

@@ -32,10 +32,16 @@ export default class SessionStore {
   paragraphs = [];
   speaker = '';
 
+  scripts = [];
+
   constructor() {
     makeAutoObservable(this);
 
     this.init();
+  }
+
+  addScript(data) {
+    runInAction(() => this.scripts.push(data));
   }
 
   setSpeaker(data) {

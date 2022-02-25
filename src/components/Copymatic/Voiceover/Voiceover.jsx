@@ -1,18 +1,27 @@
 import cns from 'classnames';
-import React, { useState } from 'react';
+import React from 'react';
 import st from './Voiceover.module.scss';
 import { SharedSpeaker } from '@c/Shared';
 
 export let source;
 export const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
-export const playStream = (buffer) => {
+export const playStream = (buffer, cb) => {
   source = audioCtx.createBufferSource();
   source.connect(audioCtx.destination);
 
   source.buffer = buffer;
   source.loop = false;
+
+  cb ? (source.onended = cb) : (source.onended = null);
+
   source.start();
+
+  return source;
+};
+
+audioCtx.onstatechange = () => {
+  console.log(audioCtx.state);
 };
 
 export const stopStream = () => {
@@ -210,7 +219,7 @@ const Voiceover = ({ className }) => {
   return (
     <section className={cns(st.container, className)}>
       <div className={st.grid}>
-        {speakers && speakers.map((speaker, idx) => <SharedSpeaker {...speaker} key={speaker.id || idx} />)}
+        {speakers && speakers.map((speaker, idx) => <SharedSpeaker cta speaker={speaker} key={speaker.id || idx} />)}
       </div>
     </section>
   );

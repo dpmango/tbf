@@ -6,6 +6,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+
   :global .svg-icon--plus-circle {
     font-size: 2.2rem;
     color: $colorPrimary;
@@ -20,7 +21,7 @@
 }
 
 .headActions {
-  display: flex;
+  display: none;
   align-items: center;
   flex: 0 0 auto;
   margin: 0.5rem 0 0.5rem 0;
@@ -35,6 +36,7 @@
   line-height: 1.43;
   text-align: right;
   color: $colorGray700;
+
   &::before {
     display: inline-block;
     content: ' ';
@@ -56,6 +58,7 @@
 
 .listItem {
   margin-bottom: 0.6rem;
+
   &:last-child {
     margin-bottom: 0;
   }

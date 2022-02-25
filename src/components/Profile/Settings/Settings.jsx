@@ -65,7 +65,7 @@ const Settings = ({ className, steps, ...props }) => {
           <div className={st.sectionContent}>
             <div className={st.photo}>
               <div className={st.photoCurrent}>
-                <img src="/img/avatar.jpg" alt="your avatar" />
+                <img src="https://randomuser.me/api/portraits/men/64.jpg" alt="Your avatar" />
               </div>
               <div className={st.photoUploader}>
                 <Upload placeholder="PNG or JPG (min. 1400x1400px)" />

@@ -10,6 +10,7 @@
   padding: 0.8rem 1.2rem;
   cursor: pointer;
   transition: border 0.25s $ease;
+
   &:hover {
     border-color: $colorPrimary;
   }
@@ -25,6 +26,7 @@
   height: 1.6rem;
   border-radius: 50%;
   color: $colorGray600;
+
   &::after {
     display: inline-block;
     content: ' ';
@@ -40,6 +42,7 @@
     border-radius: 50%;
     animation: pulse 1.8s ease-out infinite;
   }
+
   :global .svg-icon {
     position: relative;
     z-index: 2;
@@ -52,6 +55,7 @@
   font-size: 0.7rem;
   line-height: 1.43;
   color: $colorGray;
+
   span {
     font-weight: 500;
     color: $colorPrimary;
@@ -74,17 +78,22 @@
   padding: 0.8rem 0.8rem;
   margin-bottom: 0.6rem;
   transition: border 0.25s $ease;
+
   &:last-child {
     margin-bottom: 0;
   }
+
   &:hover {
     border-color: $colorPrimary;
   }
+
   &._compleate {
     border-color: $colorPrimary;
+
     .uploaderProcessDone {
       opacity: 1;
     }
+
     .uploaderProcessRemove {
       opacity: 0;
       pointer-events: none;
@@ -102,6 +111,7 @@
   height: 1.4rem;
   border-radius: 50%;
   color: $colorPrimary;
+
   &::after {
     display: inline-block;
     content: ' ';
@@ -117,6 +127,7 @@
     border-radius: 50%;
     animation: pulse 1.8s ease-out infinite;
   }
+
   :global .svg-icon {
     position: relative;
     z-index: 2;
@@ -154,6 +165,7 @@
   color: $colorGray;
   transition: color 0.25s $ease;
   cursor: pointer;
+
   &:hover {
     color: $colorPrimary;
   }
@@ -174,6 +186,7 @@
   pointer-events: none;
   font-size: 0;
   border-radius: 50%;
+
   :global .svg-icon {
     font-size: 0.4rem;
   }

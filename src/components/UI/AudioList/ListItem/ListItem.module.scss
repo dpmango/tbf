@@ -8,6 +8,7 @@
 }
 
 .boxCheckbox {
+  display: none;
   flex: 0 0 auto;
   margin-right: 0.8em;
 }
@@ -16,7 +17,7 @@
   flex: 0 0 auto;
   display: flex;
   align-items: center;
-  margin-right: 0.8rem;
+  margin-right: 0.5rem;
 }
 
 .boxLabel {
@@ -39,16 +40,23 @@
   justify-content: center;
   cursor: pointer;
   transition: color 0.25s $ease;
+
   :global .svg-icon {
     font-size: 0.9rem;
   }
+
   &:hover {
     color: $colorGray900;
   }
 }
 
+.actionFlash {
+  display: none;
+}
+
 .actionTimer {
   margin-right: 0;
+
   span {
     display: inline-block;
     min-width: 2.2rem;
@@ -64,14 +72,17 @@
   opacity: 0;
   pointer-events: none;
 }
+
 .actionPlay {
   :global .svg-icon--stop-circle {
     display: none;
   }
+
   &._playing {
     :global .svg-icon--stop-circle {
       display: block;
     }
+
     :global .svg-icon--play-circle {
       display: none;
     }

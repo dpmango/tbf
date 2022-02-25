@@ -13,6 +13,7 @@
   height: 2rem;
   border-radius: 50%;
   color: $colorGray600;
+
   &::after {
     display: inline-block;
     content: ' ';
@@ -28,13 +29,16 @@
     border-radius: 50%;
     animation: pulse 1.8s ease-out infinite;
   }
+
   :global .svg-icon {
     position: relative;
     z-index: 2;
     font-size: 1rem;
   }
+
   &.alert {
     color: $colorRed;
+
     &::after {
       background: #fee4e2;
       border-color: #fef3f2;
@@ -62,7 +66,8 @@
 }
 
 .title {
-  font-weight: 500;
+  font-size: 0.7rem;
+  font-weight: 600;
   color: $colorGray900;
 }
 
@@ -75,11 +80,12 @@
   margin-top: 0.9rem;
   display: flex;
   justify-content: space-between;
-  margin-bottom: -0.8rem;
-  margin-right: -0.8rem;
+  //margin-bottom: -0.8rem;
+  //margin-right: -0.8rem;
+
   :global .btn {
-    margin-right: 0.6rem;
-    margin-bottom: 0.6rem;
+    //margin-right: 0.6rem;
+    //margin-bottom: 0.6rem;
     min-height: 2rem;
   }
 }

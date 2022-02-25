@@ -16,7 +16,7 @@ const ArticlePage = observer(() => {
         <title>Article Page</title>
       </Helmet>
 
-      <DashboardHead includeDescription="Your current sales summary and activity." />
+      <DashboardHead includeDescription="Your current sales summary and activity" />
       <ContentWysiwyg {...content.page} />
       <ContentActions {...content.actions} />
       <DashboardDocs {...content.documents} />

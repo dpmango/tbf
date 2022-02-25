@@ -42,7 +42,7 @@ const mainStyles = {
 const narrowStyles = {
   content: {
     width: 'calc(100% - 1rem)',
-    maxWidth: '20rem',
+    maxWidth: '21rem',
     top: '50%',
     left: '50%',
     right: 'auto',
@@ -87,7 +87,7 @@ const ModalComponent = observer(({ variant, modifier, name, className, mobTitle,
   const afterOpenModal = () => {};
 
   const closeModal = () => {
-    history.replaceState(null, null, '/');
+    //history.replaceState(null, null, '/');
     uiContext.resetModal();
   };
 
